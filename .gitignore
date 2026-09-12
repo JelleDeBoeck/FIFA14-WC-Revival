@@ -1,0 +1,40 @@
+# Local config
+config.local.json
+config.local.psd1
+
+# Runtime/state
+state/
+logs/
+runtime/
+artifacts/
+captures/
+certs/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Secrets / certificates
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cer
+
+# FIFA / EA game files
+*.exe
+*.dll
+*.big
+*.bh
+
+# Donor/reference code
+vendor/
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
