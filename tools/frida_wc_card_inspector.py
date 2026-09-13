@@ -21,10 +21,66 @@ def main():
     parser.add_argument("--run-seconds", type=int, default=1800)
     args = parser.parse_args()
 
+    catalog_path = (
+        Path(__file__).resolve().parents[1]
+        / "src"
+        / "backend"
+        / "fifa14-special-catalog.v240.json"
+    )
+
+    catalog_document = json.loads(catalog_path.read_text(encoding="utf-8"))
+
+    match_priority = {
+        "name+nation": 0,
+        "unique-nation-name-token": 1,
+        "slug": 2,
+        "name": 3,
+    }
+
+    wc_asset_rows = {}
+
+    for player in catalog_document.get("players", []):
+        if str(player.get("cardType", "")).strip().lower() != "worldcup":
+            continue
+
+        try:
+            asset_id = int(player.get("assetId", 0) or 0)
+            nation = int(player.get("nation", 0) or 0)
+        except (TypeError, ValueError):
+            continue
+
+        if asset_id <= 0 or nation <= 0:
+            continue
+
+        existing = wc_asset_rows.get(asset_id)
+
+        if existing is None:
+            wc_asset_rows[asset_id] = player
+            continue
+
+        current_priority = match_priority.get(
+            str(player.get("matchMethod", "")).strip().lower(),
+            99,
+        )
+        existing_priority = match_priority.get(
+            str(existing.get("matchMethod", "")).strip().lower(),
+            99,
+        )
+
+        if current_priority < existing_priority:
+            wc_asset_rows[asset_id] = player
+
+    wc_asset_nation = {
+        asset_id: int(player["nation"])
+        for asset_id, player in wc_asset_rows.items()
+    }
+
     agent = r"""
-'use strict';
+    'use strict';
 
 const MODULE_NAME = 'CardsDLLzf.dll';
+
+const WC_ASSET_NATION = __WC_ASSET_NATION__;
 
 let installed = false;
 let sequence = 0;
@@ -208,24 +264,6 @@ function install() {
 
     hookField(
         base,
-        'NATIONALITY_ASSET_ID',
-        0x00024C57
-    );
-
-    hookField(
-        base,
-        'CONFEDERATION_ASSET_ID',
-        0x00024CFA
-    );
-
-    hookField(
-        base,
-        'TEAM_ASSET_ID',
-        0x00024D11
-    );
-
-    hookField(
-        base,
         'CARD_TOTW',
         0x00024847
     );
@@ -280,7 +318,10 @@ function install() {
         167: { teamId: 974,    confederationId: 5 }  // Korea Republic
     };
 
+    const currentAssetByThread = {};
     const currentNationByThread = {};
+
+    const dumpedPlayerStructAssets = {};
 
     function hookActualValue(name, rva) {
         const address = base.add(rva);
@@ -290,8 +331,19 @@ function install() {
                 const tid = Process.getCurrentThreadId();
                 const original = u32(this.context.eax);
 
+                if (name === 'ASSET_ID') {
+                    currentAssetByThread[tid] = original;
+                }
+
                 if (name === 'NATIONALITY_ASSET_ID') {
-                    currentNationByThread[tid] = original;
+                    const assetId = currentAssetByThread[tid];
+                    const mappedNation = WC_ASSET_NATION[String(assetId)];
+
+                    if (mappedNation !== undefined) {
+                        this.context.eax = ptr(mappedNation);
+                    }
+
+                    currentNationByThread[tid] = u32(this.context.eax);
                 }
 
                 const nation = currentNationByThread[tid];
@@ -331,6 +383,193 @@ function install() {
         });
     }
 
+    function safeCString(p) {
+    try {
+        if (!p || p.isNull())
+            return null;
+
+        return p.readCString();
+    } catch (_) {
+        return null;
+    }
+}
+
+    function hookNameSource() {
+        const address = base.add(0x000D5FB0);
+
+        Interceptor.attach(address, {
+            onEnter(args) {
+                const tid = Process.getCurrentThreadId();
+                const assetId = currentAssetByThread[tid];
+
+                let playerStruct = ptr(0);
+                let name88 = null;
+                let name9d = null;
+
+                try {
+                    playerStruct = this.context.ecx.add(0x0C).readPointer();
+
+                    if (!playerStruct.isNull()) {
+                        const namePtr = playerStruct.add(0x88);
+
+                        name88 = safeCString(namePtr);
+                        name9d = safeCString(playerStruct.add(0x9D));
+                    }
+                } catch (_) {
+                }
+
+                emit('wc-card-name-source', {
+                    asset_id: assetId || null,
+                    object: this.context.ecx.toString(),
+                    player_struct: playerStruct.toString(),
+                    offset_88: name88,
+                    offset_9d: name9d
+                });
+            }
+        });
+
+        emit('wc-card-name-source-hook-installed', {
+            rva: '0x000D5FB0',
+            address: address.toString()
+        });
+    }
+
+    function hookPlayerLookupId() {
+        const address = base.add(0x000D51E0);
+
+        Interceptor.attach(address, {
+            onEnter(args) {
+                this.tid = Process.getCurrentThreadId();
+                this.obj = this.context.ecx;
+
+                this.playerStruct = ptr(0);
+                this.name88 = null;
+
+                try {
+                    this.playerStruct = this.obj.add(0x0C).readPointer();
+
+                    if (!this.playerStruct.isNull()) {
+                        this.name88 = safeCString(
+                            this.playerStruct.add(0x88)
+                        );
+                    }
+                } catch (_) {}
+            },
+
+            onLeave(retval) {
+                let raw = 0;
+                let masked = 0;
+
+                try {
+                    raw = retval.toUInt32();
+                    masked = raw & 0x00FFFFFF;
+                } catch (_) {}
+
+                emit('wc-card-player-lookup-id', {
+                    tid: this.tid,
+                    object: this.obj.toString(),
+                    player_struct: this.playerStruct.toString(),
+                    name_88: this.name88,
+                    raw: raw,
+                    masked_24bit: masked
+                });
+            }
+        });
+
+        emit('hook-installed', {
+            field: 'PLAYER_LOOKUP_ID',
+            rva: '0x000D51E0',
+            address: address.toString()
+        });
+    }
+
+    function hookPlayerStructDump() {
+        const address = base.add(0x000D5FB0);
+
+        Interceptor.attach(address, {
+            onEnter(args) {
+                const tid = Process.getCurrentThreadId();
+                const assetId = currentAssetByThread[tid];
+
+                // Alleen Arévalo en Neuer
+                if (assetId !== 182103 && assetId !== 167495)
+                    return;
+
+                // Elke speler maar 1 keer dumpen
+                if (dumpedPlayerStructAssets[assetId])
+                    return;
+
+                try {
+                    const obj = this.context.ecx;
+                    const playerStruct = obj.add(0x0C).readPointer();
+
+                    if (playerStruct.isNull())
+                        return;
+
+                    dumpedPlayerStructAssets[assetId] = true;
+
+                    emit('wc-card-player-struct-dump', {
+                        asset_id: assetId,
+                        object: obj.toString(),
+                        player_struct: playerStruct.toString(),
+                        name_88: safeCString(playerStruct.add(0x88)),
+                        dump: hexdump(playerStruct, {
+                            offset: 0,
+                            length: 0x140,
+                            header: true,
+                            ansi: false
+                        })
+                    });
+
+                } catch (e) {
+                    emit('wc-card-player-struct-dump-error', {
+                        asset_id: assetId,
+                        error: String(e)
+                    });
+                }
+            }
+        });
+
+        emit('hook-installed', {
+            field: 'PLAYER_STRUCT_DUMP',
+            rva: '0x000D5FB0',
+            address: address.toString()
+        });
+    }
+
+    function hookNameValue(rva) {
+        const address = base.add(rva);
+
+        Interceptor.attach(address, {
+            onEnter(args) {
+                const value = this.context.eax;
+
+                emit('wc-card-name-value', {
+                    rva: '0x' + rva.toString(16),
+                    eax: value.toString(),
+                    preview: safePreview(value, 64),
+                    registers: snapshotRegs(this.context)
+                });
+            }
+        });
+
+        emit('wc-card-name-hook-installed', {
+            rva: '0x' + rva.toString(16),
+            address: address.toString()
+        });
+    }
+
+    hookNameSource();
+    hookPlayerLookupId();
+    hookPlayerStructDump();
+
+    hookNameValue(0x00024888);
+
+    hookActualValue(
+        'ASSET_ID',
+        0x0002486B
+    );
+
     hookActualValue(
         'NATIONALITY_ASSET_ID',
         0x00024C4A
@@ -363,6 +602,11 @@ const timer = setInterval(function () {
         clearInterval(timer);
 }, 500);
 """
+
+    agent = agent.replace(
+        "__WC_ASSET_NATION__",
+        json.dumps(wc_asset_nation, separators=(",", ":")),
+    )
 
     output = Path(args.log)
     output.parent.mkdir(parents=True, exist_ok=True)
