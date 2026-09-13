@@ -28,6 +28,9 @@ PACK_WEIGHTS_PATH = Path(__file__).with_name("pack-weights.v237.json")
 PLAYER_CATALOG_PATH = Path(__file__).with_name("fifa14-player-catalog.v237.json")
 MANAGER_CATALOG_PATH = Path(__file__).with_name("manager-catalog.v237.json")
 SPECIAL_CATALOG_PATH = Path(__file__).with_name("fifa14-special-catalog.v240.json")
+WC_NATIVE_PLAYER_IDS_PATH = Path(__file__).with_name(
+    "fifa14-wc-native-playerids.v1.json"
+)
 LEGEND_CATALOG_PATH = Path(__file__).with_name("fifa14-legend-catalog.v24013.json")
 CONSUMABLE_CATALOG_PATH = Path(__file__).with_name("fifa14-consumable-catalog.v2412.json")
 
@@ -66,6 +69,17 @@ VERIFIED_PLAYER_POOL_DOCUMENT = PLAYER_CATALOG_DOCUMENT
 VERIFIED_PLAYER_POOL = PLAYER_CATALOG
 VERIFIED_PLAYER_BY_ASSET = PLAYER_BY_ASSET
 LOCAL_TEST_STARTING_COINS = int(PACK_WEIGHTS_DOCUMENT.get("localTestStartingCoins", 500000))
+
+WC_NATIVE_PLAYER_IDS_DOCUMENT = _load_json(WC_NATIVE_PLAYER_IDS_PATH)
+
+WC_NATIVE_PLAYER_IDS = frozenset(
+    int(player_id)
+    for player_id in WC_NATIVE_PLAYER_IDS_DOCUMENT.get("playerIds", [])
+    if int(player_id) > 0
+)
+
+if not WC_NATIVE_PLAYER_IDS:
+    raise RuntimeError("native World Cup player ID allowlist is empty")
 
 # BETA 2.25.0: regular FUT market contains every base PC player plus every
 # normal-mode special variant that our PC catalogue can already render. World
@@ -815,95 +829,201 @@ class LocalIdentityStore:
             cardType=worldcup are eligible.
             """
     
-            world_cup_pool = [
+            world_cup_candidates = [
                 dict(player)
                 for player in SPECIAL_PLAYER_CATALOG
                 if str(player.get("cardType", "")).strip().lower() == "worldcup"
             ]
+
+            match_priority = {
+                "name+nation": 0,
+                "unique-nation-name-token": 1,
+                "slug": 2,
+                "name": 3,
+            }
+
+            world_cup_by_asset: dict[int, dict[str, Any]] = {}
+
+            for player in world_cup_candidates:
+                asset_id = self._bounded_int(player.get("assetId", 0), 0)
+
+                if asset_id <= 0:
+                    continue
+
+                existing = world_cup_by_asset.get(asset_id)
+
+                if existing is None:
+                    world_cup_by_asset[asset_id] = player
+                    continue
+
+                current_priority = match_priority.get(
+                    str(player.get("matchMethod", "")).strip().lower(),
+                    99,
+                )
+                existing_priority = match_priority.get(
+                    str(existing.get("matchMethod", "")).strip().lower(),
+                    99,
+                )
+
+                if current_priority < existing_priority:
+                    world_cup_by_asset[asset_id] = player
+
+            world_cup_pool = list(world_cup_by_asset.values())
     
             if not world_cup_pool:
                 raise ValueError("World Cup player catalogue is empty")
     
-            # Keep the first diagnostic starter squad deliberately modest.
-            # The exact retail WC starter-pack weighting is not known yet, so do
-            # not grant elite cards while validating the onboarding contract.
+            # FIFA 2014 World Cup qualified nations.
+            # Only cards belonging to one of these nations may enter the WC starter squad.
+            valid_wc_nations = {
+                54,   # Brazil
+                10,   # Croatia
+                83,   # Mexico
+                103,  # Cameroon
+                45,   # Spain
+                34,   # Netherlands
+                55,   # Chile
+                195,  # Australia
+                56,   # Colombia
+                22,   # Greece
+                108,  # Ivory Coast
+                163,  # Japan
+                60,   # Uruguay
+                72,   # Costa Rica
+                14,   # England
+                27,   # Italy
+                47,   # Switzerland
+                57,   # Ecuador
+                18,   # France
+                81,   # Honduras
+                52,   # Argentina
+                8,    # Bosnia & Herzegovina
+                161,  # Iran
+                133,  # Nigeria
+                21,   # Germany
+                38,   # Portugal
+                117,  # Ghana
+                95,   # United States
+                7,    # Belgium
+                97,   # Algeria
+                40,   # Russia
+                167,  # Korea Republic
+            }
+
+            # Known catalogue entry that is not present in the WC player DB.
+            # Keep it out until the catalogue/DB mismatch is understood.
             starter_pool = [
                 player
                 for player in world_cup_pool
-                if self._bounded_int(player.get("rating", 0), 0) <= 74
+                if (
+                    self._bounded_int(player.get("nation", 0), 0) in valid_wc_nations
+                    and self._bounded_int(player.get("assetId", 0), 0)
+                    in WC_NATIVE_PLAYER_IDS
+                    and (
+                        self._bounded_int(player.get("rating", 0), 0) <= 74
+                        or str(player.get("position", "")).strip().upper() == "GK"
+                    )
+                )
             ]
-    
+
             if len(starter_pool) < 23:
                 raise ValueError(
-                    f"World Cup starter pool contains only {len(starter_pool)} players"
+                    f"World Cup starter pool contains only {len(starter_pool)} valid players"
                 )
-    
-            starter_pool.sort(
-                key=lambda player: (
-                    self._bounded_int(player.get("rating", 0), 0),
-                    str(player.get("name", "")).casefold(),
-                    self._bounded_int(player.get("resourceId", 0), 0),
-                )
-            )
-    
+
+            # Randomise the eligible WC pool on every fresh starter provisioning.
+            rng = random.SystemRandom()
+            rng.shuffle(starter_pool)
+
             selected: list[dict[str, Any]] = []
             used_resource_ids: set[int] = set()
-    
+
+
             def take_player(*positions: str) -> None:
                 wanted = {position.upper() for position in positions}
-    
+
+                candidates = []
+
                 for player in starter_pool:
                     resource_id = self._bounded_int(
                         player.get("resourceId", 0),
                         0,
                     )
-    
+
                     if resource_id <= 0 or resource_id in used_resource_ids:
                         continue
-    
+
                     position = str(player.get("position", "")).strip().upper()
+
                     if position not in wanted:
                         continue
-    
-                    selected.append(player)
-                    used_resource_ids.add(resource_id)
-                    return
-    
-                raise ValueError(
-                    "World Cup starter pool has no unused player for positions "
-                    + "/".join(sorted(wanted))
-                )
-    
-            # Starting XI for the existing f442 squad slot contract.
-            take_player("ST", "CF")
-            take_player("ST", "CF")
-            take_player("LM", "LW")
-            take_player("CM", "CDM", "CAM")
-            take_player("CM", "CDM", "CAM")
-            take_player("RM", "RW")
-            take_player("LB", "LWB")
-            take_player("CB")
-            take_player("CB")
-            take_player("RB", "RWB")
-            take_player("GK")
-    
-            # Fill the seven substitutes and five reserves with the remaining
-            # lowest-rated WC cards. They remain genuine WC card revisions.
-            for player in starter_pool:
-                if len(selected) >= 23:
-                    break
-    
+
+                    candidates.append(player)
+
+                if not candidates:
+                    raise ValueError(
+                        "World Cup starter pool has no unused player for positions "
+                        + "/".join(sorted(wanted))
+                    )
+
+                player = rng.choice(candidates)
+
                 resource_id = self._bounded_int(
                     player.get("resourceId", 0),
                     0,
                 )
-    
-                if resource_id <= 0 or resource_id in used_resource_ids:
-                    continue
-    
+
                 selected.append(player)
                 used_resource_ids.add(resource_id)
-    
+
+
+            # Starting XI for the existing f442 squad slot contract.
+            take_player("ST", "CF")
+            take_player("ST", "CF")
+
+            take_player("LM", "LW")
+
+            take_player("CM", "CDM", "CAM")
+            take_player("CM", "CDM", "CAM")
+
+            take_player("RM", "RW")
+
+            take_player("LB", "LWB")
+
+            take_player("CB")
+            take_player("CB")
+
+            take_player("RB", "RWB")
+
+            take_player("GK")
+
+
+            # Seven substitutes + five reserves.
+            remaining_players = [
+                player
+                for player in starter_pool
+                if self._bounded_int(player.get("resourceId", 0), 0)
+                not in used_resource_ids
+            ]
+
+            rng.shuffle(remaining_players)
+
+            for player in remaining_players:
+                if len(selected) >= 23:
+                    break
+
+                resource_id = self._bounded_int(
+                    player.get("resourceId", 0),
+                    0,
+                )
+
+                if resource_id <= 0 or resource_id in used_resource_ids:
+                    continue
+
+                selected.append(player)
+                used_resource_ids.add(resource_id)
+
+
             if len(selected) != 23:
                 raise ValueError(
                     f"World Cup starter selection produced {len(selected)} players"
@@ -1022,19 +1142,21 @@ class LocalIdentityStore:
                 )
     
                 for index, player in enumerate(selected):
+                    db_slot_index = 10 - index if index < 11 else index
+
                     asset_id = self._bounded_int(
                         player.get("assetId", 0),
                         0,
                         minimum=1,
                     )
-    
+
                     item_id = 180_000_000_000 + index + 1
-    
+
                     payload = self._canonical_player_payload(
                         item_id=item_id,
                         asset_id=asset_id,
                         existing=dict(player),
-                        slot_index=index,
+                        slot_index=db_slot_index,
                     )
 
                     attrs = [
@@ -1060,7 +1182,7 @@ class LocalIdentityStore:
                         """,
                         (
                             squad_id,
-                            index,
+                            db_slot_index,
                             item_id,
                             int(payload["assetId"]),
                             int(payload["resourceId"]),
