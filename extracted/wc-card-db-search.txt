@@ -1,0 +1,8 @@
+
+Path                                                                              LineNumber Line
+----                                                                              ---------- ----
+C:\Users\Gebruiker\Desktop\FIFA14-WC-Revival\extracted\wc_card\card-constants.txt        453   [ 393] String("GetPlayerCardInfo")
+C:\Users\Gebruiker\Desktop\FIFA14-WC-Revival\extracted\wc_card\card-constants.txt        687   [ 627] String("NATIONALITY_ASSET_ID")
+C:\Users\Gebruiker\Desktop\FIFA14-WC-Revival\extracted\wc_card\card-constants.txt        946   [ 886] String("TEAM_ASSET_ID")
+C:\Users\Gebruiker\Desktop\FIFA14-WC-Revival\extracted\wc_card\card-constants.txt        951   [ 891] String("CONFEDERATION_ASSET_ID")
+

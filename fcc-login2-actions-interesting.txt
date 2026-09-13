@@ -1,0 +1,583 @@
+
+  fcc-login2-actions.txt:375:    DictRef { kind: ByteGetMember, index: 49 }
+  fcc-login2-actions.txt:376:    DictRef { kind: PushByte, index: 50 }
+  fcc-login2-actions.txt:377:    CallMethod
+  fcc-login2-actions.txt:378:    DictRef { kind: ByteGetVar, index: 58 }
+  fcc-login2-actions.txt:379:    PushRegister(1)
+  fcc-login2-actions.txt:380:    PushByte(2)
+  fcc-login2-actions.txt:381:    DictRef { kind: ByteGetVar, index: 47 }
+  fcc-login2-actions.txt:382:    DictRef { kind: ByteGetMember, index: 48 }
+  fcc-login2-actions.txt:383:    DictRef { kind: ByteGetMember, index: 49 }
+  fcc-login2-actions.txt:384:    DictRef { kind: PushByte, index: 50 }
+  fcc-login2-actions.txt:385:    CallMethod
+  fcc-login2-actions.txt:386:    PushByte(2)
+  fcc-login2-actions.txt:387:    PushRegister(2)
+  fcc-login2-actions.txt:388:    DictRef { kind: CallMethodPop, index: 71 }
+  fcc-login2-actions.txt:389:  }
+> fcc-login2-actions.txt:390:  DefineFunction2 "LoginFinalizedSuccessContinue"() {
+  fcc-login2-actions.txt:391:    DictRef { kind: PushByte, index: 72 }
+  fcc-login2-actions.txt:392:    Trace
+  fcc-login2-actions.txt:393:    DictRef { kind: PushByte, index: 73 }
+  fcc-login2-actions.txt:394:    DictRef { kind: ByteGetVar, index: 33 }
+  fcc-login2-actions.txt:395:    DictRef { kind: ByteGetMember, index: 74 }
+  fcc-login2-actions.txt:396:    Add2
+  fcc-login2-actions.txt:397:    Trace
+  fcc-login2-actions.txt:398:    DictRef { kind: PushByte, index: 75 }
+  fcc-login2-actions.txt:399:    DictRef { kind: ByteGetVar, index: 33 }
+  fcc-login2-actions.txt:400:    DictRef { kind: ByteGetMember, index: 76 }
+  fcc-login2-actions.txt:401:    Add2
+  fcc-login2-actions.txt:402:    Trace
+  fcc-login2-actions.txt:403:    PushRegister(1)
+  fcc-login2-actions.txt:404:    DictRef { kind: ByteGetMember, index: 20 }
+  fcc-login2-actions.txt:405:    DictRef { kind: ByteGetMember, index: 65 }
+  fcc-login2-actions.txt:406:    EA:Push1
+  fcc-login2-actions.txt:407:    PushRegister(1)
+  fcc-login2-actions.txt:408:    DictRef { kind: ByteGetMember, index: 7 }
+  fcc-login2-actions.txt:409:    DictRef { kind: ByteGetMember, index: 15 }
+  fcc-login2-actions.txt:410:    DictRef { kind: CallMethodPop, index: 38 }
+  fcc-login2-actions.txt:411:    PushRegister(1)
+  fcc-login2-actions.txt:412:    DictRef { kind: ByteGetMember, index: 20 }
+  fcc-login2-actions.txt:413:    DictRef { kind: ByteGetMember, index: 39 }
+  fcc-login2-actions.txt:414:    EA:Push1
+  fcc-login2-actions.txt:415:    PushRegister(1)
+  fcc-login2-actions.txt:416:    DictRef { kind: ByteGetMember, index: 7 }
+  fcc-login2-actions.txt:417:    DictRef { kind: ByteGetMember, index: 15 }
+  fcc-login2-actions.txt:418:    DictRef { kind: CallMethodPop, index: 38 }
+  fcc-login2-actions.txt:419:    DictRef { kind: ByteGetVar, index: 33 }
+  fcc-login2-actions.txt:420:    DictRef { kind: ByteGetMember, index: 74 }
+  fcc-login2-actions.txt:421:    PushDuplicate
+  fcc-login2-actions.txt:422:    BranchIfTrue { target: 35 }
+  fcc-login2-actions.txt:423:    Pop
+  fcc-login2-actions.txt:424:    DictRef { kind: ByteGetVar, index: 33 }
+  fcc-login2-actions.txt:425:    DictRef { kind: ByteGetMember, index: 76 }
+  fcc-login2-actions.txt:426:    Not
+  fcc-login2-actions.txt:427:    BranchIfTrue { target: 40 }
+  fcc-login2-actions.txt:428:    EA:Push0
+  fcc-login2-actions.txt:429:    DictRef { kind: CallFuncPop, index: 77 }
+  fcc-login2-actions.txt:430:    BranchAlways { target: 42 }
+  fcc-login2-actions.txt:431:    EA:Push0
+  fcc-login2-actions.txt:432:    DictRef { kind: CallFuncPop, index: 78 }
+  fcc-login2-actions.txt:433:  }
+> fcc-login2-actions.txt:434:  DefineFunction2 "NewUserFlow"() {
+  fcc-login2-actions.txt:435:    DictRef { kind: PushByte, index: 79 }
+  fcc-login2-actions.txt:436:    Trace
+  fcc-login2-actions.txt:437:    DictRef { kind: PushByte, index: 80 }
+  fcc-login2-actions.txt:438:    EA:Push1
+  fcc-login2-actions.txt:439:    PushRegister(2)
+  fcc-login2-actions.txt:440:    DictRef { kind: ByteGetMember, index: 81 }
+  fcc-login2-actions.txt:441:    DictRef { kind: ByteGetMember, index: 82 }
+  fcc-login2-actions.txt:442:    DictRef { kind: CallMethodPop, index: 83 }
+  fcc-login2-actions.txt:443:    EA:Push0
+  fcc-login2-actions.txt:444:    DictRef { kind: CallFuncPop, index: 84 }
+  fcc-login2-actions.txt:445:    DictRef { kind: PushByte, index: 85 }
+  fcc-login2-actions.txt:446:    PushByte(25)
+  fcc-login2-actions.txt:447:    EA:Push1
+  fcc-login2-actions.txt:448:    DictRef { kind: PushByte, index: 86 }
+  fcc-login2-actions.txt:449:    NewObject
+  fcc-login2-actions.txt:450:    SetVariable
+  fcc-login2-actions.txt:451:    DictRef { kind: PushByte, index: 87 }
+  fcc-login2-actions.txt:452:    DictRef { kind: ByteGetVar, index: 85 }
+  fcc-login2-actions.txt:453:    DictRef { kind: ByteGetMember, index: 88 }
+  fcc-login2-actions.txt:454:    Add2
+  fcc-login2-actions.txt:455:    Trace
+  fcc-login2-actions.txt:456:    DictRef { kind: PushByte, index: 89 }
+  fcc-login2-actions.txt:457:    EA:PushTrue
+  fcc-login2-actions.txt:458:    DictRef { kind: PushByte, index: 90 }
+  fcc-login2-actions.txt:459:    DictRef { kind: ByteGetVar, index: 85 }
+  fcc-login2-actions.txt:460:    DictRef { kind: ByteGetMember, index: 88 }
+  fcc-login2-actions.txt:461:    DictRef { kind: PushByte, index: 91 }
+  fcc-login2-actions.txt:462:    EA:Push0
+  fcc-login2-actions.txt:463:    DictRef { kind: PushByte, index: 92 }
+  fcc-login2-actions.txt:464:    DictRef { kind: ByteGetVar, index: 93 }
+  fcc-login2-actions.txt:465:    PushRegister(1)
+  fcc-login2-actions.txt:466:    PushByte(2)
+  fcc-login2-actions.txt:467:    DictRef { kind: ByteGetVar, index: 47 }
+  fcc-login2-actions.txt:468:    DictRef { kind: ByteGetMember, index: 48 }
+  fcc-login2-actions.txt:469:    DictRef { kind: ByteGetMember, index: 49 }
+  fcc-login2-actions.txt:470:    DictRef { kind: PushByte, index: 50 }
+  fcc-login2-actions.txt:471:    CallMethod
+  fcc-login2-actions.txt:472:    DictRef { kind: PushByte, index: 94 }
+  fcc-login2-actions.txt:473:    EA:PushFalse
+  fcc-login2-actions.txt:474:    DictRef { kind: PushByte, index: 95 }
+  fcc-login2-actions.txt:475:    EA:PushFalse
+  fcc-login2-actions.txt:476:    DictRef { kind: PushByte, index: 96 }
+  fcc-login2-actions.txt:477:    EA:PushFalse
+  fcc-login2-actions.txt:478:    DictRef { kind: PushByte, index: 97 }
+  fcc-login2-actions.txt:479:    EA:PushFalse
+  fcc-login2-actions.txt:480:    DictRef { kind: PushByte, index: 98 }
+  fcc-login2-actions.txt:481:    EA:PushTrue
+  fcc-login2-actions.txt:482:    PushByte(9)
+  fcc-login2-actions.txt:483:    InitObject
+  fcc-login2-actions.txt:484:    EA:Push1
+  fcc-login2-actions.txt:485:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:486:    DictRef { kind: CallMethodPop, index: 99 }
+  fcc-login2-actions.txt:487:    PushDWord(60000)
+  fcc-login2-actions.txt:488:    DictRef { kind: PushByte, index: 100 }
+  fcc-login2-actions.txt:489:    DictRef { kind: PushByte, index: 101 }
+  fcc-login2-actions.txt:490:    PushByte(3)
+  fcc-login2-actions.txt:491:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:492:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:493:    DictRef { kind: CallMethodPop, index: 103 }
+  fcc-login2-actions.txt:494:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:495:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:496:    EA:Push1
+  fcc-login2-actions.txt:497:    DictRef { kind: ByteGetVar, index: 104 }
+  fcc-login2-actions.txt:498:    DictRef { kind: CallMethodPop, index: 105 }
+  fcc-login2-actions.txt:499:    EA:PushTrue
+  fcc-login2-actions.txt:500:    EA:Push1
+  fcc-login2-actions.txt:501:    DictRef { kind: ByteGetVar, index: 104 }
+  fcc-login2-actions.txt:502:    DictRef { kind: CallMethodPop, index: 106 }
+  fcc-login2-actions.txt:503:    EA:Push0
+  fcc-login2-actions.txt:504:    PushRegister(2)
+  fcc-login2-actions.txt:505:    DictRef { kind: ByteGetMember, index: 107 }
+  fcc-login2-actions.txt:506:    DictRef { kind: CallMethodPop, index: 108 }
+  fcc-login2-actions.txt:507:  }
+> fcc-login2-actions.txt:508:  DefineFunction2 "_OnNewCardUpdate"(card, i) {
+  fcc-login2-actions.txt:509:    DictRef { kind: PushByte, index: 109 }
+  fcc-login2-actions.txt:510:    PushRegister(1)
+  fcc-login2-actions.txt:511:    Add2
+  fcc-login2-actions.txt:512:    DictRef { kind: PushByte, index: 110 }
+  fcc-login2-actions.txt:513:    Add2
+  fcc-login2-actions.txt:514:    PushRegister(2)
+  fcc-login2-actions.txt:515:    Add2
+  fcc-login2-actions.txt:516:    DictRef { kind: PushByte, index: 111 }
+  fcc-login2-actions.txt:517:    Add2
+  fcc-login2-actions.txt:518:    Trace
+  fcc-login2-actions.txt:519:    DictRef { kind: ByteGetVar, index: 85 }
+  fcc-login2-actions.txt:520:    PushRegister(2)
+  fcc-login2-actions.txt:521:    GetMember
+  fcc-login2-actions.txt:522:    DictRef { kind: ByteGetMember, index: 112 }
+  fcc-login2-actions.txt:523:    EA:Push0
+  fcc-login2-actions.txt:524:    Equals2
+  fcc-login2-actions.txt:525:    PushDuplicate
+  fcc-login2-actions.txt:526:    BranchIfTrue { target: 24 }
+  fcc-login2-actions.txt:527:    Pop
+  fcc-login2-actions.txt:528:    DictRef { kind: ByteGetVar, index: 85 }
+  fcc-login2-actions.txt:529:    PushRegister(2)
+  fcc-login2-actions.txt:530:    GetMember
+  fcc-login2-actions.txt:531:    EA:PushNull
+  fcc-login2-actions.txt:532:    Equals2
+  fcc-login2-actions.txt:533:    Not
+  fcc-login2-actions.txt:534:    BranchIfTrue { target: 31 }
+  fcc-login2-actions.txt:535:    DictRef { kind: ByteGetVar, index: 113 }
+  fcc-login2-actions.txt:536:    EA:Push1
+  fcc-login2-actions.txt:537:    PushRegister(1)
+  fcc-login2-actions.txt:538:    DictRef { kind: CallMethodPop, index: 114 }
+  fcc-login2-actions.txt:539:    BranchAlways { target: 37 }
+  fcc-login2-actions.txt:540:    DictRef { kind: ByteGetVar, index: 85 }
+  fcc-login2-actions.txt:541:    PushRegister(2)
+  fcc-login2-actions.txt:542:    GetMember
+  fcc-login2-actions.txt:543:    EA:Push1
+  fcc-login2-actions.txt:544:    PushRegister(1)
+  fcc-login2-actions.txt:545:    DictRef { kind: CallMethodPop, index: 114 }
+  fcc-login2-actions.txt:546:    EA:Push0
+  fcc-login2-actions.txt:547:    PushRegister(1)
+  fcc-login2-actions.txt:548:    DictRef { kind: CallMethodPop, index: 115 }
+  fcc-login2-actions.txt:549:  }
+> fcc-login2-actions.txt:550:  DefineFunction2 "onCreateFirstSquadSuccess"() {
+  fcc-login2-actions.txt:551:    DictRef { kind: PushByte, index: 116 }
+  fcc-login2-actions.txt:552:    Trace
+  fcc-login2-actions.txt:553:    DictRef { kind: PushByte, index: 117 }
+  fcc-login2-actions.txt:554:    EA:Push1
+  fcc-login2-actions.txt:555:    PushRegister(1)
+  fcc-login2-actions.txt:556:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:557:    DictRef { kind: PushByte, index: 119 }
+  fcc-login2-actions.txt:558:    EA:Push1
+  fcc-login2-actions.txt:559:    PushRegister(1)
+  fcc-login2-actions.txt:560:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:561:    DictRef { kind: ByteGetVar, index: 120 }
+  fcc-login2-actions.txt:562:    DictRef { kind: PushByte, index: 121 }
+  fcc-login2-actions.txt:563:    PushByte(2)
+  fcc-login2-actions.txt:564:    PushRegister(1)
+  fcc-login2-actions.txt:565:    DictRef { kind: CallMethodPop, index: 122 }
+  fcc-login2-actions.txt:566:    DictRef { kind: ByteGetVar, index: 28 }
+  fcc-login2-actions.txt:567:    DictRef { kind: PushByte, index: 123 }
+  fcc-login2-actions.txt:568:    PushByte(2)
+  fcc-login2-actions.txt:569:    PushRegister(1)
+  fcc-login2-actions.txt:570:    DictRef { kind: CallMethodPop, index: 122 }
+  fcc-login2-actions.txt:571:    DictRef { kind: PushByte, index: 123 }
+  fcc-login2-actions.txt:572:    DictRef { kind: PushByte, index: 121 }
+  fcc-login2-actions.txt:573:    PushByte(2)
+  fcc-login2-actions.txt:574:    PushRegister(1)
+  fcc-login2-actions.txt:575:    DictRef { kind: ByteGetMember, index: 124 }
+  fcc-login2-actions.txt:576:    DictRef { kind: CallMethodPop, index: 125 }
+  fcc-login2-actions.txt:577:  }
+  fcc-login2-actions.txt:578:  DefineFunction2 "onGetSquadListSuccess"() {
+  fcc-login2-actions.txt:579:    DictRef { kind: PushByte, index: 126 }
+  fcc-login2-actions.txt:580:    Trace
+  fcc-login2-actions.txt:581:    DictRef { kind: PushByte, index: 121 }
+  fcc-login2-actions.txt:582:    EA:Push1
+  fcc-login2-actions.txt:583:    PushRegister(1)
+  fcc-login2-actions.txt:584:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:585:    DictRef { kind: PushByte, index: 123 }
+  fcc-login2-actions.txt:586:    EA:Push1
+  fcc-login2-actions.txt:587:    PushRegister(1)
+  fcc-login2-actions.txt:588:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:589:    DictRef { kind: ByteGetVar, index: 127 }
+  fcc-login2-actions.txt:590:    DictRef { kind: PushByte, index: 128 }
+  fcc-login2-actions.txt:591:    PushByte(2)
+  fcc-login2-actions.txt:592:    PushRegister(1)
+  fcc-login2-actions.txt:593:    DictRef { kind: CallMethodPop, index: 122 }
+  fcc-login2-actions.txt:594:    DictRef { kind: ByteGetVar, index: 28 }
+  fcc-login2-actions.txt:595:    DictRef { kind: PushByte, index: 129 }
+  fcc-login2-actions.txt:596:    PushByte(2)
+  fcc-login2-actions.txt:597:    PushRegister(1)
+  fcc-login2-actions.txt:598:    DictRef { kind: CallMethodPop, index: 122 }
+  fcc-login2-actions.txt:599:    DictRef { kind: PushByte, index: 129 }
+  fcc-login2-actions.txt:600:    DictRef { kind: PushByte, index: 128 }
+  fcc-login2-actions.txt:601:    PushByte(2)
+  fcc-login2-actions.txt:602:    PushRegister(1)
+  fcc-login2-actions.txt:603:    DictRef { kind: ByteGetMember, index: 124 }
+  fcc-login2-actions.txt:604:    DictRef { kind: CallMethodPop, index: 130 }
+  fcc-login2-actions.txt:605:  }
+  fcc-login2-actions.txt:606:  DefineFunction2 "onLoadActiveSquadSuccess"() {
+  fcc-login2-actions.txt:607:    DictRef { kind: PushByte, index: 131 }
+  fcc-login2-actions.txt:608:    Trace
+  fcc-login2-actions.txt:609:    DictRef { kind: PushByte, index: 128 }
+  fcc-login2-actions.txt:610:    EA:Push1
+  fcc-login2-actions.txt:611:    PushRegister(1)
+  fcc-login2-actions.txt:612:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:613:    DictRef { kind: PushByte, index: 129 }
+  fcc-login2-actions.txt:614:    EA:Push1
+  fcc-login2-actions.txt:615:    PushRegister(1)
+  fcc-login2-actions.txt:616:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:617:    DictRef { kind: ByteGetVar, index: 132 }
+  fcc-login2-actions.txt:618:    DictRef { kind: PushByte, index: 133 }
+  fcc-login2-actions.txt:619:    PushByte(2)
+  fcc-login2-actions.txt:620:    PushRegister(1)
+  fcc-login2-actions.txt:621:    DictRef { kind: CallMethodPop, index: 122 }
+  fcc-login2-actions.txt:622:    DictRef { kind: ByteGetVar, index: 28 }
+  fcc-login2-actions.txt:623:    DictRef { kind: PushByte, index: 134 }
+  fcc-login2-actions.txt:624:    PushByte(2)
+  fcc-login2-actions.txt:625:    PushRegister(1)
+  fcc-login2-actions.txt:626:    DictRef { kind: CallMethodPop, index: 122 }
+  fcc-login2-actions.txt:627:    EA:Push0
+  fcc-login2-actions.txt:628:    PushRegister(1)
+  fcc-login2-actions.txt:629:    DictRef { kind: ByteGetMember, index: 124 }
+  fcc-login2-actions.txt:630:    DictRef { kind: PushByte, index: 135 }
+  fcc-login2-actions.txt:631:    CallMethod
+  fcc-login2-actions.txt:632:    StoreRegister(2)
+  fcc-login2-actions.txt:633:    Pop
+  fcc-login2-actions.txt:634:    DictRef { kind: PushByte, index: 134 }
+  fcc-login2-actions.txt:635:    DictRef { kind: PushByte, index: 133 }
+  fcc-login2-actions.txt:636:    PushRegister(2)
+  fcc-login2-actions.txt:637:    PushByte(3)
+  fcc-login2-actions.txt:638:    PushRegister(1)
+  fcc-login2-actions.txt:639:    DictRef { kind: ByteGetMember, index: 124 }
+  fcc-login2-actions.txt:640:    DictRef { kind: CallMethodPop, index: 136 }
+  fcc-login2-actions.txt:641:  }
+  fcc-login2-actions.txt:642:  DefineFunction2 "onSaveActiveSquadSuccess"() {
+  fcc-login2-actions.txt:643:    DictRef { kind: PushByte, index: 137 }
+  fcc-login2-actions.txt:644:    Trace
+  fcc-login2-actions.txt:645:    DictRef { kind: PushByte, index: 128 }
+  fcc-login2-actions.txt:646:    EA:Push1
+  fcc-login2-actions.txt:647:    PushRegister(1)
+  fcc-login2-actions.txt:648:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:649:    DictRef { kind: PushByte, index: 129 }
+  fcc-login2-actions.txt:650:    EA:Push1
+  fcc-login2-actions.txt:651:    PushRegister(1)
+  fcc-login2-actions.txt:652:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:653:    DictRef { kind: PushByte, index: 133 }
+  fcc-login2-actions.txt:654:    EA:Push1
+  fcc-login2-actions.txt:655:    PushRegister(1)
+  fcc-login2-actions.txt:656:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:657:    DictRef { kind: PushByte, index: 134 }
+  fcc-login2-actions.txt:658:    EA:Push1
+  fcc-login2-actions.txt:659:    PushRegister(1)
+  fcc-login2-actions.txt:660:    DictRef { kind: CallMethodPop, index: 118 }
+  fcc-login2-actions.txt:661:    PushRegister(1)
+  fcc-login2-actions.txt:662:    DictRef { kind: ByteGetMember, index: 20 }
+  fcc-login2-actions.txt:663:    DictRef { kind: ByteGetMember, index: 21 }
+  fcc-login2-actions.txt:664:    EA:Push1
+  fcc-login2-actions.txt:665:    PushRegister(1)
+  fcc-login2-actions.txt:666:    DictRef { kind: ByteGetMember, index: 7 }
+  fcc-login2-actions.txt:667:    DictRef { kind: ByteGetMember, index: 15 }
+  fcc-login2-actions.txt:668:    DictRef { kind: CallMethodPop, index: 38 }
+  fcc-login2-actions.txt:669:    DictRef { kind: ByteGetVar, index: 138 }
+  fcc-login2-actions.txt:670:    EA:Push1
+  fcc-login2-actions.txt:671:    PushRegister(1)
+  fcc-login2-actions.txt:672:    DictRef { kind: ByteGetMember, index: 124 }
+  fcc-login2-actions.txt:673:    DictRef { kind: CallMethodPop, index: 139 }
+  fcc-login2-actions.txt:674:    EA:Push0
+  fcc-login2-actions.txt:675:    DictRef { kind: CallFuncPop, index: 140 }
+  fcc-login2-actions.txt:676:  }
+> fcc-login2-actions.txt:677:  DefineFunction2 "_initOpenPackAnimation"() {
+  fcc-login2-actions.txt:678:    DictRef { kind: PushByte, index: 141 }
+  fcc-login2-actions.txt:679:    Trace
+  fcc-login2-actions.txt:680:    EA:Push0
+  fcc-login2-actions.txt:681:    PushRegister(2)
+  fcc-login2-actions.txt:682:    DictRef { kind: ByteGetMember, index: 107 }
+  fcc-login2-actions.txt:683:    DictRef { kind: PushByte, index: 142 }
+  fcc-login2-actions.txt:684:    CallMethod
+  fcc-login2-actions.txt:685:    StoreRegister(6)
+  fcc-login2-actions.txt:686:    Pop
+  fcc-login2-actions.txt:687:    PushRegister(2)
+  fcc-login2-actions.txt:688:    DictRef { kind: ByteGetMember, index: 20 }
+  fcc-login2-actions.txt:689:    DictRef { kind: ByteGetMember, index: 143 }
+  fcc-login2-actions.txt:690:    DictRef { kind: ByteGetMember, index: 144 }
+  fcc-login2-actions.txt:691:    PushByte(18)
+  fcc-login2-actions.txt:692:    DictRef { kind: PushByte, index: 145 }
+  fcc-login2-actions.txt:693:    PushByte(3)
+  fcc-login2-actions.txt:694:    DictRef { kind: PushByte, index: 146 }
+  fcc-login2-actions.txt:695:    NewObject
+  fcc-login2-actions.txt:696:    StoreRegister(7)
+  fcc-login2-actions.txt:697:    Pop
+  fcc-login2-actions.txt:698:    PushRegister(7)
+  fcc-login2-actions.txt:699:    EA:Push1
+  fcc-login2-actions.txt:700:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:701:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:702:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:703:    DictRef { kind: ByteGetMember, index: 147 }
+  fcc-login2-actions.txt:704:    DictRef { kind: CallMethodPop, index: 148 }
+  fcc-login2-actions.txt:705:    EA:PushTrue
+  fcc-login2-actions.txt:706:    EA:Push1
+  fcc-login2-actions.txt:707:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:708:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:709:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:710:    DictRef { kind: ByteGetMember, index: 147 }
+  fcc-login2-actions.txt:711:    DictRef { kind: CallMethodPop, index: 149 }
+  fcc-login2-actions.txt:712:    PushRegister(6)
+  fcc-login2-actions.txt:713:    DictRef { kind: ByteGetMember, index: 150 }
+  fcc-login2-actions.txt:714:    EA:Push1
+  fcc-login2-actions.txt:715:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:716:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:717:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:718:    DictRef { kind: ByteGetMember, index: 147 }
+  fcc-login2-actions.txt:719:    DictRef { kind: CallMethodPop, index: 151 }
+  fcc-login2-actions.txt:720:    EA:Push0
+  fcc-login2-actions.txt:721:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:722:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:723:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:724:    DictRef { kind: ByteGetMember, index: 147 }
+  fcc-login2-actions.txt:725:    DictRef { kind: CallMethodPop, index: 152 }
+  fcc-login2-actions.txt:726:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:727:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:728:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:729:    DictRef { kind: ByteGetMember, index: 153 }
+  fcc-login2-actions.txt:730:    DictRef { kind: PushByte, index: 154 }
+  fcc-login2-actions.txt:731:    PushRegister(6)
+  fcc-login2-actions.txt:732:    DictRef { kind: ByteGetMember, index: 155 }
+  fcc-login2-actions.txt:733:    SetMember
+  fcc-login2-actions.txt:734:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:735:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:736:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:737:    DictRef { kind: ByteGetMember, index: 156 }
+  fcc-login2-actions.txt:738:    DictRef { kind: PushByte, index: 154 }
+  fcc-login2-actions.txt:739:    DictRef { kind: PushByte, index: 157 }
+  fcc-login2-actions.txt:740:    EA:Push1
+  fcc-login2-actions.txt:741:    PushRegister(2)
+  fcc-login2-actions.txt:742:    DictRef { kind: PushByte, index: 158 }
+  fcc-login2-actions.txt:743:    CallMethod
+  fcc-login2-actions.txt:744:    SetMember
+  fcc-login2-actions.txt:745:    EA:PushFalse
+  fcc-login2-actions.txt:746:    EA:Push1
+  fcc-login2-actions.txt:747:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:748:    DictRef { kind: CallMethodPop, index: 159 }
+  fcc-login2-actions.txt:749:    EA:Push0
+  fcc-login2-actions.txt:750:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:751:    DictRef { kind: CallMethodPop, index: 160 }
+  fcc-login2-actions.txt:752:    EA:PushTrue
+  fcc-login2-actions.txt:753:    EA:Push1
+  fcc-login2-actions.txt:754:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:755:    DictRef { kind: CallMethodPop, index: 161 }
+  fcc-login2-actions.txt:756:    EA:PushFalse
+  fcc-login2-actions.txt:757:    EA:Push1
+  fcc-login2-actions.txt:758:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:759:    DictRef { kind: CallMethodPop, index: 162 }
+  fcc-login2-actions.txt:760:    EA:Push0
+  fcc-login2-actions.txt:761:    DictRef { kind: PushByte, index: 86 }
+  fcc-login2-actions.txt:762:    NewObject
+  fcc-login2-actions.txt:763:    StoreRegister(5)
+  fcc-login2-actions.txt:764:    Pop
+  fcc-login2-actions.txt:765:    EA:Push0
+  fcc-login2-actions.txt:766:    StoreRegister(3)
+  fcc-login2-actions.txt:767:    Pop
+  fcc-login2-actions.txt:768:    PushRegister(3)
+  fcc-login2-actions.txt:769:    EA:Push0
+  fcc-login2-actions.txt:770:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:771:    DictRef { kind: PushByte, index: 163 }
+  fcc-login2-actions.txt:772:    CallMethod
+  fcc-login2-actions.txt:773:    DictRef { kind: ByteGetMember, index: 88 }
+  fcc-login2-actions.txt:774:    LessThan2
+  fcc-login2-actions.txt:775:    Not
+  fcc-login2-actions.txt:776:    BranchIfTrue { target: 115 }
+  fcc-login2-actions.txt:777:    PushRegister(3)
+  fcc-login2-actions.txt:778:    EA:Push1
+  fcc-login2-actions.txt:779:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:780:    DictRef { kind: PushByte, index: 164 }
+  fcc-login2-actions.txt:781:    CallMethod
+  fcc-login2-actions.txt:782:    StoreRegister(4)
+  fcc-login2-actions.txt:783:    Pop
+  fcc-login2-actions.txt:784:    PushRegister(4)
+  fcc-login2-actions.txt:785:    EA:Push1
+  fcc-login2-actions.txt:786:    PushRegister(5)
+  fcc-login2-actions.txt:787:    DictRef { kind: CallMethodPop, index: 165 }
+  fcc-login2-actions.txt:788:    PushRegister(3)
+  fcc-login2-actions.txt:789:    Increment
+  fcc-login2-actions.txt:790:    StoreRegister(3)
+  fcc-login2-actions.txt:791:    Pop
+  fcc-login2-actions.txt:792:    BranchAlways { target: 90 }
+  fcc-login2-actions.txt:793:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:794:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:795:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:796:    EA:Push1
+  fcc-login2-actions.txt:797:    PushRegister(5)
+  fcc-login2-actions.txt:836:    PushRegister(1)
+  fcc-login2-actions.txt:837:    DictRef { kind: ByteGetVar, index: 171 }
+  fcc-login2-actions.txt:838:    PushRegister(1)
+  fcc-login2-actions.txt:839:    PushByte(2)
+  fcc-login2-actions.txt:840:    DictRef { kind: ByteGetVar, index: 47 }
+  fcc-login2-actions.txt:841:    DictRef { kind: ByteGetMember, index: 48 }
+  fcc-login2-actions.txt:842:    DictRef { kind: ByteGetMember, index: 49 }
+  fcc-login2-actions.txt:843:    DictRef { kind: PushByte, index: 50 }
+  fcc-login2-actions.txt:844:    CallMethod
+  fcc-login2-actions.txt:845:    PushByte(2)
+  fcc-login2-actions.txt:846:    PushRegister(2)
+  fcc-login2-actions.txt:847:    DictRef { kind: ByteGetMember, index: 7 }
+  fcc-login2-actions.txt:848:    DictRef { kind: ByteGetMember, index: 172 }
+  fcc-login2-actions.txt:849:    DictRef { kind: CallMethodPop, index: 173 }
+  fcc-login2-actions.txt:850:  }
+> fcc-login2-actions.txt:851:  DefineFunction "_onOpenPackAnimationComplete"() {
+  fcc-login2-actions.txt:852:    DictRef { kind: PushByte, index: 174 }
+  fcc-login2-actions.txt:853:    Trace
+  fcc-login2-actions.txt:854:    EA:Push0
+  fcc-login2-actions.txt:855:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:856:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:857:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:858:    DictRef { kind: CallMethodPop, index: 175 }
+  fcc-login2-actions.txt:859:    EA:Push0
+  fcc-login2-actions.txt:860:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:861:    DictRef { kind: ByteGetMember, index: 102 }
+  fcc-login2-actions.txt:862:    DictRef { kind: ByteGetMember, index: 100 }
+  fcc-login2-actions.txt:863:    DictRef { kind: CallMethodPop, index: 176 }
+  fcc-login2-actions.txt:864:    EA:PushFalse
+  fcc-login2-actions.txt:865:    EA:Push1
+  fcc-login2-actions.txt:866:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:867:    DictRef { kind: CallMethodPop, index: 161 }
+  fcc-login2-actions.txt:868:    DictRef { kind: ByteGetVar, index: 177 }
+  fcc-login2-actions.txt:869:    EA:Push1
+  fcc-login2-actions.txt:870:    DictRef { kind: ByteGetVar, index: 5 }
+  fcc-login2-actions.txt:871:    DictRef { kind: CallMethodPop, index: 178 }
+  fcc-login2-actions.txt:872:  }
+> fcc-login2-actions.txt:873:  DefineFunction2 "GoToNextScreen_NewUser"() {
+  fcc-login2-actions.txt:874:    DictRef { kind: PushByte, index: 179 }
+  fcc-login2-actions.txt:875:    Trace
+  fcc-login2-actions.txt:876:    EA:Push0
+  fcc-login2-actions.txt:877:    PushRegister(1)
+  fcc-login2-actions.txt:878:    DictRef { kind: ByteGetMember, index: 180 }
+  fcc-login2-actions.txt:879:    DictRef { kind: CallMethodPop, index: 181 }
+  fcc-login2-actions.txt:880:    PushRegister(1)
+  fcc-login2-actions.txt:881:    DictRef { kind: ByteGetMember, index: 182 }
+  fcc-login2-actions.txt:882:    DictRef { kind: ByteGetMember, index: 183 }
+  fcc-login2-actions.txt:883:    DictRef { kind: ByteGetMember, index: 184 }
+  fcc-login2-actions.txt:884:    EA:Push1
+  fcc-login2-actions.txt:885:    PushRegister(1)
+  fcc-login2-actions.txt:886:    DictRef { kind: ByteGetMember, index: 7 }
+  fcc-login2-actions.txt:887:    DictRef { kind: ByteGetMember, index: 185 }
+  fcc-login2-actions.txt:888:    DictRef { kind: CallMethodPop, index: 186 }
+  fcc-login2-actions.txt:889:    PushRegister(1)
+  fcc-login2-actions.txt:890:    DictRef { kind: ByteGetMember, index: 187 }
+  fcc-login2-actions.txt:891:    EA:PushTrue
+  fcc-login2-actions.txt:892:    Equals2
+  fcc-login2-actions.txt:893:    PushDuplicate
+  fcc-login2-actions.txt:894:    BranchIfTrue { target: 26 }
+  fcc-login2-actions.txt:895:    Pop
+  fcc-login2-actions.txt:896:    PushRegister(1)
+  fcc-login2-actions.txt:897:    DictRef { kind: ByteGetMember, index: 188 }
+  fcc-login2-actions.txt:898:    EA:PushTrue
+  fcc-login2-actions.txt:899:    Equals2
+  fcc-login2-actions.txt:900:    Not
+  fcc-login2-actions.txt:901:    BranchIfTrue { target: 46 }
+  fcc-login2-actions.txt:902:    EA:Push0
+  fcc-login2-actions.txt:903:    PushRegister(1)
+  fcc-login2-actions.txt:904:    DictRef { kind: ByteGetMember, index: 189 }
+  fcc-login2-actions.txt:905:    DictRef { kind: PushByte, index: 190 }
+  fcc-login2-actions.txt:906:    CallMethod
+  fcc-login2-actions.txt:907:    StoreRegister(3)
+  fcc-login2-actions.txt:908:    Pop
+  fcc-login2-actions.txt:909:    DictRef { kind: PushByte, index: 191 }
+  fcc-login2-actions.txt:910:    DictRef { kind: ByteGetVar, index: 192 }
+  fcc-login2-actions.txt:911:    DictRef { kind: ByteGetMember, index: 193 }
+  fcc-login2-actions.txt:912:    DictRef { kind: ByteGetMember, index: 194 }
+  fcc-login2-actions.txt:913:    DictRef { kind: ByteGetMember, index: 195 }
+  fcc-login2-actions.txt:914:    PushByte(2)
+  fcc-login2-actions.txt:915:    DictRef { kind: ByteGetVar, index: 192 }
+  fcc-login2-actions.txt:916:    DictRef { kind: ByteGetMember, index: 193 }
+  fcc-login2-actions.txt:917:    DictRef { kind: ByteGetMember, index: 196 }
+  fcc-login2-actions.txt:918:    DictRef { kind: CallMethodPop, index: 197 }
+  fcc-login2-actions.txt:919:    BranchAlways { target: 86 }
+  fcc-login2-actions.txt:920:    EA:Push0
+  fcc-login2-actions.txt:921:    DictRef { kind: PushByte, index: 22 }
+  fcc-login2-actions.txt:922:    NewObject
+  fcc-login2-actions.txt:923:    StoreRegister(2)
+  fcc-login2-actions.txt:924:    Pop
+  fcc-login2-actions.txt:925:    PushRegister(2)
+  fcc-login2-actions.txt:926:    DictRef { kind: PushByte, index: 198 }
+  fcc-login2-actions.txt:927:    EA:PushTrue
+  fcc-login2-actions.txt:928:    SetMember
+  fcc-login2-actions.txt:929:    EA:Push0
+  fcc-login2-actions.txt:930:    PushRegister(1)
+  fcc-login2-actions.txt:931:    DictRef { kind: ByteGetMember, index: 20 }
+  fcc-login2-actions.txt:932:    DictRef { kind: PushByte, index: 168 }
+  fcc-login2-actions.txt:933:    CallMethod
+  fcc-login2-actions.txt:934:    BranchIfTrue { target: 66 }
+  fcc-login2-actions.txt:935:    PushRegister(1)
+  fcc-login2-actions.txt:936:    DictRef { kind: ByteGetMember, index: 199 }
+  fcc-login2-actions.txt:937:    DictRef { kind: ByteGetMember, index: 200 }
+  fcc-login2-actions.txt:938:    DictRef { kind: ByteGetMember, index: 201 }
+  fcc-login2-actions.txt:939:    BranchAlways { target: 70 }
+  fcc-login2-actions.txt:940:    PushRegister(1)
+  fcc-login2-actions.txt:941:    DictRef { kind: ByteGetMember, index: 199 }
+  fcc-login2-actions.txt:942:    DictRef { kind: ByteGetMember, index: 200 }
+  fcc-login2-actions.txt:943:    DictRef { kind: ByteGetMember, index: 202 }
+  fcc-login2-actions.txt:944:    PushRegister(2)
+  fcc-login2-actions.txt:945:    PushByte(2)
+  fcc-login2-actions.txt:946:    PushRegister(1)
+  fcc-login2-actions.txt:947:    DictRef { kind: ByteGetMember, index: 7 }
+  fcc-login2-actions.txt:948:    DictRef { kind: ByteGetMember, index: 8 }
+  fcc-login2-actions.txt:949:    DictRef { kind: CallMethodPop, index: 11 }
+  fcc-login2-actions.txt:950:    DictRef { kind: PushByte, index: 203 }
+  fcc-login2-actions.txt:951:    DictRef { kind: ByteGetVar, index: 192 }
+  fcc-login2-actions.txt:952:    DictRef { kind: ByteGetMember, index: 193 }
+  fcc-login2-actions.txt:953:    DictRef { kind: ByteGetMember, index: 194 }
+  fcc-login2-actions.txt:954:    DictRef { kind: ByteGetMember, index: 195 }
+  fcc-login2-actions.txt:955:    PushByte(2)
+  fcc-login2-actions.txt:956:    DictRef { kind: ByteGetVar, index: 192 }
+  fcc-login2-actions.txt:957:    DictRef { kind: ByteGetMember, index: 193 }
+  fcc-login2-actions.txt:958:    DictRef { kind: ByteGetMember, index: 196 }
+  fcc-login2-actions.txt:959:    DictRef { kind: CallMethodPop, index: 197 }
+  fcc-login2-actions.txt:960:    EA:PushTrue
+  fcc-login2-actions.txt:961:    EA:Push1
+  fcc-login2-actions.txt:962:    PushRegister(1)
+  fcc-login2-actions.txt:963:    DictRef { kind: ByteGetMember, index: 107 }
+  fcc-login2-actions.txt:964:    DictRef { kind: CallMethodPop, index: 204 }
+  fcc-login2-actions.txt:965:    DictRef { kind: PushByte, index: 80 }
+  fcc-login2-actions.txt:966:    EA:Push1
+  fcc-login2-actions.txt:967:    PushRegister(1)
+  fcc-login2-actions.txt:968:    DictRef { kind: ByteGetMember, index: 81 }
+  fcc-login2-actions.txt:969:    DictRef { kind: ByteGetMember, index: 82 }
+  fcc-login2-actions.txt:970:    DictRef { kind: CallMethodPop, index: 205 }
+  fcc-login2-actions.txt:971:    DictRef { kind: PushByte, index: 206 }
+  fcc-login2-actions.txt:972:    EA:Push1
+  fcc-login2-actions.txt:973:    PushRegister(1)
+  fcc-login2-actions.txt:974:    DictRef { kind: ByteGetMember, index: 81 }
+  fcc-login2-actions.txt:975:    DictRef { kind: ByteGetMember, index: 82 }
+  fcc-login2-actions.txt:976:    DictRef { kind: CallMethodPop, index: 205 }
+  fcc-login2-actions.txt:977:    EA:Push0
+  fcc-login2-actions.txt:978:    PushRegister(1)
+  fcc-login2-actions.txt:979:    DictRef { kind: ByteGetMember, index: 20 }
+  fcc-login2-actions.txt:980:    DictRef { kind: CallMethodPop, index: 207 }
+  fcc-login2-actions.txt:981:  }
+  fcc-login2-actions.txt:982:  DefineFunction2 "OnError"(info) {
+  fcc-login2-actions.txt:983:    DictRef { kind: PushByte, index: 208 }
+  fcc-login2-actions.txt:984:    Trace
+  fcc-login2-actions.txt:985:    DictRef { kind: PushByte, index: 209 }
+  fcc-login2-actions.txt:986:    EA:Push1
+  fcc-login2-actions.txt:987:    PushRegister(1)
+  fcc-login2-actions.txt:988:    DictRef { kind: CallMethodPop, index: 210 }
+  fcc-login2-actions.txt:989:  }
+  fcc-login2-actions.txt:990:  DefineFunction2 "AllCustomThingsCreated"() {
+  fcc-login2-actions.txt:991:    DictRef { kind: PushByte, index: 211 }
+  fcc-login2-actions.txt:992:    Trace
+  fcc-login2-actions.txt:993:    PushRegister(1)
+

@@ -3,14 +3,15 @@ import zlib
 
 
 ARCHIVE = Path(
-    r"C:\Program Files\EA Games\FIFA 14\Game\cards0.big"
+    r"C:\Users\Gebruiker\Desktop\FIFA14-WC-Revival"
+    r"\backups\worldcup-gamehub-test\patch.big.before_wc_test"
 )
 
-TARGET = "data/db/cards_ng_db-meta.xml"
+TARGET = "data/ui/external/ion_fut/artassets/worldcup/pebbleconfederation/4.big"
 
 OUT = Path(
-    r"D:\Afbeeldingen\FUT14-Revival"
-    r"\extracted\cards_db\cards_ng_db-meta.xml"
+    r"C:\Users\Gebruiker\Desktop\FIFA14-WC-Revival"
+    r"\extracted\wc_assets\confed_4.big"
 )
 
 

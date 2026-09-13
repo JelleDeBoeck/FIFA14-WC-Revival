@@ -807,6 +807,315 @@ class LocalIdentityStore:
             )
             return {"club": club, "activeSquadId": squad_id, "players": 23}
 
+    def provision_world_cup_starter(self) -> dict[str, Any]:
+            """Provision one deterministic World Cup-only starter squad.
+    
+            This path is deliberately separate from the normal FUT/Icebreaker
+            provisioning flow. Only historical cards explicitly marked
+            cardType=worldcup are eligible.
+            """
+    
+            world_cup_pool = [
+                dict(player)
+                for player in SPECIAL_PLAYER_CATALOG
+                if str(player.get("cardType", "")).strip().lower() == "worldcup"
+            ]
+    
+            if not world_cup_pool:
+                raise ValueError("World Cup player catalogue is empty")
+    
+            # Keep the first diagnostic starter squad deliberately modest.
+            # The exact retail WC starter-pack weighting is not known yet, so do
+            # not grant elite cards while validating the onboarding contract.
+            starter_pool = [
+                player
+                for player in world_cup_pool
+                if self._bounded_int(player.get("rating", 0), 0) <= 74
+            ]
+    
+            if len(starter_pool) < 23:
+                raise ValueError(
+                    f"World Cup starter pool contains only {len(starter_pool)} players"
+                )
+    
+            starter_pool.sort(
+                key=lambda player: (
+                    self._bounded_int(player.get("rating", 0), 0),
+                    str(player.get("name", "")).casefold(),
+                    self._bounded_int(player.get("resourceId", 0), 0),
+                )
+            )
+    
+            selected: list[dict[str, Any]] = []
+            used_resource_ids: set[int] = set()
+    
+            def take_player(*positions: str) -> None:
+                wanted = {position.upper() for position in positions}
+    
+                for player in starter_pool:
+                    resource_id = self._bounded_int(
+                        player.get("resourceId", 0),
+                        0,
+                    )
+    
+                    if resource_id <= 0 or resource_id in used_resource_ids:
+                        continue
+    
+                    position = str(player.get("position", "")).strip().upper()
+                    if position not in wanted:
+                        continue
+    
+                    selected.append(player)
+                    used_resource_ids.add(resource_id)
+                    return
+    
+                raise ValueError(
+                    "World Cup starter pool has no unused player for positions "
+                    + "/".join(sorted(wanted))
+                )
+    
+            # Starting XI for the existing f442 squad slot contract.
+            take_player("ST", "CF")
+            take_player("ST", "CF")
+            take_player("LM", "LW")
+            take_player("CM", "CDM", "CAM")
+            take_player("CM", "CDM", "CAM")
+            take_player("RM", "RW")
+            take_player("LB", "LWB")
+            take_player("CB")
+            take_player("CB")
+            take_player("RB", "RWB")
+            take_player("GK")
+    
+            # Fill the seven substitutes and five reserves with the remaining
+            # lowest-rated WC cards. They remain genuine WC card revisions.
+            for player in starter_pool:
+                if len(selected) >= 23:
+                    break
+    
+                resource_id = self._bounded_int(
+                    player.get("resourceId", 0),
+                    0,
+                )
+    
+                if resource_id <= 0 or resource_id in used_resource_ids:
+                    continue
+    
+                selected.append(player)
+                used_resource_ids.add(resource_id)
+    
+            if len(selected) != 23:
+                raise ValueError(
+                    f"World Cup starter selection produced {len(selected)} players"
+                )
+    
+            with self._lock, closing(self._connect()) as connection, connection:
+                identity = self._identity(connection)
+                persona_id = int(identity["persona_id"])
+                fut_user = self._ensure_fut_user_locked(connection)
+    
+                existing_squad_id = fut_user["active_squad_id"]
+    
+                if (
+                    existing_squad_id is not None
+                    and bool(fut_user["starter_pack_claimed"])
+                ):
+                    existing_count = int(
+                        connection.execute(
+                            """
+                            SELECT COUNT(*)
+                            FROM squad_players
+                            WHERE squad_id = ? AND item_id > 0
+                            """,
+                            (int(existing_squad_id),),
+                        ).fetchone()[0]
+                    )
+    
+                    existing_club = connection.execute(
+                        "SELECT * FROM clubs WHERE persona_id = ?",
+                        (persona_id,),
+                    ).fetchone()
+    
+                    if existing_count > 0 and existing_club is not None:
+                        return {
+                            "club": self._club_document(existing_club),
+                            "activeSquadId": int(existing_squad_id),
+                            "players": existing_count,
+                            "alreadyProvisioned": True,
+                        }
+    
+                # Support Nation selection has already created the WC club.
+                # Preserve that row exactly instead of replacing its team_id with
+                # a normal FUT club/team.
+                club_row = connection.execute(
+                    "SELECT * FROM clubs WHERE persona_id = ?",
+                    (persona_id,),
+                ).fetchone()
+    
+                if club_row is None:
+                    club = self._create_club_locked(
+                        connection,
+                        club_name="Local FUT",
+                        club_abbr="LFT",
+                        badge_id=0,
+                        team_id=0,
+                    )
+                else:
+                    club = self._club_document(club_row)
+    
+                row = connection.execute(
+                    """
+                    SELECT squad_id
+                    FROM squads
+                    WHERE persona_id = ? AND active = 1
+                    ORDER BY squad_id
+                    LIMIT 1
+                    """,
+                    (persona_id,),
+                ).fetchone()
+    
+                if row is None:
+                    cursor = connection.execute(
+                        """
+                        INSERT INTO squads (
+                            persona_id,
+                            squad_name,
+                            formation,
+                            active
+                        ) VALUES (?, 'World Cup XI', 'f442', 1)
+                        """,
+                        (persona_id,),
+                    )
+                    squad_id = int(cursor.lastrowid)
+                else:
+                    squad_id = int(row["squad_id"])
+                    connection.execute(
+                        """
+                        UPDATE squads
+                        SET squad_name = 'World Cup XI',
+                            formation = 'f442',
+                            active = 1
+                        WHERE squad_id = ?
+                        """,
+                        (squad_id,),
+                    )
+    
+                connection.execute(
+                    "UPDATE squads SET active = 0 WHERE persona_id = ? AND squad_id != ?",
+                    (persona_id, squad_id),
+                )
+    
+                connection.execute(
+                    "DELETE FROM squad_players WHERE squad_id = ?",
+                    (squad_id,),
+                )
+    
+                # This WC database should stay isolated from normal FUT ownership.
+                # Remove only player ownership here; do not wipe future cosmetic
+                # items such as kits/badges.
+                connection.execute(
+                    """
+                    DELETE FROM items
+                    WHERE persona_id = ? AND item_type = 'player'
+                    """,
+                    (persona_id,),
+                )
+    
+                for index, player in enumerate(selected):
+                    asset_id = self._bounded_int(
+                        player.get("assetId", 0),
+                        0,
+                        minimum=1,
+                    )
+    
+                    item_id = 180_000_000_000 + index + 1
+    
+                    payload = self._canonical_player_payload(
+                        item_id=item_id,
+                        asset_id=asset_id,
+                        existing=dict(player),
+                        slot_index=index,
+                    )
+
+                    attrs = [
+                        int(entry["value"])
+                        for entry in payload["attributeList"]
+                    ]
+    
+                    connection.execute(
+                        """
+                        INSERT INTO squad_players (
+                            squad_id,
+                            slot_index,
+                            item_id,
+                            asset_id,
+                            resource_id,
+                            team_id,
+                            rating,
+                            rare_flag,
+                            play_style,
+                            preferred_position,
+                            attributes_json
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            squad_id,
+                            index,
+                            item_id,
+                            int(payload["assetId"]),
+                            int(payload["resourceId"]),
+                            int(payload["teamId"]),
+                            int(payload["rating"]),
+                            int(payload["rareflag"]),
+                            int(payload["playStyle"]),
+                            str(payload["preferredPosition"]),
+                            json.dumps(attrs, separators=(",", ":")),
+                        ),
+                    )
+    
+                    connection.execute(
+                        """
+                        INSERT OR REPLACE INTO items (
+                            item_id,
+                            persona_id,
+                            asset_id,
+                            item_type,
+                            pile,
+                            tradeable,
+                            payload
+                        ) VALUES (?, ?, ?, 'player', 'squad', 0, ?)
+                        """,
+                        (
+                            item_id,
+                            persona_id,
+                            int(payload["assetId"]),
+                            json.dumps(payload, separators=(",", ":")),
+                        ),
+                    )
+    
+                connection.execute(
+                    """
+                    UPDATE fut_users
+                    SET active_squad_id = ?,
+                        starter_pack_claimed = 1
+                    WHERE persona_id = ?
+                    """,
+                    (squad_id, persona_id),
+                )
+    
+                return {
+                    "club": club,
+                    "activeSquadId": squad_id,
+                    "players": len(selected),
+                    "worldCupPlayers": len(selected),
+                    "starterRatingMin": min(
+                        int(player["rating"]) for player in selected
+                    ),
+                    "starterRatingMax": max(
+                        int(player["rating"]) for player in selected
+                    ),
+                }        
+    
     @staticmethod
     def _full_club_item_id(asset_id: int) -> int:
         return FULL_CLUB_ITEM_BASE + int(asset_id)
@@ -1811,6 +2120,15 @@ class LocalIdentityStore:
             "statsArray": stats,
             "lifetimeStatsArray": lifetime_stats,
         }
+
+        # TEMP WC ART TEST - Archie Thompson only
+        if (
+            str(player.get("cardType") or "").lower() == "worldcup"
+            and asset_id == 34373
+        ):
+            payload["TEAM_ASSET_ID"] = 1415
+            payload["CONFEDERATION_ASSET_ID"] = 5
+
         # FIFA 14 PC uses resourceId for the FUT card revision, but its static
         # player lookup still needs the *base* definition.  Sending the versioned
         # revision as definitionId made 91 IF Ibrahimovic resolve as a GK; omitting
@@ -3430,6 +3748,48 @@ class LocalIdentityStore:
             for pack_id in touched_packs:
                 self._finish_pack_if_resolved_locked(connection, persona_id, pack_id)
         return {"items": sold, "itemData": sold, "totalCredits": credits, "credits": credits}
+
+    def world_cup_starter_items(self) -> dict[str, Any]:
+        """Diagnostic bridge: expose the provisioned WC squad as New Items.
+
+        fcc_login2 creates a 25-slot new-card view during the WC starter flow.
+        For this experiment, return the already-provisioned WC player items
+        through /purchased/items so we can prove that endpoint feeds CardStackHorz.
+        """
+        with self._lock, closing(self._connect()) as connection:
+            identity = self._identity(connection)
+            persona_id = int(identity["persona_id"])
+
+            rows = connection.execute(
+                """
+                SELECT payload
+                FROM items
+                WHERE persona_id = ?
+                    AND item_type = 'player'
+                    AND pile = 'squad'
+                ORDER BY item_id
+                """,
+                (persona_id,),
+            ).fetchall()
+
+            item_data = [
+                json.loads(row["payload"])
+                for row in rows
+                if row["payload"]
+            ]
+
+            duplicates = self._duplicate_item_id_list_locked(
+                connection,
+                persona_id,
+                item_data,
+            )
+
+            return {
+                "duplicateItemIdList": duplicates,
+                "itemData": item_data,
+                "unopenedPacks": [],
+                "packList": [],
+            }
 
     def purchased_items(self) -> dict[str, Any]:
         with self._lock, closing(self._connect()) as connection:

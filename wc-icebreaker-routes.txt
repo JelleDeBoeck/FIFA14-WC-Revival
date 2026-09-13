@@ -1,0 +1,276 @@
+
+  src\backend\probe.py:62:def build_fut_account_info_payload(account_mode: str = "new") -> bytes:
+  src\backend\probe.py:63:    return (
+  src\backend\probe.py:64:        json.dumps(build_fut_account_info(account_mode), separators=(",", ":")) + "\n"
+  src\backend\probe.py:65:    ).encode("utf-8")
+  src\backend\probe.py:66:
+  src\backend\probe.py:67:
+  src\backend\probe.py:68:def build_fut_json_payload(document: dict) -> bytes:
+  src\backend\probe.py:69:    return (json.dumps(document, separators=(",", ":")) + "\n").encode("utf-8")
+  src\backend\probe.py:70:
+  src\backend\probe.py:71:
+  src\backend\probe.py:72:def is_world_cup_path(path: str) -> bool:
+  src\backend\probe.py:73:    query = parse_qs(urlsplit(path).query, keep_blank_values=True)
+  src\backend\probe.py:74:    return query.get("skuMode", [""])[0].strip().upper() == "WC"
+  src\backend\probe.py:75:
+  src\backend\probe.py:76:
+> src\backend\probe.py:77:ICEBREAKER_FIXTURE_PATH = SERVER_DIRECTORY / "icebreakerpacklist.v27.json"
+  src\backend\probe.py:78:ICEBREAKER_PLAYER_ARRAY_FIELDS = (
+  src\backend\probe.py:79:    "squad",
+  src\backend\probe.py:80:    "teamId",
+  src\backend\probe.py:81:    "Rating",
+  src\backend\probe.py:82:    "Rare",
+  src\backend\probe.py:83:    "playStyle",
+  src\backend\probe.py:84:    "Attribute1",
+  src\backend\probe.py:85:    "Attribute2",
+  src\backend\probe.py:86:    "Attribute3",
+  src\backend\probe.py:87:    "Attribute4",
+  src\backend\probe.py:88:    "Attribute5",
+  src\backend\probe.py:89:    "Attribute6",
+  src\backend\probe.py:90:)
+  src\backend\probe.py:91:ICEBREAKER_ROLE_ARRAY_FIELDS = ("kicktakers", "squadActives")
+  src\backend\probe.py:92:ICEBREAKER_FORMATIONS = {
+  src\backend\probe.py:93:    "f3412", "f3421", "f343", "f352", "f41212", "f4231",
+  src\backend\probe.py:94:    "f4222", "f4312", "f4321", "f433", "f4411", "f442",
+  src\backend\probe.py:95:    "f451", "f5212", "f5221", "f532", "f541", "f41212a",
+  src\backend\probe.py:96:    "f4141", "f4231a", "f433a", "f433b", "f433c", "f433d",
+  src\backend\probe.py:97:    "f442a", "f451a",
+  src\backend\probe.py:98:}
+  src\backend\probe.py:99:
+  src\backend\probe.py:100:
+  src\backend\probe.py:101:def validate_icebreaker_fixture(document: object) -> dict:
+  src\backend\probe.py:102:    """Validate the complete retail captain pack-entry contract.
+  src\backend\probe.py:103:
+  src\backend\probe.py:104:    CardsDLLzf.dll parses each entry into a fixed 0x1E0-byte native record.
+  src\backend\probe.py:105:    The player-facing arrays have exactly 23 elements; kick takers and their
+  src\backend\probe.py:106:    active flags have exactly six. Rejecting malformed fixtures in Python is
+  src\backend\probe.py:107:    safer than letting the legacy native parser consume null/default values.
+  src\backend\probe.py:160:                raise ValueError(f"packList[{pack_index}].{field} must contain exactly six integers")
+  src\backend\probe.py:161:            for value_index, value in enumerate(values):
+  src\backend\probe.py:162:                if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+  src\backend\probe.py:163:                    raise ValueError(
+  src\backend\probe.py:164:                        f"packList[{pack_index}].{field}[{value_index}] must be a non-negative integer"
+  src\backend\probe.py:165:                    )
+  src\backend\probe.py:166:
+  src\backend\probe.py:167:        if len(set(pack["squad"])) != 23:
+  src\backend\probe.py:168:            raise ValueError(f"packList[{pack_index}].squad must contain 23 unique player resource IDs")
+  src\backend\probe.py:169:
+  src\backend\probe.py:170:    if seen_ids != {0, 1, 2, 3} or seen_images != {0, 1, 2, 3}:
+  src\backend\probe.py:171:        raise ValueError("captain id/image values must be exactly 0, 1, 2 and 3")
+  src\backend\probe.py:172:    return document
+  src\backend\probe.py:173:
+  src\backend\probe.py:174:
+> src\backend\probe.py:175:def load_icebreaker_fixture(path: Path = ICEBREAKER_FIXTURE_PATH) -> dict:
+  src\backend\probe.py:176:    if not path.is_file():
+  src\backend\probe.py:177:        raise ValueError(f"Icebreaker fixture is missing: {path}")
+  src\backend\probe.py:178:    try:
+  src\backend\probe.py:179:        document = json.loads(path.read_text(encoding="utf-8"))
+  src\backend\probe.py:180:    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+  src\backend\probe.py:181:        raise ValueError(f"could not read Icebreaker fixture {path}: {error}") from error
+  src\backend\probe.py:182:    return validate_icebreaker_fixture(document)
+  src\backend\probe.py:183:
+  src\backend\probe.py:184:
+  src\backend\probe.py:185:def build_fut_auth_response(sid: str) -> dict:
+  src\backend\probe.py:186:    """Return the exact three top-level fields recognized by FIFA 14 PC.
+  src\backend\probe.py:187:
+  src\backend\probe.py:188:    Static reversing of the uploaded CardsDLL maps only ``sid``,
+  src\backend\probe.py:189:    ``serverTime`` and ``lastOnlineTime`` in the Authentication response.
+  src\backend\probe.py:190:    Historical FIFA 14 clients also deserialize the session identifier from
+  src\backend\probe.py:191:    the JSON body, so the SID is deliberately returned in both body and header.
+  src\backend\probe.py:192:    """
+  src\backend\probe.py:193:    now = datetime.now(timezone.utc).replace(microsecond=0)
+  src\backend\probe.py:194:    return {
+  src\backend\probe.py:195:        "sid": sid,
+  src\backend\probe.py:196:        "serverTime": now.isoformat().replace("+00:00", "Z"),
+  src\backend\probe.py:197:        "lastOnlineTime": "1970-01-01T00:00:00Z",
+  src\backend\probe.py:198:    }
+  src\backend\probe.py:199:
+  src\backend\probe.py:200:
+  src\backend\probe.py:201:def build_fut_settings_response() -> dict:
+  src\backend\probe.py:202:    """Fields read by FIFA 14's exact FutSettings response parser."""
+  src\backend\probe.py:203:    return {
+  src\backend\probe.py:204:        "maximumTradePileSize": 30,
+  src\backend\probe.py:205:        "getOperationTimeoutSec": 300,
+  src\backend\probe.py:2203:                    "assetId": int(player["assetId"]),
+  src\backend\probe.py:2204:                    "id": int(player["assetId"]),
+  src\backend\probe.py:2205:                    "rating": int(player["rating"]),
+  src\backend\probe.py:2206:                    "position": str(player["position"]),
+  src\backend\probe.py:2207:                    "teamId": int(player["teamId"]),
+  src\backend\probe.py:2208:                    "leagueId": int(player["leagueId"]),
+  src\backend\probe.py:2209:                    "nation": int(player["nation"]),
+  src\backend\probe.py:2210:                    "name": str(player.get("name", "")),
+  src\backend\probe.py:2211:                    "commonName": str(player.get("commonName", player.get("name", ""))),
+  src\backend\probe.py:2212:                    "resourceId": int(player.get("resourceId", player["assetId"])),
+  src\backend\probe.py:2213:                    "rareFlag": int(player.get("rareFlag", 0)),
+  src\backend\probe.py:2214:                }
+  src\backend\probe.py:2215:        return None
+  src\backend\probe.py:2216:
+  src\backend\probe.py:2217:    @staticmethod
+> src\backend\probe.py:2218:    def _is_icebreaker_packlist_path(path_without_query: str) -> bool:
+  src\backend\probe.py:2219:        """Match the retail captain-selection pack-list JSON asset.
+  src\backend\probe.py:2220:
+  src\backend\probe.py:2221:        This must be handled before the broad /fut/* XML fallback. Returning
+  src\backend\probe.py:2222:        XML for this .json path aborts the original Icebreaker flow. V27 serves
+  src\backend\probe.py:2223:        a validated editable four-pack fixture with all 23 native player slots,
+  src\backend\probe.py:2224:        allowing retail RetrievePack and BuildSquad to resolve non-null cards.
+  src\backend\probe.py:2225:        """
+  src\backend\probe.py:2226:        lowered = path_without_query.lower()
+  src\backend\probe.py:2227:        return lowered.endswith(
+> src\backend\probe.py:2228:            "/fut/packs/icebreaker/icebreakerpacklist.json"
+  src\backend\probe.py:2229:        ) or lowered.endswith(
+> src\backend\probe.py:2230:            "/packs/icebreaker/icebreakerpacklist.json"
+  src\backend\probe.py:2231:        )
+  src\backend\probe.py:2232:
+  src\backend\probe.py:2233:    @staticmethod
+  src\backend\probe.py:2234:    def _is_store_pack_descriptions_path(path_without_query: str) -> bool:
+  src\backend\probe.py:2235:        return "packs/loc/storepackdescriptions." in path_without_query.lower()
+  src\backend\probe.py:2236:
+  src\backend\probe.py:2237:    @staticmethod
+  src\backend\probe.py:2238:    def _is_fut_localization_path(path_without_query: str) -> bool:
+  src\backend\probe.py:2239:        lowered = path_without_query.lower()
+  src\backend\probe.py:2240:        return "/fut/loc/" in lowered and lowered.endswith(".xml")
+  src\backend\probe.py:2241:
+  src\backend\probe.py:2242:    @classmethod
+  src\backend\probe.py:2243:    def _local_ui_locstrings_payload(cls) -> bytes:
+  src\backend\probe.py:2244:        strings: dict[str, str] = {}
+  src\backend\probe.py:2245:        try:
+  src\backend\probe.py:2246:            from local_identity import PACK_CATALOG_DOCUMENT
+  src\backend\probe.py:2247:            for entry in PACK_CATALOG_DOCUMENT.get("packs", []):
+  src\backend\probe.py:2248:                pack_type = int(entry.get("packType", 0))
+  src\backend\probe.py:2249:                pack_id = int(entry.get("packId", pack_type))
+  src\backend\probe.py:2250:                name = str(entry.get("name", f"Local Pack {pack_type}"))
+  src\backend\probe.py:2251:                description = str(entry.get("description", name))
+  src\backend\probe.py:2252:                strings[f"LOCAL_PACK_NAME_{pack_type}"] = name
+  src\backend\probe.py:2253:                strings[f"LOCAL_PACK_DESC_{pack_type}"] = description
+  src\backend\probe.py:2254:                strings[f"FUT_STORE_PACK_{pack_id}_DESC"] = description
+  src\backend\probe.py:2255:        except Exception:
+  src\backend\probe.py:2256:            pass
+  src\backend\probe.py:2257:        try:
+  src\backend\probe.py:2258:            from beta_identity import OFFLINE_TOURNAMENTS
+  src\backend\probe.py:2259:            for entry in OFFLINE_TOURNAMENTS:
+  src\backend\probe.py:2260:                tournament_id = int(entry.get("tournamentId", 0) or 0)
+  src\backend\probe.py:2457:                "pid": os.getpid(),
+  src\backend\probe.py:2458:                "instanceToken": str(getattr(self.server, "instance_token", "")),
+  src\backend\probe.py:2459:                "probe": self.server_version,
+  src\backend\probe.py:2460:                "identityDb": str(getattr(identity_store, "database", getattr(identity_store, "path", ""))) if identity_store is not None else "",
+  src\backend\probe.py:2461:                "fullItemDataRequired": ["itemType", "cardsubtypeid", "nation", "leagueId", "resourceGameYear"],
+  src\backend\probe.py:2462:                "samplePlayer": sample,
+  src\backend\probe.py:2463:            }
+  src\backend\probe.py:2464:            payload = build_fut_json_payload(document)
+  src\backend\probe.py:2465:            self.send_response(200)
+  src\backend\probe.py:2466:            self.send_header("content-type", "application/json; charset=utf-8")
+  src\backend\probe.py:2467:            self.send_header("cache-control", "no-store")
+  src\backend\probe.py:2468:            self.send_header("connection", "close")
+  src\backend\probe.py:2469:            emit("v237-health-response", path=self.path, pid=os.getpid(), sample=sample)
+  src\backend\probe.py:2470:        elif (
+  src\backend\probe.py:2471:            probe_name in {"fut-http", "dynamic-http"}
+> src\backend\probe.py:2472:            and self._is_icebreaker_packlist_path(path_without_query)
+  src\backend\probe.py:2473:        ):
+  src\backend\probe.py:2474:            # V27 keeps the client-side captain screen retail and repairs the
+  src\backend\probe.py:2475:            # server contract instead. The fixture is loaded on every request,
+  src\backend\probe.py:2476:            # so developers can edit the 23-player packs without rebuilding the
+  src\backend\probe.py:2477:            # package. Validation prevents the zero resource IDs that made the
+  src\backend\probe.py:2478:            # retail CardsDLL card constructor dereference a null player object.
+  src\backend\probe.py:2479:            try:
+> src\backend\probe.py:2480:                document = load_icebreaker_fixture()
+  src\backend\probe.py:2481:            except ValueError as error:
+  src\backend\probe.py:2482:                document = {"error": "invalid-icebreaker-fixture", "detail": str(error)}
+  src\backend\probe.py:2483:                payload = build_fut_json_payload(document)
+  src\backend\probe.py:2484:                self.send_response(500)
+  src\backend\probe.py:2485:                self.send_header("content-type", "application/json; charset=utf-8")
+  src\backend\probe.py:2486:                self.send_header("cache-control", "no-store")
+  src\backend\probe.py:2487:                self.send_header("connection", "close")
+  src\backend\probe.py:2488:                emit(
+> src\backend\probe.py:2489:                    "fut-icebreaker-packlist-fixture-error",
+  src\backend\probe.py:2490:                    listener=probe_name,
+  src\backend\probe.py:2491:                    method=self.command,
+  src\backend\probe.py:2492:                    path=self.path,
+  src\backend\probe.py:2493:                    status=500,
+  src\backend\probe.py:2494:                    error=str(error),
+  src\backend\probe.py:2495:                    fixture=str(ICEBREAKER_FIXTURE_PATH),
+  src\backend\probe.py:2496:                )
+  src\backend\probe.py:2497:            else:
+  src\backend\probe.py:2498:                payload = build_fut_json_payload(document)
+  src\backend\probe.py:2499:                self.send_response(200)
+  src\backend\probe.py:2500:                self.send_header("content-type", "application/json; charset=utf-8")
+  src\backend\probe.py:2501:                self.send_header("cache-control", "no-store")
+  src\backend\probe.py:2502:                self.send_header("connection", "close")
+  src\backend\probe.py:2503:                emit(
+> src\backend\probe.py:2504:                    "fut-icebreaker-packlist-response",
+  src\backend\probe.py:2505:                    listener=probe_name,
+  src\backend\probe.py:2506:                    method=self.command,
+  src\backend\probe.py:2507:                    path=self.path,
+  src\backend\probe.py:2508:                    response_name="complete-four-captain-23-player-icebreaker-packlist-v27",
+  src\backend\probe.py:2509:                    status=200,
+  src\backend\probe.py:2510:                    bytes=len(payload),
+  src\backend\probe.py:2511:                    fixture=str(ICEBREAKER_FIXTURE_PATH),
+  src\backend\probe.py:2512:                    captain_ids=[entry["squad"][0] for entry in document["packList"]],
+  src\backend\probe.py:2513:                    formations=[entry["formation"] for entry in document["packList"]],
+  src\backend\probe.py:2514:                    squad_lengths=[len(entry["squad"]) for entry in document["packList"]],
+  src\backend\probe.py:2515:                    response_document=document,
+  src\backend\probe.py:2516:                )
+  src\backend\probe.py:2517:        elif (
+  src\backend\probe.py:2518:            probe_name in {"fut-http", "dynamic-http"}
+  src\backend\probe.py:2519:            and self._is_icebreaker_locstrings_path(path_without_query)
+  src\backend\probe.py:2520:        ):
+  src\backend\probe.py:2521:            payload = self._icebreaker_locstrings_payload()
+  src\backend\probe.py:2522:            self.send_response(200)
+  src\backend\probe.py:2523:            self.send_header("content-type", "application/xml; charset=utf-8")
+  src\backend\probe.py:2524:            self.send_header("cache-control", "no-store")
+  src\backend\probe.py:2525:            self.send_header("connection", "close")
+  src\backend\probe.py:2526:            emit(
+  src\backend\probe.py:2527:                "fut-locstrings-http-response",
+  src\backend\probe.py:2528:                listener=probe_name, method=self.command, path=self.path,
+  src\backend\probe.py:2529:                response_name="retail-icebreaker-captain-names-locstrings-xml",
+  src\backend\probe.py:2530:                status=200, bytes=len(payload),
+  src\backend\probe.py:2531:            )
+  src\backend\probe.py:2532:        elif (
+  src\backend\probe.py:2533:            probe_name in {"fut-http", "dynamic-http"}
+  src\backend\probe.py:2534:            and self._is_leaderboards_locstrings_path(path_without_query)
+  src\backend\probe.py:3265:                    emit(
+  src\backend\probe.py:3266:                        "fut-wc-starter-provisioned",
+  src\backend\probe.py:3267:                        path=self.path,
+  src\backend\probe.py:3268:                        action_name=normalized_action,
+  src\backend\probe.py:3269:                        **provisioned,
+  src\backend\probe.py:3270:                    )
+  src\backend\probe.py:3271:
+  src\backend\probe.py:3272:                elif (
+  src\backend\probe.py:3273:                    not world_cup_active
+  src\backend\probe.py:3274:                    and normalized_action
+  src\backend\probe.py:3275:                    == "ICEBREAKER_ENGLISH_CAPTAIN_SELECTED"
+  src\backend\probe.py:3276:                    and effective_method != "DELETE"
+  src\backend\probe.py:3277:                ):
+  src\backend\probe.py:3278:                    # Normal FUT Icebreaker provisioning stays completely
+  src\backend\probe.py:3279:                    # separate from the World Cup onboarding path.
+> src\backend\probe.py:3280:                    fixture = load_icebreaker_fixture()
+  src\backend\probe.py:3281:                    provisioned = identity_store.provision_pack_play_club(
+  src\backend\probe.py:3282:                        fixture["packList"][1]
+  src\backend\probe.py:3283:                    )
+  src\backend\probe.py:3284:                    emit(
+  src\backend\probe.py:3285:                        "fut-icebreaker-local-club-provisioned",
+  src\backend\probe.py:3286:                        path=self.path,
+  src\backend\probe.py:3287:                        **provisioned,
+  src\backend\probe.py:3288:                    )
+  src\backend\probe.py:3289:                response = identity_store.update_user_action(
+  src\backend\probe.py:3290:                    action_name,
+  src\backend\probe.py:3291:                    completed=effective_method != "DELETE",
+  src\backend\probe.py:3292:                )
+  src\backend\probe.py:3293:                payload = build_fut_json_payload(response)
+  src\backend\probe.py:3294:                self.send_response(200)
+  src\backend\probe.py:3295:                response_name = f"fut-user-action-{action_name}"
+  src\backend\probe.py:3296:            except ValueError as error:
+  src\backend\probe.py:3297:                payload = build_fut_json_payload(
+  src\backend\probe.py:3298:                    {"code": "400", "reason": str(error)}
+  src\backend\probe.py:3299:                )
+  src\backend\probe.py:3300:                self.send_response(400)
+  src\backend\probe.py:3301:                response_name = "fut-user-action-invalid"
+  src\backend\probe.py:3302:            self.send_header("content-type", "application/json; charset=utf-8")
+  src\backend\probe.py:3303:            self.send_header("cache-control", "no-store")
+  src\backend\probe.py:3304:            emit(
+  src\backend\probe.py:3305:                "fut-http-response",
+  src\backend\probe.py:3306:                method=self.command,
+  src\backend\probe.py:3307:                effective_method=effective_method,
+  src\backend\probe.py:3308:                path=self.path,
+  src\backend\probe.py:3309:                response_name=response_name,
+  src\backend\probe.py:3310:                status=200 if response_name != "fut-user-action-invalid" else 400,
+

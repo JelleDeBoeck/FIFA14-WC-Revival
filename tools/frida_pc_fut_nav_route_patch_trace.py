@@ -343,6 +343,8 @@ const getUserInfoParserDepthByThread = Object.create(null);
 const getUserInfoSubparserDepthByThread = Object.create(null);
 const icebreakerPackListParserDepthByThread = Object.create(null);
 const icebreakerPackEntryParserDepthByThread = Object.create(null);
+const purchasedItemsDepthByThread = Object.create(null);
+let purchasedItemsTraceUntilMs = 0;
 let getUserInfoParserCompleted = false;
 let getUserInfoParserSucceeded = false;
 let phishingValidationSucceeded = false;
@@ -528,6 +530,53 @@ function emit(kind, payload) {
   if (count <= 1000) send({kind: kind, index: count, time_ms: nowMs(), ...payload});
   else if (count === 1001) send({kind: kind + '-suppressed', limit: 1000});
 }
+function hookAptDebugOutput() {
+  function hookOne(name, wide) {
+    const address = Module.findGlobalExportByName(name);
+    if (address === null) {
+      emit('apt-debug-hook-missing', {name: name});
+      return;
+    }
+
+    Interceptor.attach(address, {
+      onEnter(args) {
+        let text = null;
+
+        try {
+          text = wide
+            ? args[0].readUtf16String()
+            : args[0].readCString();
+        } catch (_) {
+          return;
+        }
+
+        if (!text) return;
+
+        if (
+          text.indexOf('Card DB ID') !== -1 ||
+          text.indexOf('Card FIFA ID') !== -1 ||
+          text.indexOf('CARD_ID') !== -1 ||
+          text.indexOf('FIFA_ID') !== -1
+        ) {
+          emit('apt-card-trace', {
+            api: name,
+            text: text
+          });
+        }
+      }
+    });
+
+    emit('apt-debug-hook-installed', {
+      name: name,
+      address: address.toString()
+    });
+  }
+
+  hookOne('OutputDebugStringA', false);
+  hookOne('OutputDebugStringW', true);
+}
+
+hookAptDebugOutput();
 function verify(address, signature) {
   try {
     const actual = listBytes(address.readByteArray(signature.length));
@@ -616,6 +665,21 @@ function hookDynamicDispatchTargets(module) {
           this.callback = args[1];
           this.callNumber = (counters['startup-operation-' + spec.operation_index] || 0) + 1;
           counters['startup-operation-' + spec.operation_index] = this.callNumber;
+          if (spec.operation_index === 73) {
+              const key = String(tid());
+              purchasedItemsDepthByThread[key] =
+                  (purchasedItemsDepthByThread[key] || 0) + 1;
+
+              this.purchasedItemsThreadKey = key;
+
+              purchasedItemsTraceUntilMs = nowMs() + 15000;
+
+              emit('cards-purchased-items-enter', {
+                  thread_id: tid(),
+                  request: pointerProbe(this.request, 0x180),
+                  callback: pointerProbe(this.callback, 0x180)
+              });
+          }
           emit('cards-startup-operation-enter', {
             name:spec.name, operation_index:spec.operation_index, slot:'0x'+spec.slot.toString(16), call_number:this.callNumber,
             thread_id:tid(), target:target.toString(), return_address:safePtr(this.returnAddress),
@@ -625,6 +689,20 @@ function hookDynamicDispatchTargets(module) {
           });
         },
         onLeave(retval) {
+          if (spec.operation_index === 73 && this.purchasedItemsThreadKey) {
+            emit('cards-purchased-items-leave', {
+              thread_id: tid(),
+              retval: retval.toString(),
+              retval_i32: retval.toInt32()
+            });
+
+            purchasedItemsDepthByThread[this.purchasedItemsThreadKey] =
+              Math.max(
+                0,
+                (purchasedItemsDepthByThread[this.purchasedItemsThreadKey] || 1) - 1
+              );
+          }
+
           emit('cards-startup-operation-leave', {
             name:spec.name, operation_index:spec.operation_index, slot:'0x'+spec.slot.toString(16), call_number:this.callNumber,
             thread_id:tid(), target:target.toString(), retval:retval.toString(), retval_i32:retval.toInt32(),
@@ -3191,7 +3269,14 @@ function attachCardsHooksOnce(reason) {
       this.icebreakerPackListActive = (icebreakerPackListParserDepthByThread[key] || 0) > 0;
       this.icebreakerPackEntryActive = (icebreakerPackEntryParserDepthByThread[key] || 0) > 0;
       this.competitionActive = competitionTraceActive();
-      this.active = this.operation92Active || this.getUserInfoActive || this.icebreakerPackListActive || this.icebreakerPackEntryActive || this.competitionActive;
+      this.purchasedItemsActive = purchasedItemsTraceUntilMs > nowMs();
+      this.active =
+        this.operation92Active ||
+        this.getUserInfoActive ||
+        this.icebreakerPackListActive ||
+        this.icebreakerPackEntryActive ||
+        this.competitionActive ||
+        this.purchasedItemsActive;
       if (this.active) {
         this.keyName = cstring(args[0], 256);
         this.mapperReturnAddress = safePtr(this.returnAddress);
@@ -3203,6 +3288,12 @@ function attachCardsHooksOnce(reason) {
     onLeave(retval) {
       if (!this.active) return;
       const payload = {thread_id: tid(), key: this.keyName, id: retval.toUInt32(), id_hex: '0x' + retval.toUInt32().toString(16)};
+      if (this.purchasedItemsActive) {
+        emit('cards-purchased-items-json-key', {
+          ...payload,
+          return_address: this.mapperReturnAddress
+        });
+      }
       if (this.operation92Active) emit('cards-operation92-json-key', payload);
       if (this.getUserInfoActive) emit('cards-get-user-info-json-key', payload);
       if (this.icebreakerPackListActive || this.icebreakerPackEntryActive) {

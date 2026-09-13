@@ -1,0 +1,23 @@
+{
+  "name": "fifa14-wc-revival",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JelleDeBoeck/FIFA14-WC-Revival.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JelleDeBoeck/FIFA14-WC-Revival/issues"
+  },
+  "homepage": "https://github.com/JelleDeBoeck/FIFA14-WC-Revival#readme",
+  "description": "",
+  "dependencies": {
+    "fifa-t3db": "^0.0.2"
+  }
+}

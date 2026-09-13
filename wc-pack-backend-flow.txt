@@ -1,0 +1,424 @@
+
+=== PACKSELECT SUPPORT 2060-2260 ===
+ 2060:         return (
+ 2061:             b'<?xml version="1.0" encoding="UTF-8"?>\n'
+ 2062:             b'<MESSAGES>\n'
+ 2063:             b'</MESSAGES>\n'
+ 2064:         )
+ 2065: 
+ 2066:     @staticmethod
+ 2067:     def _locstrings_payload(strings: dict[str, str], *, target: str) -> bytes:
+ 2068:         # Values here are controlled constants. Keep the document deliberately
+ 2069:         # tiny: it supplements the retail game's built-in localization instead
+ 2070:         # of trying to recreate EA's complete 2014 language database.
+ 2071:         def xml_text(value: str) -> str:
+ 2072:             return (str(value).replace("&", "&amp;").replace("<", "&lt;")
+ 2073:                     .replace(">", "&gt;").replace('"', "&quot;"))
+ 2074:         rows = [f'<locstring id="{xml_text(key)}">{xml_text(value)}</locstring>' for key, value in strings.items()]
+ 2075:         return (
+ 2076:             '<?xml version="1.0" encoding="UTF-8"?>\n'
+ 2077:             f'<message_set target="{xml_text(target)}">\n  '
+ 2078:             + '\n  '.join(rows)
+ 2079:             + '\n</message_set>\n'
+ 2080:         ).encode("utf-8")
+ 2081: 
+ 2082:     @classmethod
+ 2083:     def _icebreaker_locstrings_payload(cls) -> bytes:
+ 2084:         # The retail futPackSelect APT resolves these four fixed tokens.
+ 2085:         return cls._locstrings_payload({
+ 2086:             "FUT_IB_CAPTAINNAME_0": "FALCAO",
+ 2087:             "FUT_IB_CAPTAINNAME_1": "MESSI",
+ 2088:             "FUT_IB_CAPTAINNAME_2": "EL SHAARAWY",
+ 2089:             "FUT_IB_CAPTAINNAME_3": "ALABA",
+ 2090:         }, target="fut-icebreaker-locstrings")
+ 2091: 
+ 2092:     @classmethod
+ 2093:     def _leaderboards_locstrings_payload(cls) -> bytes:
+ 2094:         # V2.35 incorrectly answered the returning-user leaderboards localization
+ 2095:         # request with the four Icebreaker captain names only. The user's capture
+ 2096:         # then showed literal *LeagueName_Abbr15 / *LAbbr_0 strings in My Club.
+ 2097:         # Supply the league/nation tokens used by our verified catalogue while
+ 2098:         # keeping the captain tokens too for a same-session route transition.
+ 2099:         leagues = {
+ 2100:             7: ("Liga do Brasil", "BRAZIL"),
+ 2101:             13: ("Barclays Premier League", "BPL"),
+ 2102:             16: ("Ligue 1", "LIGUE 1"),
+ 2103:             19: ("Bundesliga", "BUNDESLIGA"),
+ 2104:             31: ("Serie A", "SERIE A"),
+ 2105:             53: ("Liga BBVA", "LIGA BBVA"),
+ 2106:         }
+ 2107:         nations = {
+ 2108:             4: "Austria", 7: "Belgium", 14: "England", 18: "France",
+ 2109:             21: "Germany", 27: "Italy", 34: "Netherlands", 38: "Portugal",
+ 2110:             45: "Spain", 46: "Sweden", 52: "Argentina", 54: "Brazil",
+ 2111:             56: "Colombia", 60: "Uruguay",
+ 2112:         }
+ 2113:         strings: dict[str, str] = {
+ 2114:             "FUT_IB_CAPTAINNAME_0": "FALCAO",
+ 2115:             "FUT_IB_CAPTAINNAME_1": "MESSI",
+ 2116:             "FUT_IB_CAPTAINNAME_2": "EL SHAARAWY",
+ 2117:             "FUT_IB_CAPTAINNAME_3": "ALABA",
+ 2118:             # Safe fallbacks for the exact unresolved tokens in the V2.35 capture.
+ 2119:             "LeagueName_Abbr15": "FUT LEAGUE",
+ 2120:             "LAbbr_0": "FUT",
+ 2121:         }
+ 2122:         for league_id, (full_name, short_name) in leagues.items():
+ 2123:             strings[f"LeagueName_{league_id}"] = full_name
+ 2124:             strings[f"LeagueName_Abbr15_{league_id}"] = short_name
+ 2125:             strings[f"LeagueName_abbr15_{league_id}"] = short_name
+ 2126:             strings[f"LAbbr_{league_id}"] = short_name
+ 2127:         for nation_id, name in nations.items():
+ 2128:             strings[f"NationName_{nation_id}"] = name
+ 2129:         return cls._locstrings_payload(strings, target="fut-leaderboards-locstrings")
+ 2130: 
+ 2131:     @staticmethod
+ 2132:     def _is_icebreaker_locstrings_path(path_without_query: str) -> bool:
+ 2133:         return path_without_query.lower().endswith("/loc/pc/icebreaker.eng_us.xml")
+ 2134: 
+ 2135:     @staticmethod
+ 2136:     def _is_leaderboards_locstrings_path(path_without_query: str) -> bool:
+ 2137:         return path_without_query.lower().endswith("/loc/pc/leaderboards.eng_us.xml")
+ 2138: 
+ 2139:     @staticmethod
+ 2140:     def _is_fut_static_metadata_path(path_without_query: str) -> bool:
+ 2141:         lowered = path_without_query.lower()
+ 2142:         return "/2014/fut/items/web/" in lowered and lowered.endswith(".json")
+ 2143: 
+ 2144:     @staticmethod
+ 2145:     def _is_fut_static_image_path(path_without_query: str) -> bool:
+ 2146:         lowered = path_without_query.lower()
+ 2147:         return "/fut/items/images/" in lowered and lowered.endswith((".png", ".jpg", ".jpeg"))
+ 2148: 
+ 2149:     @staticmethod
+ 2150:     def _is_fut_static_archive_path(path_without_query: str) -> bool:
+ 2151:         # FUT static image bundles use EA's BIGF/BIG4 container format.
+ 2152:         lowered = path_without_query.lower()
+ 2153:         return "/fut/items/images/" in lowered and lowered.endswith(".big")
+ 2154: 
+ 2155:     @staticmethod
+ 2156:     def _is_fut_trophy_archive_path(path_without_query: str) -> bool:
+ 2157:         # Offline Seasons requests item.big.  BETA 2.6 also proved that selecting
+ 2158:         # a tournament with trophyResourceId=0 asks for the degenerate path
+ 2159:         # /trophies/pc/.big.  Both are retired trophy CDN bundles, so serve the
+ 2160:         # same parseable empty BIGF while the competition contract is isolated.
+ 2161:         lowered = path_without_query.lower()
+ 2162:         return "/fut/items/images/trophies/pc/" in lowered and lowered.endswith(".big")
+ 2163: 
+ 2164:     @staticmethod
+ 2165:     def _empty_bigf_archive() -> bytes:
+ 2166:         # Minimal structurally valid EA BIGF archive: magic + declared size +
+ 2167:         # zero directory entries + 16-byte directory/header size. The project's
+ 2168:         # own BIG parser/repacker uses the same big-endian header contract.
+ 2169:         # This is intentionally an empty compatibility response, not invented
+ 2170:         # trophy art.
+ 2171:         return b"BIGF" + (16).to_bytes(4, "big") + (0).to_bytes(4, "big") + (16).to_bytes(4, "big")
+ 2172: 
+ 2173:     @staticmethod
+ 2174:     def _fut_player_metadata_payload(path_without_query: str) -> dict | None:
+ 2175:         # The old EA CDN is gone. We only serve metadata for asset IDs we have
+ 2176:         # actually verified; image art is intentionally not fabricated.
+ 2177:         lowered = path_without_query.lower()
+ 2178:         if lowered.endswith("/2014/fut/items/web/players.json"):
+ 2179:             return {
+ 2180:                 "players": [
+ 2181:                     {
+ 2182:                         "assetId": int(player["assetId"]),
+ 2183:                         "id": int(player["assetId"]),
+ 2184:                         "rating": int(player["rating"]),
+ 2185:                         "position": str(player["position"]),
+ 2186:                         "teamId": int(player["teamId"]),
+ 2187:                         "leagueId": int(player["leagueId"]),
+ 2188:                         "nation": int(player["nation"]),
+ 2189:                         "name": str(player.get("name", "")),
+ 2190:                         "commonName": str(player.get("commonName", player.get("name", ""))),
+ 2191:                         "resourceId": int(player.get("resourceId", player["assetId"])),
+ 2192:                         "rareFlag": int(player.get("rareFlag", 0)),
+ 2193:                     }
+ 2194:                     for player in PLAYER_REFERENCE_BY_ASSET.values()
+ 2195:                 ]
+ 2196:             }
+ 2197:         name = Path(path_without_query).name
+ 2198:         stem = name.rsplit(".", 1)[0]
+ 2199:         if stem.isdigit():
+ 2200:             player = PLAYER_REFERENCE_BY_ASSET.get(int(stem))
+ 2201:             if player is not None:
+ 2202:                 return {
+ 2203:                     "assetId": int(player["assetId"]),
+ 2204:                     "id": int(player["assetId"]),
+ 2205:                     "rating": int(player["rating"]),
+ 2206:                     "position": str(player["position"]),
+ 2207:                     "teamId": int(player["teamId"]),
+ 2208:                     "leagueId": int(player["leagueId"]),
+ 2209:                     "nation": int(player["nation"]),
+ 2210:                     "name": str(player.get("name", "")),
+ 2211:                     "commonName": str(player.get("commonName", player.get("name", ""))),
+ 2212:                     "resourceId": int(player.get("resourceId", player["assetId"])),
+ 2213:                     "rareFlag": int(player.get("rareFlag", 0)),
+ 2214:                 }
+ 2215:         return None
+ 2216: 
+ 2217:     @staticmethod
+ 2218:     def _is_icebreaker_packlist_path(path_without_query: str) -> bool:
+ 2219:         """Match the retail captain-selection pack-list JSON asset.
+ 2220: 
+ 2221:         This must be handled before the broad /fut/* XML fallback. Returning
+ 2222:         XML for this .json path aborts the original Icebreaker flow. V27 serves
+ 2223:         a validated editable four-pack fixture with all 23 native player slots,
+ 2224:         allowing retail RetrievePack and BuildSquad to resolve non-null cards.
+ 2225:         """
+ 2226:         lowered = path_without_query.lower()
+ 2227:         return lowered.endswith(
+ 2228:             "/fut/packs/icebreaker/icebreakerpacklist.json"
+ 2229:         ) or lowered.endswith(
+ 2230:             "/packs/icebreaker/icebreakerpacklist.json"
+ 2231:         )
+ 2232: 
+ 2233:     @staticmethod
+ 2234:     def _is_store_pack_descriptions_path(path_without_query: str) -> bool:
+ 2235:         return "packs/loc/storepackdescriptions." in path_without_query.lower()
+ 2236: 
+ 2237:     @staticmethod
+ 2238:     def _is_fut_localization_path(path_without_query: str) -> bool:
+ 2239:         lowered = path_without_query.lower()
+ 2240:         return "/fut/loc/" in lowered and lowered.endswith(".xml")
+ 2241: 
+ 2242:     @classmethod
+ 2243:     def _local_ui_locstrings_payload(cls) -> bytes:
+ 2244:         strings: dict[str, str] = {}
+ 2245:         try:
+ 2246:             from local_identity import PACK_CATALOG_DOCUMENT
+ 2247:             for entry in PACK_CATALOG_DOCUMENT.get("packs", []):
+ 2248:                 pack_type = int(entry.get("packType", 0))
+ 2249:                 pack_id = int(entry.get("packId", pack_type))
+ 2250:                 name = str(entry.get("name", f"Local Pack {pack_type}"))
+ 2251:                 description = str(entry.get("description", name))
+ 2252:                 strings[f"LOCAL_PACK_NAME_{pack_type}"] = name
+ 2253:                 strings[f"LOCAL_PACK_DESC_{pack_type}"] = description
+ 2254:                 strings[f"FUT_STORE_PACK_{pack_id}_DESC"] = description
+ 2255:         except Exception:
+ 2256:             pass
+ 2257:         try:
+ 2258:             from beta_identity import OFFLINE_TOURNAMENTS
+ 2259:             for entry in OFFLINE_TOURNAMENTS:
+ 2260:                 tournament_id = int(entry.get("tournamentId", 0) or 0)
+
+=== USER ACTION / CHARITY 3170-3295 ===
+ 3170:                         emit(
+ 3171:                             "fut-wc-support-nation-selected",
+ 3172:                             path=self.path,
+ 3173:                             nation_id=nation_id,
+ 3174:                         )
+ 3175:                     elif isinstance(request, dict) and (request.get("clubName") or request.get("clubAbbr")):
+ 3176:                         persisted = identity_store.update_club_profile(request)
+ 3177:                 response = identity_store.ensure_fut_user()
+ 3178:                 if world_cup_active:
+ 3179:                     response["created"] = 0
+ 3180:                 payload = build_fut_json_payload(response)
+ 3181:                 self.send_response(200)
+ 3182:                 status = 200
+ 3183:                 response_name = "fut-user-persisted" if persisted is not None else "fut-user"
+ 3184:             except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:
+ 3185:                 payload = build_fut_json_payload({"code": "400", "reason": str(error)})
+ 3186:                 self.send_response(400)
+ 3187:                 status = 400
+ 3188:                 response_name = "fut-user-invalid"
+ 3189:             self.send_header("content-type", "application/json; charset=utf-8")
+ 3190:             self.send_header("cache-control", "no-store")
+ 3191:             emit(
+ 3192:                 "fut-http-response", method=self.command, effective_method=effective_method,
+ 3193:                 path=self.path, response_name=response_name, status=status, bytes=len(payload),
+ 3194:                 response_document=response if status == 200 else None,
+ 3195:                 record=(identity_store.match_record() if status == 200 and hasattr(identity_store, "match_record") else None),
+ 3196:             )
+ 3197:         elif (
+ 3198:             getattr(self.server, "probe_name", "http") == "fut-http"
+ 3199:             and path_without_query == "/ut/game/fifa14/user/action"
+ 3200:             and identity_store is not None
+ 3201:         ):
+ 3202:             # FutGetUserActionServerResponse requires an object root and scans
+ 3203:             # key names rather than their boolean values. Expose only completed
+ 3204:             # action keys; a new persona receives {}, never false INTRO_DONE or
+ 3205:             # CHARITY_MATCH_PLAYED keys that would incorrectly skip onboarding.
+ 3206:             query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
+ 3207:             action_type = query.get("actionType", [""])[0].strip().upper()
+ 3208:             stored_actions = {} if world_cup_active else identity_store.user_actions()
+ 3209:             if action_type:
+ 3210:                 completed_action_map = (
+ 3211:                     {action_type: True}
+ 3212:                     if stored_actions.get(action_type, False)
+ 3213:                     else {}
+ 3214:                 )
+ 3215:             else:
+ 3216:                 completed_action_map = {
+ 3217:                     name: True
+ 3218:                     for name, completed in sorted(stored_actions.items())
+ 3219:                     if completed
+ 3220:                 }
+ 3221:             completed_actions = list(completed_action_map)
+ 3222:             payload = build_fut_json_payload(completed_action_map)
+ 3223:             self.send_response(200)
+ 3224:             self.send_header("content-type", "application/json; charset=utf-8")
+ 3225:             self.send_header("cache-control", "no-store")
+ 3226:             emit(
+ 3227:                 "fut-user-action-query",
+ 3228:                 method=self.command,
+ 3229:                 effective_method=effective_method,
+ 3230:                 path=self.path,
+ 3231:                 action_type=action_type,
+ 3232:                 action_type_blank=not bool(action_type),
+ 3233:                 completed_actions=completed_actions,
+ 3234:                 contract="completed-action-key-object",
+ 3235:             )
+ 3236:             emit(
+ 3237:                 "fut-http-response",
+ 3238:                 method=self.command,
+ 3239:                 effective_method=effective_method,
+ 3240:                 path=self.path,
+ 3241:                 response_name="fut-user-action-query",
+ 3242:                 status=200,
+ 3243:                 bytes=len(payload),
+ 3244:                 action_type=action_type,
+ 3245:                 completed_actions=completed_actions,
+ 3246:             )
+ 3247:         elif (
+ 3248:             getattr(self.server, "probe_name", "http") == "fut-http"
+ 3249:             and path_without_query.startswith(
+ 3250:                 "/ut/game/fifa14/user/action/"
+ 3251:             )
+ 3252:             and identity_store is not None
+ 3253:         ):
+ 3254:             action_name = path_without_query.rsplit("/", 1)[-1]
+ 3255:             try:
+ 3256:                 provisioned = None
+ 3257:                 normalized_action = action_name.strip().upper()
+ 3258: 
+ 3259:                 if (
+ 3260:                     world_cup_active
+ 3261:                     and normalized_action == "CHARITY_MATCH_PLAYED"
+ 3262:                     and effective_method != "DELETE"
+ 3263:                 ):
+ 3264:                     provisioned = identity_store.provision_world_cup_starter()
+ 3265:                     emit(
+ 3266:                         "fut-wc-starter-provisioned",
+ 3267:                         path=self.path,
+ 3268:                         action_name=normalized_action,
+ 3269:                         **provisioned,
+ 3270:                     )
+ 3271: 
+ 3272:                 elif (
+ 3273:                     not world_cup_active
+ 3274:                     and normalized_action
+ 3275:                     == "ICEBREAKER_ENGLISH_CAPTAIN_SELECTED"
+ 3276:                     and effective_method != "DELETE"
+ 3277:                 ):
+ 3278:                     # Normal FUT Icebreaker provisioning stays completely
+ 3279:                     # separate from the World Cup onboarding path.
+ 3280:                     fixture = load_icebreaker_fixture()
+ 3281:                     provisioned = identity_store.provision_pack_play_club(
+ 3282:                         fixture["packList"][1]
+ 3283:                     )
+ 3284:                     emit(
+ 3285:                         "fut-icebreaker-local-club-provisioned",
+ 3286:                         path=self.path,
+ 3287:                         **provisioned,
+ 3288:                     )
+ 3289:                 response = identity_store.update_user_action(
+ 3290:                     action_name,
+ 3291:                     completed=effective_method != "DELETE",
+ 3292:                 )
+ 3293:                 payload = build_fut_json_payload(response)
+ 3294:                 self.send_response(200)
+ 3295:                 response_name = f"fut-user-action-{action_name}"
+
+=== PURCHASED ITEMS 3800-3890 ===
+ 3800:             self.send_response(200)
+ 3801:             self.send_header("content-type", "application/json; charset=utf-8")
+ 3802:             self.send_header("cache-control", "no-store")
+ 3803:             emit("fut-http-response", method=self.command, effective_method=effective_method, path=self.path,
+ 3804:                  response_name="trade-clear-sold-retail-route-beta2258", status=200, bytes=len(payload), trade_id=trade_id)
+ 3805:         elif (
+ 3806:             getattr(self.server, "probe_name", "http") == "fut-http"
+ 3807:             and re.fullmatch(r"/ut/game/fifa14/trade/\d+", path_without_query, re.IGNORECASE)
+ 3808:             and identity_store is not None
+ 3809:             and effective_method == "DELETE"
+ 3810:         ):
+ 3811:             trade_id=int(path_without_query.rsplit("/",1)[-1])
+ 3812:             response=identity_store.withdraw_listing(trade_id); payload=build_fut_json_payload(response)
+ 3813:             self.send_response(200); self.send_header("content-type","application/json; charset=utf-8"); self.send_header("cache-control","no-store")
+ 3814:             emit("fut-http-response",method=self.command,effective_method=effective_method,path=self.path,response_name="trade-clear-or-withdraw-beta2254",status=200,bytes=len(payload),trade_id=trade_id)
+ 3815:         elif (
+ 3816:             getattr(self.server, "probe_name", "http") == "fut-http"
+ 3817:             and (path_without_query == "/ut/game/fifa14/trade" or path_without_query.startswith("/ut/game/fifa14/trade/"))
+ 3818:             and identity_store is not None
+ 3819:         ):
+ 3820:             response=identity_store.empty_auctions(); payload=build_fut_json_payload(response)
+ 3821:             self.send_response(200); self.send_header("content-type","application/json; charset=utf-8"); self.send_header("cache-control","no-store")
+ 3822:             emit("fut-http-response",method=self.command,effective_method=effective_method,path=self.path,response_name="fut-trade-fallback-beta2250",status=200,bytes=len(payload))
+ 3823:         elif (
+ 3824:             getattr(self.server, "probe_name", "http") == "fut-http"
+ 3825:             and path_without_query
+ 3826:             in {
+ 3827:                 "/ut/game/fifa14/purchased",
+ 3828:                 "/ut/game/fifa14/purchased/items",
+ 3829:             }
+ 3830:             and identity_store is not None
+ 3831:         ):
+ 3832:             # v2.40.11: the retail Store's CREATEPACK path does not POST to
+ 3833:             # /store at all. The successful v2.40.10 capture proves the actual
+ 3834:             # coin-purchase wire contract is:
+ 3835:             #   POST /ut/game/fifa14/purchased/items
+ 3836:             #   {"packId":N,"useCredits":1,"usePreOrder":0,"currency":"COINS"}
+ 3837:             #
+ 3838:             # Older local builds treated every method on this endpoint as a
+ 3839:             # read and returned empty_purchased_items(), which let the frontend
+ 3840:             # transition to New Items while charging nothing and returning zero
+ 3841:             # cards. Commit the purchase on POST/PUT, then keep GET as the
+ 3842:             # purchased/unassigned-pile retrieval path.
+ 3843:             if effective_method in {"POST", "PUT"}:
+ 3844:                 request = self._decode_store_purchase(body)
+ 3845:                 raw_pack_type = self._store_pack_selector(request)
+ 3846:                 currency = str(
+ 3847:                     request.get("currency")
+ 3848:                     or request.get("currencyId")
+ 3849:                     or ("COINS" if request.get("useCredits", True) else "FIFA_POINTS")
+ 3850:                 )
+ 3851:                 try:
+ 3852:                     if raw_pack_type is None:
+ 3853:                         raise ValueError("purchased/items request did not include a numeric packId/id/packType/serverId")
+ 3854:                     response = identity_store.purchase_pack(raw_pack_type, currency=currency)
+ 3855:                     status = 200
+ 3856:                     response_name = "local-purchased-items-pack-purchase"
+ 3857:                     emit(
+ 3858:                         "fut-purchased-items-pack-purchased",
+ 3859:                         method=self.command,
+ 3860:                         effective_method=effective_method,
+ 3861:                         path=self.path,
+ 3862:                         pack_id=int(response.get("packId", raw_pack_type)),
+ 3863:                         transaction_id=int(response.get("transactionId", 0)),
+ 3864:                         item_count=len(response.get("itemData", [])),
+ 3865:                         duplicate_count=len(response.get("duplicateItemIdList", [])),
+ 3866:                         credits=int(response.get("credits", 0)),
+ 3867:                         # BETA 2.25.0: never serialize the entire pack payload
+ 3868:                         # into redirect-probe.log on the live Store request.
+ 3869:                         # Jumbo player packs can exceed ~90 KB and the same
+ 3870:                         # document was previously JSON-encoded twice.
+ 3871:                     )
+ 3872:                 except (TypeError, ValueError) as error:
+ 3873:                     response = {"code": "400", "reason": str(error)}
+ 3874:                     status = 400
+ 3875:                     response_name = "local-purchased-items-pack-purchase-error"
+ 3876:                     emit(
+ 3877:                         "fut-purchased-items-pack-purchase-error",
+ 3878:                         method=self.command,
+ 3879:                         effective_method=effective_method,
+ 3880:                         path=self.path,
+ 3881:                         request_document=request,
+ 3882:                         error=str(error),
+ 3883:                     )
+ 3884:             else:
+ 3885:                 response = identity_store.purchased_items()
+ 3886:                 status = 200
+ 3887:                 response_name = "local-purchased-items"
+ 3888:             payload = build_fut_json_payload(response)
+ 3889:             self.send_response(status)
+ 3890:             self.send_header("content-type", "application/json; charset=utf-8")

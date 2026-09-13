@@ -2402,11 +2402,29 @@ class HttpProbe(BaseHTTPRequestHandler):
             body_hex=body.hex(),
         )
         path_without_query = self.path.partition("?")[0]
+
+        if is_world_cup_path(self.path):
+            self.server.world_cup_active = True
+
+        world_cup_active = bool(
+            getattr(self.server, "world_cup_active", False)
+        )
+
         identity_store = (
             getattr(self.server, "wc_identity_store", None)
-            if is_world_cup_path(self.path)
+            if world_cup_active
             else getattr(self.server, "identity_store", None)
         )
+
+        emit(
+            "fut-mode-routing",
+            method=self.command,
+            path=self.path,
+            explicit_wc=is_world_cup_path(self.path),
+            sticky_wc=world_cup_active,
+            identity="wc" if world_cup_active else "normal",
+        )
+
         effective_method = self.headers.get(
             "X-HTTP-Method-Override",
             self.command,
@@ -3139,10 +3157,9 @@ class HttpProbe(BaseHTTPRequestHandler):
                 if effective_method in {"POST", "PUT"} and body:
                     request = json.loads(body.decode("utf-8"))
 
-                    if is_world_cup_path(self.path) and effective_method == "POST":
+                    if world_cup_active and effective_method == "POST":
                         nation_id = int(request.get("clubName") or 0)
 
-                        # Create/update the WC club first.
                         persisted = identity_store.create_club(
                             "Local FUT",
                             "LFT",
@@ -3150,22 +3167,15 @@ class HttpProbe(BaseHTTPRequestHandler):
                             team_id=nation_id,
                         )
 
-                        # The WC selector POST carries no pack id. Use the validated
-                        # canonical Icebreaker pack to establish the persistent active squad.
-                        fixture = load_icebreaker_fixture()
-                        provisioned = identity_store.provision_icebreaker_completion(
-                            fixture["packList"][1]
-                        )
-
                         emit(
-                            "fut-wc-starter-provisioned",
+                            "fut-wc-support-nation-selected",
                             path=self.path,
-                            **provisioned,
+                            nation_id=nation_id,
                         )
                     elif isinstance(request, dict) and (request.get("clubName") or request.get("clubAbbr")):
                         persisted = identity_store.update_club_profile(request)
                 response = identity_store.ensure_fut_user()
-                if is_world_cup_path(self.path):
+                if world_cup_active:
                     response["created"] = 0
                 payload = build_fut_json_payload(response)
                 self.send_response(200)
@@ -3195,7 +3205,7 @@ class HttpProbe(BaseHTTPRequestHandler):
             # CHARITY_MATCH_PLAYED keys that would incorrectly skip onboarding.
             query = parse_qs(urlsplit(self.path).query, keep_blank_values=True)
             action_type = query.get("actionType", [""])[0].strip().upper()
-            stored_actions = {} if is_world_cup_path(self.path) else identity_store.user_actions()
+            stored_actions = {} if world_cup_active else identity_store.user_actions()
             if action_type:
                 completed_action_map = (
                     {action_type: True}
@@ -3244,16 +3254,29 @@ class HttpProbe(BaseHTTPRequestHandler):
             action_name = path_without_query.rsplit("/", 1)[-1]
             try:
                 provisioned = None
+                normalized_action = action_name.strip().upper()
+
                 if (
-                    action_name.strip().upper()
+                    world_cup_active
+                    and normalized_action == "CHARITY_MATCH_PLAYED"
+                    and effective_method != "DELETE"
+                ):
+                    provisioned = identity_store.provision_world_cup_starter()
+                    emit(
+                        "fut-wc-starter-provisioned",
+                        path=self.path,
+                        action_name=normalized_action,
+                        **provisioned,
+                    )
+
+                elif (
+                    not world_cup_active
+                    and normalized_action
                     == "ICEBREAKER_ENGLISH_CAPTAIN_SELECTED"
                     and effective_method != "DELETE"
                 ):
-                    # The retail action carries no selected pack body. Persist
-                    # the validated Messi captain pack as a deterministic local
-                    # active squad before the very next /user request. This is
-                    # server state only; the on-screen selected squad remains
-                    # the one built by retail RetrievePack/BuildSquad.
+                    # Normal FUT Icebreaker provisioning stays completely
+                    # separate from the World Cup onboarding path.
                     fixture = load_icebreaker_fixture()
                     provisioned = identity_store.provision_pack_play_club(
                         fixture["packList"][1]
@@ -3859,9 +3882,19 @@ class HttpProbe(BaseHTTPRequestHandler):
                         error=str(error),
                     )
             else:
-                response = identity_store.purchased_items()
+                if world_cup_active:
+                    response = identity_store.world_cup_starter_items()
+                    response_name = "local-wc-starter-items-diagnostic"
+                    emit(
+                        "fut-wc-starter-items-served",
+                        path=self.path,
+                        item_count=len(response.get("itemData", [])),
+                    )
+                else:
+                    response = identity_store.purchased_items()
+                    response_name = "local-purchased-items"
+
                 status = 200
-                response_name = "local-purchased-items"
             payload = build_fut_json_payload(response)
             self.send_response(status)
             self.send_header("content-type", "application/json; charset=utf-8")

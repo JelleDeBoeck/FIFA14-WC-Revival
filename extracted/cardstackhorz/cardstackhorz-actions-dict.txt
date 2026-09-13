@@ -1,0 +1,6881 @@
+APT movie
+  pointer size : 4 bytes (32-bit)
+  decoupled    : yes
+  SWF version  : 7
+  header tag   : "Apt Data:1:7:4\u{1a}"
+  dimensions   : 1280 x 720
+  frame rate   : 33 ms/frame (~30.3 fps)
+  frames       : 1
+  characters   : 14
+  imports      : 1
+  exports      : 6
+  by type      :
+      Animation(root)  1
+      Bitmap           4
+      Shape            3
+      Sprite           5
+      empty            1
+  exported symbols:
+      CardStackTab -> character 7
+      StackScrollArrow -> character 12
+      StackScrollArrow -> character 12
+      CardStackHorz -> character 13
+      StackScrollArrow -> character 12
+      CardStackTab -> character 7
+  imported symbols:
+      game/components/FIFA_stdControls:game.components.classes.TextScroller -> character 6
+
+Action streams:
+  -- character 7 frame 0 DoAction --
+  DefineDictionary (18 items)
+    [  0] String("_visible")
+    [  1] String("mcTextScroller")
+    [  2] String("stopScroll")
+    [  3] String("CardStackTab::init()")
+    [  4] String("setVert")
+    [  5] String("setSize")
+    [  6] String("game")
+    [  7] String("globalClasses")
+    [  8] String("StyleManager")
+    [  9] String("COLOR_SAFE_WHITE")
+    [ 10] String("FONT_NAME_HEAVY")
+    [ 11] String("TextFormat")
+    [ 12] String("setTextFontType")
+    [ 13] String("show")
+    [ 14] String("startScroll")
+    [ 15] String("ltxt")
+    [ 16] String("setText")
+    [ 17] String("getText")
+  DefineFunction "isLoaded"() {
+    EA:PushTrue
+    Return
+  }
+  DefineFunction2 "hide"() {
+    PushRegister(1)
+    DictRef { kind: PushByte, index: 0 }
+    EA:PushFalse
+    SetMember
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 2 }
+  }
+  DefineFunction2 "show"() {
+    PushRegister(1)
+    DictRef { kind: PushByte, index: 0 }
+    EA:PushTrue
+    SetMember
+  }
+  DefineFunction2 "init"() {
+    DictRef { kind: PushByte, index: 3 }
+    Trace
+    EA:PushTrue
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 4 }
+    PushWord(205)
+    PushByte(28)
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 5 }
+    DictRef { kind: ByteGetVar, index: 6 }
+    DictRef { kind: ByteGetMember, index: 7 }
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: ByteGetMember, index: 9 }
+    PushByte(18)
+    DictRef { kind: ByteGetVar, index: 6 }
+    DictRef { kind: ByteGetMember, index: 7 }
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: ByteGetMember, index: 10 }
+    PushByte(3)
+    DictRef { kind: PushByte, index: 11 }
+    NewObject
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 12 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 13 }
+  }
+  DefineFunction "startScroll"() {
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 14 }
+  }
+  DefineFunction "stopScroll"() {
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 2 }
+  }
+  DefineFunction2 "setText"(text, localize) {
+    PushRegister(3)
+    StoreRegister(2)
+    Pop
+    PushRegister(4)
+    Not
+    BranchIfTrue { target: 13 }
+    PushRegister(3)
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: PushByte, index: 15 }
+    CallMethod
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: CallMethodPop, index: 16 }
+  }
+  DefineFunction "getText"() {
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: PushByte, index: 17 }
+    CallMethod
+    Return
+  }
+  End
+  -- character 13 frame 0 DoAction --
+  DefineDictionary (479 items)
+    [  0] String("cardStackHorz::Init()")
+    [  1] String("mcSepRight")
+    [  2] String("_visible")
+    [  3] String("mcSepLeft")
+    [  4] String("cardStackHorz::Shutdown()")
+    [  5] String("gDelayMgr")
+    [  6] String("clean")
+    [  7] String("m_pThis")
+    [  8] String("gAnimator")
+    [  9] String("ClearAnimations")
+    [ 10] String("UnlockDockViewChange")
+    [ 11] String("clear")
+    [ 12] String("mCardImageLoadingInterval")
+    [ 13] String("clearInterval")
+    [ 14] String("m_pileFunction")
+    [ 15] String("cbOnRowUpdate")
+    [ 16] String("m_animateSwapCardInfo")
+    [ 17] String("mOnCardSelected")
+    [ 18] String("mOnCardHighlighted")
+    [ 19] String("mAnimationCallback")
+    [ 20] String("m_allImagesLoadedCallback")
+    [ 21] String("m_DockAnimationCB")
+    [ 22] String("mOnDisableCB")
+    [ 23] String("mOnEnableCB")
+    [ 24] String("mOnRollOverCB")
+    [ 25] String("cardStackHorz::SetMaskWidth()")
+    [ 26] String("_x")
+    [ 27] String("mcMask")
+    [ 28] String("_width")
+    [ 29] String("MASK_WIDTH")
+    [ 30] String("cardStackHorz::SetMaskHeight()")
+    [ 31] String("_height")
+    [ 32] String("cardStackHorz::SetHighlightRise() ")
+    [ 33] String("HIGHLIGHT_POS_Y")
+    [ 34] String("SELECTED_YOFFSET")
+    [ 35] String("cardStackHorz::ClearHighlight()")
+    [ 36] String("mHighlightedIndex")
+    [ 37] String("MoveCard")
+    [ 38] String("cardStackHorz::clear()")
+    [ 39] String("m_TabCards")
+    [ 40] String("length")
+    [ 41] String("mcTextScroller")
+    [ 42] String("removeMovieClip")
+    [ 43] String("Array")
+    [ 44] String("mCards")
+    [ 45] String("destroy")
+    [ 46] String("numCards")
+    [ 47] String("m_arrTabNames")
+    [ 48] String("m_arrTabs")
+    [ 49] String("push")
+    [ 50] String("cardStackHorz::DecrementTabs() ")
+    [ 51] String("ReGenerateTabCards")
+    [ 52] String("cardStackHorz::SetTabLocText() ")
+    [ 53] String("ltxt")
+    [ 54] String("isLoaded")
+    [ 55] String("setText")
+    [ 56] String("cardStackHorz::GenerateTabCards()")
+    [ 57] String("GetNumberOfTabs")
+    [ 58] String("getTabDepthForIndex")
+    [ 59] String("mTab")
+    [ 60] String("CardStackTab")
+    [ 61] String("mcScrollArea")
+    [ 62] String("attachMovie")
+    [ 63] String("RepositionTabs")
+    [ 64] String("initTabs")
+    [ 65] String("exec")
+    [ 66] String("cardStackHorz::ReGenerateTabCards()")
+    [ 67] String("splice")
+    [ 68] String("cardStackHorz::initTabs()")
+    [ 69] String("init")
+    [ 70] String("cardStackHorz::ShowTabs()")
+    [ 71] String("cardStackHorz::MoveTab()")
+    [ 72] String("getCardYPosition")
+    [ 73] String("getCardXPosition")
+    [ 74] String("TABCARD_OFFSETX")
+    [ 75] String("POST_HIGHLIGHT_XOFFSET")
+    [ 76] String("interpolationMethod")
+    [ 77] String("Animate")
+    [ 78] String("_y")
+    [ 79] String("m_DockStartPosition")
+    [ 80] String("TAB_DEFAULT_WIDTH")
+    [ 81] String("m_DockEndPosition")
+    [ 82] String("cardStackHorz::RepositionTabs()")
+    [ 83] String("MoveTab")
+    [ 84] String("getNumCards")
+    [ 85] String("OVERLAY_XOFFSET")
+    [ 86] String("TAB_XOFFSET")
+    [ 87] String("mStackEdgeTotal")
+    [ 88] String("cardStackHorz::MoveCard()")
+    [ 89] String("onCardMoveComplete")
+    [ 90] String("HIGHLIGHT_POS_X")
+    [ 91] String("m_cardPosition")
+    [ 92] String("CARD_STATE_ENABLED")
+    [ 93] String("mSelectedIndex")
+    [ 94] String("onHighlightComplete")
+    [ 95] String("IsCardVisible")
+    [ 96] String("m_iCardsAnimating")
+    [ 97] String("cafe")
+    [ 98] String("utility")
+    [ 99] String("Delegate")
+    [100] String("Create")
+    [101] String("updateSeparators")
+    [102] String("CARD_DEFAULT_WIDTH")
+    [103] String("cardStackHorz::RepositionScrollArea()")
+    [104] String("m_isOpenPackAnimationPlaying")
+    [105] String("_animateDockDone")
+    [106] String("m_isLeftAlligned")
+    [107] String("mStackStartEdgeSize")
+    [108] String("cardStackHorz::RepositionCards()")
+    [109] String("RepositionScrollArea")
+    [110] String("cardStackHorz::createByObj()")
+    [111] String("m_obj")
+    [112] String("STACK_START_EDGE_SIZE")
+    [113] String("STACK_EDGE_TOTAL")
+    [114] String("startEdgeSize")
+    [115] String("endEdgeSize")
+    [116] String("allignLeft")
+    [117] String("PINNED_START_EDGE_SIZE")
+    [118] String("STACK_END_EDGE_SIZE")
+    [119] String("enableSeparator")
+    [120] String("enableSeparators")
+    [121] String("waitUntilCardsHaveFullyLoaded")
+    [122] String("m_waitUntilCardsHaveFullyLoaded")
+    [123] String("_alpha")
+    [124] String("selectedYOffset")
+    [125] String("CARD_DOCK_SELECTED_OFFSET")
+    [126] String("CARD_DOCK_MOVE_DISPLACEMENT")
+    [127] String("CARD_DOCK_INACTIVE_OFFSET")
+    [128] String("index")
+    [129] String("m_newCardViewActive")
+    [130] String("newCardViewActive")
+    [131] String("itemSymbol")
+    [132] String("mItemSymbol")
+    [133] String("mIsCardStack")
+    [134] String("Card")
+    [135] String("mEnableCardHelpText")
+    [136] String("showHelpText")
+    [137] String("mRemoveIconXRotation")
+    [138] String("m_RemoveIconXRotation")
+    [139] String("enable")
+    [140] String("mFirstTimeInitView")
+    [141] String("view")
+    [142] String("m_curView")
+    [143] String("m_cardsLoaded")
+    [144] String("m_isLoadingCards")
+    [145] String("createCards")
+    [146] String("m_isHighlightAnimationPlaying")
+    [147] String("cardStackHorz::previous()")
+    [148] String("mEnabled")
+    [149] String("m_isHighlightAnimationPlaying == true, so nothing happened")
+    [150] String("SetHighlightAnimationPlaying")
+    [151] String("CARD_MOVE_DURATION")
+    [152] String("Math")
+    [153] String("floor")
+    [154] String("highlight")
+    [155] String("mFlashUpArrowFrame")
+    [156] String("ARROW_FLASH_DURATION")
+    [157] String("CardInventory")
+    [158] String("eSoundEvent")
+    [159] String("SCROLL_CARDS")
+    [160] String("playSound")
+    [161] String("cardStackHorz::next()")
+    [162] String("mFlashDownArrowFrame")
+    [163] String("cardStackHorz::enable()")
+    [164] String("select")
+    [165] String("cardStackHorz::setOnEnableCb")
+    [166] String("cardStackHorz::enableSubsReservesIcons() ")
+    [167] String("mSubsReservesEnabled")
+    [168] String("cardStackHorz::disable()")
+    [169] String("deselect")
+    [170] String("cardStackHorz::setOnDisableCb")
+    [171] String("cardStackHorz::getCards()")
+    [172] String("cardStackHorz::getIndex()")
+    [173] String("cardStackHorz::getCard() ")
+    [174] String("cardStackHorz::getSelectedIndex() ")
+    [175] String("cardStackHorz::select()")
+    [176] String("selectByIndex")
+    [177] String("cardStackHorz::selectByIndex() ")
+    [178] String("unselect")
+    [179] String("m_useSelectedCardStyle")
+    [180] String("SELECTED_SCALE")
+    [181] String("_xscale")
+    [182] String("_yscale")
+    [183] String("ABOVE_ALL")
+    [184] String("swapDepths")
+    [185] String("SELECT_CARD")
+    [186] String("cardStackHorz::useSelectedCardStyle() ")
+    [187] String("cardStackHorz::unselect() ")
+    [188] String("NONSELECTED_SCALE")
+    [189] String("getDepthForIndex")
+    [190] String("getTab")
+    [191] String("CalculateWidth")
+    [192] String("CARD_STATE_OFF_LEFT")
+    [193] String("CARD_STATE_OFF_RIGHT")
+    [194] String("CARD_STATE_DISABLED")
+    [195] String("CARD_STATE_OFF")
+    [196] String("CARD_DOCK_OFF_DISPLACEMENT")
+    [197] String("getCardXPositionNoRandom")
+    [198] String("cardStackHorz::initPositions()")
+    [199] String("setScale")
+    [200] String("RepositionAll")
+    [201] String("cardStackHorz::createCards()")
+    [202] String("mCard")
+    [203] String("_refresh")
+    [204] String("LOADING_DELAY")
+    [205] String("cardStackHorz::initCards()")
+    [206] String("UseGroupLoadingInterval")
+    [207] String("setCollapsedMode")
+    [208] String("setSpecialCaseView")
+    [209] String("setView")
+    [210] String("updateImages")
+    [211] String("setLoadedCallback")
+    [212] String("EnableLoadingIcon")
+    [213] String("mcLoadingAnimation")
+    [214] String("stopPlaying")
+    [215] String("onEnterFrame")
+    [216] String("cardLoadedCallback")
+    [217] String("initCards()::Mouse Callbacks for Card")
+    [218] String("onRollOverCard")
+    [219] String("setOnRollOverCb")
+    [220] String("onCardRelease")
+    [221] String("setOnReleaseCb")
+    [222] String("onChangeView")
+    [223] String("setOnChangeViewCb")
+    [224] String("mImageLoadingSteps")
+    [225] String("INTERVAL_LOADING_IMAGES")
+    [226] String("allCardLoadedCallback")
+    [227] String("setInterval")
+    [228] String("cardStackHorz::_refresh()")
+    [229] String("initPositions")
+    [230] String("initCards")
+    [231] String("cardStackHorz::refresh()")
+    [232] String("cardStackHorz::highlight() ")
+    [233] String("unhighlightIndex")
+    [234] String("updateAllImages")
+    [235] String("cardStackHorz::onHighlightComplete()")
+    [236] String("GetIsCollapsed")
+    [237] String("cardStackHorz::onCardMoveComplete()")
+    [238] String("cardStackHorz::unhighlight()")
+    [239] String("cardStackHorz::unhighlightIndex() ")
+    [240] String("cardStackHorz::setView()")
+    [241] String("cardStackHorz::setNewCardView()")
+    [242] String("cardStackHorz::setSpecialCaseView()")
+    [243] String("getType")
+    [244] String("eCardType")
+    [245] String("PLAYER")
+    [246] String("MANAGER")
+    [247] String("eView")
+    [248] String("EMPTY_VIEW")
+    [249] String("cardStackHorz::animateSwap()")
+    [250] String("getAlternativeDepthForIndex")
+    [251] String("mAddedCard")
+    [252] String("mNewCardID")
+    [253] String("Object")
+    [254] String("AnimatedAdd_playerID")
+    [255] String("AnimatedAdd_startX")
+    [256] String("AnimatedAdd_startY")
+    [257] String("AnimatedAdd_toSlot")
+    [258] String("AnimatedAdd_onComplete")
+    [259] String("AnimatedAdd_newMC")
+    [260] String("soundEvent")
+    [261] String("initAddedCard")
+    [262] String("delayCall")
+    [263] String("cardStackHorz::initaddedcard()")
+    [264] String("setData")
+    [265] String("enableHelpText")
+    [266] String("mRemoveTradeStatusXRotation")
+    [267] String("setPosition")
+    [268] String("_animateRemove")
+    [269] String("linear")
+    [270] String("HIGHLIGHT_POS_Z")
+    [271] String("gFutHelpers")
+    [272] String("Move")
+    [273] String("cardStackHorz::animateRemove()")
+    [274] String("animateRemoveWithAngleScale")
+    [275] String("cardStackHorz::removeCardFromArray()")
+    [276] String("pop")
+    [277] String("DecrementTabs")
+    [278] String("HideTabs")
+    [279] String("cardStackHorz::discardCard() ")
+    [280] String("removeCardFromArray")
+    [281] String("cardStackHorz::animateRemoveWithAngleScale()")
+    [282] String("mc")
+    [283] String("onComplete")
+    [284] String("MoveRotateScaleAlpha")
+    [285] String("MoveRotateScale")
+    [286] String("cardStackHorz::animateInternalSwap()")
+    [287] String("mHighlightIndex")
+    [288] String("mInternalSwap_Index1")
+    [289] String("mInternalSwap_Index2")
+    [290] String("mInternalSwap_OnComplete")
+    [291] String("mInternalSwap_Position")
+    [292] String("x1")
+    [293] String("x2")
+    [294] String("ADD_CARD_TO_LINEUP")
+    [295] String("internalSwapFirstAnimateCardPullComplete")
+    [296] String("CARD_SWAP_DURATION")
+    [297] String("cardStackHorz::internalSwapFirstAnimateCardPullComplete()")
+    [298] String("internalSwapFirstComplete")
+    [299] String("internalSwapSecondAnimateCardPullComplete")
+    [300] String("cardStackHorz::internalSwapFirstComplete()")
+    [301] String("cardStackHorz::internalSwapSecondAnimateCardPullComplete()")
+    [302] String("internalSwapSecondComplete")
+    [303] String("cardStackHorz::internalSwapSecondComplete()")
+    [304] String("internalSwapAllComplete")
+    [305] String("cardStackHorz::internalSwapAllComplete()")
+    [306] String("cardStackHorz::animateRemoveForDiscardAll()")
+    [307] String("FCC")
+    [308] String("eDirection")
+    [309] String("Down")
+    [310] String("AnimateCardOut")
+    [311] String("cardStackHorz::preloadCardForAdding()")
+    [312] String("mAnimatedAdd_preloadedCard")
+    [313] String("mAnimatedAdd_preloadedCardID")
+    [314] String("PRELOAD_DEPTH")
+    [315] String("cardStackHorz::animateAdd()")
+    [316] String("animateAddWithAngleScale")
+    [317] String("START_DEPTH")
+    [318] String("cardStackHorz::getAlternativeDepthForIndex()")
+    [319] String("cardStackHorz::animateAddWithAngleScale()")
+    [320] String("unhighlight")
+    [321] String("AnimatedAdd_cardID")
+    [322] String("AnimatedAdd_angle")
+    [323] String("AnimatedAdd_scale")
+    [324] String("initAddedCard2")
+    [325] String("cardStackHorz::initAddedCard2()")
+    [326] String("animateAddAnimationComplete")
+    [327] String("show")
+    [328] String("cardStackHorz::animateAddAnimationComplete()")
+    [329] String("cardStackHorz::_animateRemove()")
+    [330] String("cardStackHorz::animateDockDisable() - ")
+    [331] String("m_iCardIndexAnimating")
+    [332] String("m_iTabIndexAnimating")
+    [333] String("DOCK_MOVE_DURATION")
+    [334] String("postionDock")
+    [335] String("cardStackHorz::animateDockEnable() - ")
+    [336] String("cardStackHorz::animateDockOff()")
+    [337] String("cardStackHorz::animateDockLeft()")
+    [338] String("cardStackHorz::animateDockRight()")
+    [339] String("cardStackHorz::positionDockOff()")
+    [340] String("cardStackHorz::positionDockEnable()")
+    [341] String("cardStackHorz::positionDockDisable()")
+    [342] String("cardStackHorz::postionDock() ")
+    [343] String("cardStackHorz::_animateDockDone()")
+    [344] String("cardStackHorz::areCardsAnimating() ")
+    [345] String("cardStackHorz::SetHideHighlightedCard() ")
+    [346] String("m_hideHighlightedCard")
+    [347] String("cardStackHorz::updateImages() ")
+    [348] String("hide")
+    [349] String("cardStackHorz::updateAllImages()")
+    [350] String("cardStackHorz::IsActive() ")
+    [351] String("cardStackHorz::SetSelectCallback()")
+    [352] String("cardStackHorz::SetHighlightCallback()")
+    [353] String("cardStackHorz::localEventHandler() - uhh ok")
+    [354] String("INPUTCODE")
+    [355] String("UI_LEFT")
+    [356] String("UI_RIGHT")
+    [357] String("ADVANCE")
+    [358] String("RAS_LEFT")
+    [359] String("RAS_RIGHT")
+    [360] String("next")
+    [361] String("getIndex")
+    [362] String("LockChangeCardView")
+    [363] String("previous")
+    [364] String("_advance")
+    [365] String("m_LockViewChange")
+    [366] String("cardStackHorz::PileAnimation() - ")
+    [367] String(", ")
+    [368] String("m_midPileCB")
+    [369] String("m_pileDoneCB")
+    [370] String("m_SkipFullPileAnimation")
+    [371] String("_pauseOnPile")
+    [372] String("i")
+    [373] String("PILE_GATHER_TIME")
+    [374] String("PILE_CLOSE")
+    [375] String("Left")
+    [376] String("hideSeparator")
+    [377] String("Right")
+    [378] String("cardStackHorz::SetPileCoverArt()")
+    [379] String("m_PileCoverAssetPaths")
+    [380] String("cardStackHorz::_pauseOnPile()")
+    [381] String("spreadOutPile")
+    [382] String("PILE_PAUSE_TIME")
+    [383] String("cardStackHorz::spreadOutPile() - ")
+    [384] String("PILE_SPREAD_TIME")
+    [385] String("_onPileAnimationDone")
+    [386] String("PILE_OPEN")
+    [387] String("RepositionCards")
+    [388] String("ShowTabs")
+    [389] String("cardStackHorz::_onPileAnimationDone()")
+    [390] String("cardStackHorz::animateSendCardToPosition()")
+    [391] String("cardStackHorz::isCardFullyVisible() ")
+    [392] String("TAB_WIDTH")
+    [393] String("SCROLL_AREA_XOFFSET")
+    [394] String("mCollapsedMode")
+    [395] String("HALF_CARD_WIDTH")
+    [396] String("cardStackHorz::showSeparator() ")
+    [397] String("m_RightSepVisible")
+    [398] String("SEPARATOR_FADE_NUM_FRMS")
+    [399] String("m_LeftSepVisible")
+    [400] String("cardStackHorz::hideSeparator() ")
+    [401] String("cardStackHorz::hasCardTab()")
+    [402] String("cardStackHorz::updateSeparators()")
+    [403] String("m_separatorEnabled")
+    [404] String("hasCardTab")
+    [405] String("isCardFullyVisible")
+    [406] String("showSeparator")
+    [407] String("cardStackHorz::enableSeparators() ")
+    [408] String("cardStackHorz::trimBottom() ")
+    [409] String("m_BottomTrimmed")
+    [410] String("MASK_OFFSET_WITHOUT_TRIM")
+    [411] String("cardStackHorz::RepositionAll()")
+    [412] String("m_RepositioningLocked")
+    [413] String("cardStackHorz::\tm_RepositioningLocked is true, so components are not repositioning")
+    [414] String("cardStackHorz::cardLoadedCallback() ")
+    [415] String("cardStackHorz::allCardLoadedCallback()")
+    [416] String("checkAllImagesLoaded")
+    [417] String("  =========== Who's not loaded? CARD DB ID -  ")
+    [418] String("mData")
+    [419] String("CARD_ID")
+    [420] String(" CALLING THE CALLBACK TO TELL SCREEN THAT THE DOCK IS LOADED")
+    [421] String("cardStackHorz::WaitUntilCardsHaveFullyLoaded() ")
+    [422] String("cardStackHorz::SetAllImagesLoadedCallback()")
+    [423] String("cardStackHorz::isLoadingCards() ")
+    [424] String("cardStackHorz::setDockedElementVisibility() - ")
+    [425] String("GetType")
+    [426] String("isEmptyCard")
+    [427] String("setDockedCardElementVisibility")
+    [428] String("getSelectedIndex")
+    [429] String("cardStackHorz::AnimateDockDisable_Yonly - ")
+    [430] String("cardStackHorz::setOnRollOverCb")
+    [431] String("cardStackHorz::setMouseInputEnabled(")
+    [432] String(")")
+    [433] String("mMouseInputEnabled")
+    [434] String("setMouseInteractionEnabled")
+    [435] String("CardStackHorz::onRollOverCard(card:MovieClip)")
+    [436] String("IsAnimating")
+    [437] String("areCardsAnimating")
+    [438] String("isLoadingCards")
+    [439] String("isMouseInsideMask")
+    [440] String("getCardIndex")
+    [441] String("CardStackHorz::onCardRelease() - ")
+    [442] String("gMouseSupportManager")
+    [443] String("GetDefaultControllerId")
+    [444] String("gEH")
+    [445] String("submitKeyEvent")
+    [446] String("CardStackHorz::onChangeView() - ")
+    [447] String("_xmouse")
+    [448] String("cardStackHorz::CollapseDock() - ")
+    [449] String("enableShadow")
+    [450] String("cardStackHorz::setDockedCardDisabled() - ")
+    [451] String("setDisabled")
+    [452] String("x")
+    [453] String("y")
+    [454] String("getCard")
+    [455] String("localToGlobal")
+    [456] String("X")
+    [457] String("Y")
+    [458] String("cardStackHorz::getCardPositionInScreenSpace() - ")
+    [459] String("cardStackHorz::performingOpenPackAnimation() - ")
+    [460] String("m_LockViewTimeout")
+    [461] String("DOCK_CARD_SHUFFLING_DURATION")
+    [462] String("this")
+    [463] String("SCROLLING_SPEED")
+    [464] String("CARDS_CREATED_PER_FRAME")
+    [465] String("CARDS_INITIALIZED_PER_FRAME")
+    [466] String("TIME_BETWEEN_CARDS")
+    [467] String("TIME_BETWEEN_TABS")
+    [468] String("inout")
+    [469] String("m_card")
+    [470] String("mStackPosition")
+    [471] String("_global")
+    [472] String("STACK_POSITION_LEFT")
+    [473] String("mInternalSwap_Rotation1")
+    [474] String("mInternalSwap_Scale1")
+    [475] String("m_bFirstAnimatingCall")
+    [476] String("m_gradientYPos")
+    [477] String("mHideOffscreenCards")
+    [478] String("Init")
+  DefineFunction "Init"() {
+    DictRef { kind: PushByte, index: 0 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    DictRef { kind: ByteGetVar, index: 3 }
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+  }
+  DefineFunction2 "Shutdown"() {
+    DictRef { kind: PushByte, index: 4 }
+    Trace
+    EA:Push0
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 6 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 9 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 10 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 11 }
+    DictRef { kind: ByteGetVar, index: 12 }
+    PushByte(255)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 27 }
+    DictRef { kind: ByteGetVar, index: 12 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 13 }
+    DictRef { kind: PushByte, index: 12 }
+    PushByte(255)
+    SetVariable
+    DictRef { kind: PushByte, index: 14 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 15 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 16 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 17 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 18 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 19 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 20 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 21 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 22 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 23 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushByte, index: 24 }
+    EA:PushNull
+    SetVariable
+  }
+  DefineFunction2 "SetMaskWidth"(width) {
+    DictRef { kind: PushByte, index: 25 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    Subtract
+    Add2
+    SetMember
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: PushByte, index: 28 }
+    PushRegister(1)
+    SetMember
+    DictRef { kind: PushByte, index: 29 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "SetMaskHeight"(height) {
+    DictRef { kind: PushByte, index: 30 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: PushByte, index: 31 }
+    PushRegister(1)
+    SetMember
+  }
+  DefineFunction2 "SetHighlightRise"(yOffset) {
+    DictRef { kind: PushByte, index: 32 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 33 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "SetSelectRise"(yOffset) {
+    DictRef { kind: PushByte, index: 32 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 34 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "ClearHighlight"() {
+    DictRef { kind: PushByte, index: 35 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 36 }
+    StoreRegister(1)
+    Pop
+    DictRef { kind: PushByte, index: 36 }
+    PushByte(255)
+    SetVariable
+    EA:Push0
+    PushRegister(1)
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 37 }
+  }
+  DefineFunction2 "clear"() {
+    DictRef { kind: PushByte, index: 38 }
+    Trace
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 29 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 41 }
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 9 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 42 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 5 }
+    DictRef { kind: PushByte, index: 39 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 58 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 45 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 42 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 37 }
+    DictRef { kind: PushByte, index: 44 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    DictRef { kind: PushByte, index: 46 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushByte, index: 47 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+  }
+  DefineFunction2 "AddTab"(index) {
+    DictRef { kind: ByteGetVar, index: 48 }
+    EA:PushNull
+    Equals2
+    Not
+    BranchIfTrue { target: 10 }
+    DictRef { kind: PushByte, index: 48 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 48 }
+    DictRef { kind: CallMethodPop, index: 49 }
+  }
+  DefineFunction2 "DecrementTabs"(index) {
+    DictRef { kind: PushByte, index: 50 }
+    PushRegister(2)
+    Add2
+    Trace
+    EA:PushFalse
+    StoreRegister(3)
+    Pop
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 48 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 83 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    GetMember
+    PushRegister(2)
+    Greater
+    Not
+    BranchIfTrue { target: 34 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    GetMember
+    Decrement
+    SetMember
+    EA:PushTrue
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 78 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    GetMember
+    PushRegister(2)
+    Equals2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 69 }
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    PushDuplicate
+    BranchIfTrue { target: 69 }
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 48 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push1
+    Subtract
+    LessThan2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 69 }
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    EA:Push1
+    Add2
+    GetMember
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 78 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    EA:PushNull
+    SetMember
+    EA:PushTrue
+    StoreRegister(3)
+    Pop
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 10 }
+    PushRegister(3)
+    Not
+    BranchIfTrue { target: 88 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 51 }
+  }
+  DefineFunction "ClearTabs"() {
+    DictRef { kind: ByteGetVar, index: 48 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 12 }
+    DictRef { kind: PushByte, index: 48 }
+    Delete2
+    Pop
+    DictRef { kind: PushByte, index: 48 }
+    EA:PushNull
+    SetVariable
+  }
+  DefineFunction "GetNumberOfTabs"() {
+    DictRef { kind: ByteGetVar, index: 48 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 9 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    Return
+    EA:Push0
+    Return
+  }
+  DefineFunction2 "GetTab"(tab) {
+    DictRef { kind: ByteGetVar, index: 48 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 10 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    GetMember
+    Return
+    PushByte(255)
+    Return
+  }
+  DefineFunction2 "SetTabLocText"(tab, displayText) {
+    DictRef { kind: PushByte, index: 52 }
+    PushRegister(3)
+    PushRegister(2)
+    PushByte(2)
+    InitArray
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 47 }
+    EA:PushNull
+    Equals2
+    Not
+    BranchIfTrue { target: 17 }
+    DictRef { kind: PushByte, index: 47 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 47 }
+    PushRegister(2)
+    PushRegister(3)
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: PushByte, index: 53 }
+    CallMethod
+    SetMember
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushByte, index: 54 }
+    CallMethod
+    Not
+    BranchIfTrue { target: 41 }
+    DictRef { kind: ByteGetVar, index: 47 }
+    PushRegister(2)
+    GetMember
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 55 }
+  }
+  DefineFunction2 "GenerateTabCards"() {
+    DictRef { kind: PushByte, index: 56 }
+    Trace
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 21 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 42 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 5 }
+    DictRef { kind: PushByte, index: 39 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    EA:Push0
+    DictRef { kind: PushByte, index: 57 }
+    CallFunction
+    LessThan2
+    Not
+    BranchIfTrue { target: 65 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 58 }
+    CallFunction
+    DictRef { kind: PushByte, index: 59 }
+    PushRegister(2)
+    Add2
+    DictRef { kind: PushByte, index: 60 }
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 62 }
+    CallMethod
+    StoreRegister(3)
+    Pop
+    PushRegister(3)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: CallMethodPop, index: 49 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 29 }
+    EA:Push0
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 63 }
+    DictRef { kind: ByteGetVar, index: 64 }
+    PushByte(5)
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+  }
+  DefineFunction2 "ReGenerateTabCards"() {
+    DictRef { kind: PushByte, index: 66 }
+    Trace
+    EA:Push0
+    StoreRegister(3)
+    Pop
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 42 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(3)
+    GetMember
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 27 }
+    PushRegister(3)
+    Increment
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 37 }
+    EA:Push1
+    PushRegister(3)
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 48 }
+    DictRef { kind: CallMethodPop, index: 67 }
+    EA:Push1
+    PushRegister(3)
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 47 }
+    DictRef { kind: CallMethodPop, index: 67 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 8 }
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 61 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 42 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 45 }
+    DictRef { kind: PushByte, index: 39 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    EA:Push0
+    DictRef { kind: PushByte, index: 57 }
+    CallFunction
+    LessThan2
+    Not
+    BranchIfTrue { target: 112 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 107 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 58 }
+    CallFunction
+    DictRef { kind: PushByte, index: 59 }
+    PushRegister(2)
+    Add2
+    DictRef { kind: PushByte, index: 60 }
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 62 }
+    CallMethod
+    StoreRegister(4)
+    Pop
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+    PushRegister(4)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: CallMethodPop, index: 49 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 69 }
+    EA:Push0
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 63 }
+    DictRef { kind: ByteGetVar, index: 64 }
+    PushByte(5)
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+  }
+  DefineFunction2 "initTabs"() {
+    DictRef { kind: PushByte, index: 68 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 29 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 69 }
+    DictRef { kind: ByteGetVar, index: 47 }
+    PushRegister(1)
+    GetMember
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 55 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+  }
+  DefineFunction2 "HideTabs"() {
+    DictRef { kind: PushByte, index: 68 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 22 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+  }
+  DefineFunction2 "ShowTabs"() {
+    DictRef { kind: PushByte, index: 70 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 39 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 22 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+  }
+  DefineFunction2 "MoveTab"(i, frameCount) {
+    DictRef { kind: PushByte, index: 71 }
+    Trace
+    EA:Push0
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetVar, index: 36 }
+    Greater
+    Not
+    BranchIfTrue { target: 33 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 74 }
+    Subtract
+    DictRef { kind: ByteGetVar, index: 75 }
+    Add2
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 43 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(2)
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 74 }
+    Subtract
+    StoreRegister(3)
+    Pop
+    PushRegister(5)
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 91 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 26 }
+    PushRegister(3)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 69 }
+    EA:PushNull
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(5)
+    PushRegister(3)
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 78 }
+    PushRegister(4)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 90 }
+    EA:PushNull
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(5)
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    BranchAlways { target: 103 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushByte, index: 26 }
+    PushRegister(3)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushByte, index: 78 }
+    PushRegister(4)
+    SetMember
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 28 }
+    PushByte(2)
+    Divide
+    Subtract
+    DictRef { kind: ByteGetVar, index: 79 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 122 }
+    DictRef { kind: PushByte, index: 79 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 80 }
+    PushByte(2)
+    Divide
+    Subtract
+    SetVariable
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 28 }
+    PushByte(2)
+    Divide
+    Add2
+    DictRef { kind: ByteGetVar, index: 81 }
+    Greater
+    Not
+    BranchIfTrue { target: 141 }
+    DictRef { kind: PushByte, index: 81 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 80 }
+    PushByte(2)
+    Divide
+    Add2
+    SetVariable
+  }
+  DefineFunction2 "RepositionTabs"(frameCount) {
+    DictRef { kind: PushByte, index: 82 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    EA:Push0
+    DictRef { kind: PushByte, index: 57 }
+    CallFunction
+    LessThan2
+    Not
+    BranchIfTrue { target: 21 }
+    PushRegister(2)
+    PushRegister(1)
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 83 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+  }
+  DefineFunction2 "CalculateWidth"() {
+    EA:Push0
+    DictRef { kind: PushByte, index: 84 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 85 }
+    Multiply
+    EA:Push0
+    DictRef { kind: PushByte, index: 57 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 86 }
+    Multiply
+    Add2
+    DictRef { kind: ByteGetVar, index: 87 }
+    Add2
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 24 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    Return
+    PushRegister(1)
+    Return
+  }
+  DefineFunction2 "MoveCard"(i, frameCount) {
+    DictRef { kind: PushByte, index: 88 }
+    Trace
+    EA:Push0
+    StoreRegister(3)
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    DictRef { kind: ByteGetVar, index: 89 }
+    StoreRegister(5)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    BranchIfTrue { target: 58 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 90 }
+    Add2
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 91 }
+    DictRef { kind: ByteGetVar, index: 92 }
+    Equals2
+    Not
+    BranchIfTrue { target: 44 }
+    PushRegister(4)
+    DictRef { kind: ByteGetVar, index: 33 }
+    Add2
+    StoreRegister(4)
+    Pop
+    BranchAlways { target: 54 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 93 }
+    Equals2
+    Not
+    BranchIfTrue { target: 54 }
+    PushRegister(4)
+    DictRef { kind: ByteGetVar, index: 34 }
+    Add2
+    StoreRegister(4)
+    Pop
+    DictRef { kind: ByteGetVar, index: 94 }
+    StoreRegister(5)
+    Pop
+    BranchAlways { target: 124 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 93 }
+    Equals2
+    Not
+    BranchIfTrue { target: 92 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 34 }
+    Add2
+    StoreRegister(4)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Greater
+    Not
+    BranchIfTrue { target: 85 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 75 }
+    Add2
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 91 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 124 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Greater
+    Not
+    BranchIfTrue { target: 112 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 75 }
+    Add2
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 124 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    StoreRegister(3)
+    Pop
+    PushRegister(6)
+    EA:Push0
+    Greater
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 137 }
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 95 }
+    CallFunction
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 222 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 26 }
+    PushRegister(3)
+    Equals2
+    Not
+    PushDuplicate
+    BranchIfTrue { target: 152 }
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    BranchIfTrue { target: 183 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 164 }
+    DictRef { kind: PushByte, index: 96 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    Increment
+    SetVariable
+    PushRegister(5)
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(6)
+    PushRegister(3)
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 78 }
+    PushRegister(4)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 221 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 202 }
+    DictRef { kind: PushByte, index: 96 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    Increment
+    SetVariable
+    PushRegister(5)
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(6)
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    BranchAlways { target: 236 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushByte, index: 26 }
+    PushRegister(3)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushByte, index: 78 }
+    PushRegister(4)
+    SetMember
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+    PushRegister(2)
+    EA:Push0
+    Equals2
+    Not
+    BranchIfTrue { target: 248 }
+    DictRef { kind: PushByte, index: 79 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 102 }
+    PushByte(2)
+    Divide
+    Subtract
+    SetVariable
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push1
+    Subtract
+    Equals2
+    Not
+    BranchIfTrue { target: 263 }
+    DictRef { kind: PushByte, index: 81 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 102 }
+    PushByte(2)
+    Divide
+    Add2
+    SetVariable
+  }
+  DefineFunction2 "RepositionScrollArea"(frameCount) {
+    DictRef { kind: PushByte, index: 103 }
+    Trace
+    EA:Push0
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    StoreRegister(5)
+    Pop
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push1
+    Subtract
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    StoreRegister(7)
+    Pop
+    PushRegister(7)
+    PushRegister(5)
+    Subtract
+    DictRef { kind: ByteGetVar, index: 87 }
+    Add2
+    StoreRegister(6)
+    Pop
+    DictRef { kind: ByteGetVar, index: 104 }
+    EA:PushTrue
+    Equals2
+    BranchIfTrue { target: 29 }
+    DictRef { kind: ByteGetVar, index: 105 }
+    BranchAlways { target: 30 }
+    EA:PushNull
+    StoreRegister(3)
+    Pop
+    PushRegister(6)
+    DictRef { kind: ByteGetVar, index: 29 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 103 }
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    DictRef { kind: ByteGetVar, index: 106 }
+    Not
+    BranchIfTrue { target: 47 }
+    DictRef { kind: ByteGetVar, index: 107 }
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 56 }
+    DictRef { kind: ByteGetVar, index: 29 }
+    PushRegister(6)
+    Subtract
+    PushByte(2)
+    Divide
+    DictRef { kind: ByteGetVar, index: 107 }
+    Add2
+    StoreRegister(2)
+    Pop
+    PushRegister(4)
+    EA:Push1
+    LessThan2
+    Not
+    BranchIfTrue { target: 70 }
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 26 }
+    PushRegister(2)
+    SetMember
+    EA:Push0
+    PushRegister(3)
+    EA:PushUndefined
+    EA:CallMethodPop
+    BranchAlways { target: 102 }
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    PushRegister(2)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 88 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(4)
+    PushRegister(2)
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 61 }
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    BranchAlways { target: 102 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    PushRegister(4)
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+    BranchAlways { target: 157 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    StoreRegister(9)
+    Pop
+    PushRegister(9)
+    PushRegister(5)
+    Subtract
+    PushRegister(7)
+    PushRegister(5)
+    Subtract
+    Divide
+    StoreRegister(10)
+    Pop
+    PushRegister(10)
+    PushRegister(6)
+    DictRef { kind: ByteGetVar, index: 29 }
+    Subtract
+    Multiply
+    StoreRegister(8)
+    Pop
+    PushRegister(4)
+    EA:Push1
+    LessThan2
+    Not
+    BranchIfTrue { target: 143 }
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 26 }
+    EA:Push0
+    PushRegister(8)
+    Subtract
+    DictRef { kind: ByteGetVar, index: 107 }
+    Add2
+    SetMember
+    EA:Push0
+    PushRegister(3)
+    EA:PushUndefined
+    EA:CallMethodPop
+    BranchAlways { target: 157 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(4)
+    EA:Push0
+    PushRegister(8)
+    Subtract
+    DictRef { kind: ByteGetVar, index: 107 }
+    Add2
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 61 }
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction2 "RepositionCards"(frameCount) {
+    DictRef { kind: PushByte, index: 108 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 19 }
+    PushRegister(2)
+    PushRegister(1)
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 37 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 109 }
+  }
+  DefineFunction2 "createByObj"(obj) {
+    DictRef { kind: PushByte, index: 110 }
+    Trace
+    DictRef { kind: PushByte, index: 111 }
+    PushRegister(2)
+    SetVariable
+    DictRef { kind: PushByte, index: 107 }
+    DictRef { kind: ByteGetVar, index: 112 }
+    SetVariable
+    DictRef { kind: PushByte, index: 87 }
+    DictRef { kind: ByteGetVar, index: 113 }
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 114 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 22 }
+    DictRef { kind: PushByte, index: 107 }
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 114 }
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 115 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 35 }
+    DictRef { kind: PushByte, index: 87 }
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 115 }
+    DictRef { kind: ByteGetVar, index: 107 }
+    Add2
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 116 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 57 }
+    DictRef { kind: PushByte, index: 106 }
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 116 }
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 106 }
+    Not
+    BranchIfTrue { target: 57 }
+    DictRef { kind: PushByte, index: 107 }
+    DictRef { kind: ByteGetVar, index: 117 }
+    SetVariable
+    DictRef { kind: PushByte, index: 87 }
+    DictRef { kind: ByteGetVar, index: 107 }
+    DictRef { kind: ByteGetVar, index: 118 }
+    Add2
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 119 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 68 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 119 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 120 }
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 121 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 79 }
+    DictRef { kind: PushByte, index: 122 }
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 121 }
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: PushByte, index: 123 }
+    EA:Push0
+    SetMember
+    DictRef { kind: ByteGetVar, index: 3 }
+    DictRef { kind: PushByte, index: 123 }
+    EA:Push0
+    SetMember
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 116 }
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 111 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 42 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 96 }
+    DictRef { kind: PushByte, index: 44 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 43 }
+    NewObject
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 124 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 132 }
+    DictRef { kind: PushByte, index: 125 }
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 124 }
+    SetVariable
+    DictRef { kind: PushByte, index: 126 }
+    DictRef { kind: ByteGetVar, index: 127 }
+    DictRef { kind: ByteGetVar, index: 125 }
+    Subtract
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: ByteGetVar, index: 125 }
+    SetMember
+    DictRef { kind: PushByte, index: 46 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 46 }
+    SetVariable
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 128 }
+    EA:PushNull
+    Equals2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 153 }
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 128 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 160 }
+    DictRef { kind: PushByte, index: 36 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 128 }
+    SetVariable
+    BranchAlways { target: 162 }
+    DictRef { kind: PushByte, index: 36 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushByte, index: 129 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 130 }
+    SetVariable
+    DictRef { kind: PushByte, index: 15 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 15 }
+    SetVariable
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 131 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 185 }
+    DictRef { kind: PushByte, index: 132 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 131 }
+    SetVariable
+    DictRef { kind: PushByte, index: 133 }
+    EA:PushFalse
+    SetVariable
+    BranchAlways { target: 191 }
+    DictRef { kind: PushByte, index: 132 }
+    DictRef { kind: PushByte, index: 134 }
+    SetVariable
+    DictRef { kind: PushByte, index: 133 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: PushByte, index: 135 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 136 }
+    SetVariable
+    DictRef { kind: PushByte, index: 137 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 138 }
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 139 }
+    DictRef { kind: PushByte, index: 140 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 141 }
+    EA:PushNull
+    Equals2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 218 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 111 }
+    DictRef { kind: ByteGetMember, index: 141 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 224 }
+    DictRef { kind: PushByte, index: 142 }
+    PushRegister(2)
+    DictRef { kind: ByteGetMember, index: 141 }
+    SetVariable
+    DictRef { kind: PushByte, index: 143 }
+    EA:PushZeroSetVar
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Greater
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 234 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 122 }
+    Not
+    BranchIfTrue { target: 239 }
+    DictRef { kind: PushByte, index: 144 }
+    EA:PushTrue
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 145 }
+  }
+  DefineFunction "SetHighlightAnimationPlaying"() {
+    DictRef { kind: PushByte, index: 146 }
+    EA:PushFalse
+    SetVariable
+  }
+  DefineFunction2 "previous"(onComplete) {
+    DictRef { kind: PushByte, index: 147 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 148 }
+    Not
+    BranchIfTrue { target: 66 }
+    DictRef { kind: ByteGetVar, index: 146 }
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 19 }
+    DictRef { kind: PushByte, index: 149 }
+    Trace
+    EA:Push0
+    PushRegister(2)
+    EA:PushUndefined
+    EA:CallMethodPop
+    EA:PushUndefined
+    Return
+    BranchAlways { target: 41 }
+    DictRef { kind: PushByte, index: 146 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 150 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    DictRef { kind: ByteGetVar, index: 151 }
+    PushByte(2)
+    Divide
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 152 }
+    DictRef { kind: PushByte, index: 153 }
+    CallMethod
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push1
+    Subtract
+    LessThan2
+    Not
+    BranchIfTrue { target: 66 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    Add2
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 154 }
+    DictRef { kind: PushByte, index: 155 }
+    DictRef { kind: ByteGetVar, index: 156 }
+    SetVariable
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: ByteGetMember, index: 159 }
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+  }
+  DefineFunction2 "next"(onComplete) {
+    DictRef { kind: PushByte, index: 161 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 148 }
+    Not
+    BranchIfTrue { target: 64 }
+    DictRef { kind: ByteGetVar, index: 146 }
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 19 }
+    DictRef { kind: PushByte, index: 149 }
+    Trace
+    EA:Push0
+    PushRegister(2)
+    EA:PushUndefined
+    EA:CallMethodPop
+    EA:PushUndefined
+    Return
+    BranchAlways { target: 41 }
+    DictRef { kind: PushByte, index: 146 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 150 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    DictRef { kind: ByteGetVar, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    DictRef { kind: ByteGetVar, index: 151 }
+    PushByte(2)
+    Divide
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 152 }
+    DictRef { kind: PushByte, index: 153 }
+    CallMethod
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 64 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    Subtract
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 154 }
+    DictRef { kind: PushByte, index: 162 }
+    DictRef { kind: ByteGetVar, index: 156 }
+    SetVariable
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: ByteGetMember, index: 159 }
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+  }
+  DefineFunction "enable"() {
+    DictRef { kind: PushByte, index: 163 }
+    Trace
+    DictRef { kind: PushByte, index: 148 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 7 }
+    DictRef { kind: PushByte, index: 123 }
+    PushByte(100)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushByte(255)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 20 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 164 }
+    DictRef { kind: ByteGetVar, index: 23 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 28 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 23 }
+  }
+  DefineFunction2 "setOnEnableCb"(callback) {
+    DictRef { kind: PushByte, index: 165 }
+    Trace
+    DictRef { kind: PushByte, index: 23 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "enableSubsReservesIcons"(enable) {
+    DictRef { kind: PushByte, index: 166 }
+    PushRegister(1)
+    Add2
+    Trace
+    PushRegister(1)
+    EA:PushNull
+    Equals2
+    Not
+    BranchIfTrue { target: 12 }
+    EA:PushTrue
+    StoreRegister(1)
+    Pop
+    DictRef { kind: PushByte, index: 167 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction "disable"() {
+    DictRef { kind: PushByte, index: 168 }
+    Trace
+    DictRef { kind: PushByte, index: 148 }
+    EA:PushFalse
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushByte(255)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 16 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 169 }
+    DictRef { kind: ByteGetVar, index: 22 }
+    Not
+    BranchIfTrue { target: 21 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 22 }
+  }
+  DefineFunction2 "setOnDisableCb"(callback) {
+    DictRef { kind: PushByte, index: 170 }
+    Trace
+    DictRef { kind: PushByte, index: 22 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction "getCards"() {
+    DictRef { kind: PushByte, index: 171 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 44 }
+    Return
+  }
+  DefineFunction "getIndex"() {
+    DictRef { kind: PushByte, index: 172 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 36 }
+    Return
+  }
+  DefineFunction2 "getCard"(index) {
+    DictRef { kind: PushByte, index: 173 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    Return
+  }
+  DefineFunction "getSelectedIndex"() {
+    DictRef { kind: PushByte, index: 174 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 93 }
+    Return
+  }
+  DefineFunction "getNumCards"() {
+    DictRef { kind: ByteGetVar, index: 46 }
+    Return
+  }
+  DefineFunction "select"() {
+    DictRef { kind: PushByte, index: 175 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 176 }
+  }
+  DefineFunction2 "selectByIndex"(index) {
+    DictRef { kind: PushByte, index: 177 }
+    PushRegister(2)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 93 }
+    PushRegister(2)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 60 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    EA:Push0
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 19 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 178 }
+    DictRef { kind: PushByte, index: 93 }
+    PushRegister(2)
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 179 }
+    Not
+    BranchIfTrue { target: 53 }
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushByte(8)
+    DictRef { kind: ByteGetVar, index: 180 }
+    DictRef { kind: PushByte, index: 181 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    GetMember
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushByte(8)
+    DictRef { kind: ByteGetVar, index: 180 }
+    DictRef { kind: PushByte, index: 182 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    GetMember
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: ByteGetVar, index: 183 }
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: ByteGetMember, index: 185 }
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+  }
+  DefineFunction2 "useSelectedCardStyle"(b) {
+    DictRef { kind: PushByte, index: 186 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 179 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "unselect"(index) {
+    DictRef { kind: PushByte, index: 187 }
+    PushRegister(2)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushByte(8)
+    DictRef { kind: ByteGetVar, index: 188 }
+    DictRef { kind: PushByte, index: 181 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    GetMember
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushByte(8)
+    DictRef { kind: ByteGetVar, index: 188 }
+    DictRef { kind: PushByte, index: 182 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    GetMember
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+    DictRef { kind: PushByte, index: 93 }
+    PushByte(255)
+    SetVariable
+  }
+  DefineFunction2 "getCardXPositionNoRandom"(index) {
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    EA:Push0
+    DictRef { kind: PushByte, index: 57 }
+    CallFunction
+    LessThan2
+    Not
+    BranchIfTrue { target: 31 }
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushByte, index: 190 }
+    CallFunction
+    PushRegister(3)
+    Greater
+    Not
+    Not
+    BranchIfTrue { target: 26 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 6 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 191 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    DictRef { kind: ByteGetVar, index: 91 }
+    StoreRegister(0)
+    DictRef { kind: ByteGetVar, index: 192 }
+    StrictEquals
+    BranchIfTrue { target: 46 }
+    PushRegister(0)
+    DictRef { kind: ByteGetVar, index: 193 }
+    StrictEquals
+    BranchIfTrue { target: 56 }
+    BranchAlways { target: 66 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 86 }
+    Multiply
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 85 }
+    Multiply
+    Add2
+    PushRegister(4)
+    Subtract
+    Return
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 86 }
+    Multiply
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 85 }
+    Multiply
+    Add2
+    PushRegister(4)
+    Add2
+    Return
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 86 }
+    Multiply
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 85 }
+    Multiply
+    Add2
+    Return
+  }
+  DefineFunction "getCardYPosition"(i) {
+    DictRef { kind: ByteGetVar, index: 91 }
+    StoreRegister(0)
+    DictRef { kind: ByteGetVar, index: 194 }
+    StrictEquals
+    BranchIfTrue { target: 22 }
+    PushRegister(0)
+    DictRef { kind: ByteGetVar, index: 92 }
+    StrictEquals
+    BranchIfTrue { target: 24 }
+    PushRegister(0)
+    DictRef { kind: ByteGetVar, index: 192 }
+    StrictEquals
+    BranchIfTrue { target: 24 }
+    PushRegister(0)
+    DictRef { kind: ByteGetVar, index: 193 }
+    StrictEquals
+    BranchIfTrue { target: 24 }
+    PushRegister(0)
+    DictRef { kind: ByteGetVar, index: 195 }
+    StrictEquals
+    BranchIfTrue { target: 26 }
+    BranchAlways { target: 28 }
+    DictRef { kind: ByteGetVar, index: 126 }
+    Return
+    EA:Push0
+    Return
+    DictRef { kind: ByteGetVar, index: 196 }
+    Return
+    BranchAlways { target: 29 }
+  }
+  DefineFunction2 "getCardXPosition"(i) {
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushByte, index: 197 }
+    CallFunction
+    Return
+  }
+  DefineFunction2 "initPositions"() {
+    DictRef { kind: PushByte, index: 198 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 43 }
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    BranchIfTrue { target: 23 }
+    DictRef { kind: ByteGetVar, index: 148 }
+    Not
+    BranchIfTrue { target: 23 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 164 }
+    DictRef { kind: ByteGetVar, index: 188 }
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 199 }
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+    EA:Push0
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 200 }
+  }
+  DefineFunction2 "createCards"() {
+    DictRef { kind: PushByte, index: 201 }
+    Trace
+    DictRef { kind: PushByte, index: 96 }
+    EA:PushZeroSetVar
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 39 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    DictRef { kind: PushByte, index: 202 }
+    PushRegister(2)
+    Add2
+    DictRef { kind: ByteGetVar, index: 132 }
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 62 }
+    CallMethod
+    StoreRegister(3)
+    Pop
+    PushRegister(3)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: CallMethodPop, index: 49 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 7 }
+    DictRef { kind: ByteGetVar, index: 203 }
+    DictRef { kind: ByteGetVar, index: 204 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+  }
+  DefineFunction2 "initCards"() {
+    DictRef { kind: PushByte, index: 205 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    PushByte(12)
+    Greater
+    StoreRegister(3)
+    Pop
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 155 }
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 206 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 15 }
+    EA:PushFalse
+    EA:PushTrue
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 207 }
+    DictRef { kind: ByteGetVar, index: 129 }
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 51 }
+    DictRef { kind: ByteGetVar, index: 142 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 208 }
+    BranchAlways { target: 57 }
+    DictRef { kind: ByteGetVar, index: 142 }
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 209 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 210 }
+    DictRef { kind: ByteGetVar, index: 122 }
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 72 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 211 }
+    EA:PushNull
+    Equals2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 79 }
+    Pop
+    PushRegister(3)
+    EA:PushFalse
+    Equals2
+    Not
+    BranchIfTrue { target: 106 }
+    EA:PushFalse
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 212 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 213 }
+    DictRef { kind: CallMethodPop, index: 214 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: ByteGetMember, index: 213 }
+    DictRef { kind: PushByte, index: 215 }
+    Delete
+    Pop
+    DictRef { kind: ByteGetVar, index: 216 }
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 211 }
+    DictRef { kind: PushByte, index: 217 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 218 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 219 }
+    DictRef { kind: ByteGetVar, index: 220 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 221 }
+    DictRef { kind: ByteGetVar, index: 222 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 223 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 11 }
+    PushRegister(3)
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 179 }
+    DictRef { kind: ByteGetVar, index: 12 }
+    PushByte(255)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 172 }
+    DictRef { kind: ByteGetVar, index: 12 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 13 }
+    DictRef { kind: PushByte, index: 12 }
+    PushByte(255)
+    SetVariable
+    DictRef { kind: PushByte, index: 224 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushByte, index: 12 }
+    DictRef { kind: ByteGetVar, index: 225 }
+    DictRef { kind: ByteGetVar, index: 226 }
+    PushByte(2)
+    DictRef { kind: CallFuncSetVar, index: 227 }
+    DictRef { kind: ByteGetVar, index: 122 }
+    EA:PushTrue
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 195 }
+    DictRef { kind: PushByte, index: 144 }
+    EA:PushFalse
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 20 }
+    DictRef { kind: PushByte, index: 20 }
+    EA:PushNull
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push0
+    LessThan2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 207 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 36 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 212 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 148 }
+    Not
+    BranchIfTrue { target: 233 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 164 }
+    DictRef { kind: ByteGetVar, index: 18 }
+    Not
+    BranchIfTrue { target: 233 }
+    EA:PushFalse
+    EA:PushFalse
+    EA:PushFalse
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 207 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 18 }
+  }
+  DefineFunction "_refresh"() {
+    DictRef { kind: PushByte, index: 228 }
+    Trace
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 229 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 230 }
+  }
+  DefineFunction "refresh"() {
+    DictRef { kind: PushByte, index: 231 }
+    Trace
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 203 }
+  }
+  DefineFunction2 "highlight"(index, onComplete) {
+    DictRef { kind: PushByte, index: 232 }
+    PushRegister(1)
+    Add2
+    Trace
+    PushRegister(1)
+    PushByte(255)
+    Equals2
+    Not
+    BranchIfTrue { target: 21 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 19 }
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 21 }
+    EA:PushUndefined
+    Return
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 71 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushByte(255)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 39 }
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 233 }
+    DictRef { kind: PushByte, index: 36 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushRegister(3)
+    Greater
+    EA:PushFalse
+    EA:PushFalse
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 207 }
+    PushRegister(2)
+    Not
+    BranchIfTrue { target: 58 }
+    DictRef { kind: PushByte, index: 19 }
+    PushRegister(2)
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 151 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 200 }
+    DictRef { kind: ByteGetVar, index: 18 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 70 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 18 }
+    BranchAlways { target: 91 }
+    DictRef { kind: ByteGetVar, index: 148 }
+    Not
+    BranchIfTrue { target: 91 }
+    EA:PushFalse
+    EA:PushFalse
+    EA:PushFalse
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 207 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 164 }
+    EA:Push0
+    PushRegister(2)
+    EA:PushUndefined
+    EA:CallMethodPop
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+  }
+  DefineFunction "onHighlightComplete"() {
+    DictRef { kind: PushByte, index: 235 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 96 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 11 }
+    DictRef { kind: PushByte, index: 96 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    Decrement
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 148 }
+    Not
+    BranchIfTrue { target: 28 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: PushByte, index: 236 }
+    CallMethod
+    Not
+    Not
+    BranchIfTrue { target: 28 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 164 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+  }
+  DefineFunction "onCardMoveComplete"() {
+    DictRef { kind: PushByte, index: 237 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 96 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 11 }
+    DictRef { kind: PushByte, index: 96 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    Decrement
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+  }
+  DefineFunction "unhighlight"() {
+    DictRef { kind: PushByte, index: 238 }
+    Trace
+    PushByte(255)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 233 }
+  }
+  DefineFunction2 "unhighlightIndex"(newIndex) {
+    DictRef { kind: PushByte, index: 239 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushByte(255)
+    Equals2
+    Not
+    BranchIfTrue { target: 11 }
+    EA:PushUndefined
+    Return
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Greater
+    EA:PushFalse
+    EA:PushTrue
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 207 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    GetMember
+    DictRef { kind: CallMethodPop, index: 169 }
+    DictRef { kind: PushByte, index: 36 }
+    PushByte(255)
+    SetVariable
+  }
+  DefineFunction2 "setView"(view, mute) {
+    DictRef { kind: PushByte, index: 240 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 142 }
+    PushRegister(2)
+    Equals2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 11 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 140 }
+    Not
+    Not
+    BranchIfTrue { target: 15 }
+    EA:PushUndefined
+    Return
+    DictRef { kind: PushByte, index: 140 }
+    EA:PushFalse
+    SetVariable
+    DictRef { kind: PushByte, index: 142 }
+    PushRegister(2)
+    SetVariable
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 41 }
+    DictRef { kind: ByteGetVar, index: 142 }
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: CallMethodPop, index: 209 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 24 }
+  }
+  DefineFunction2 "setNewCardView"(view) {
+    DictRef { kind: PushByte, index: 241 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 142 }
+    PushRegister(2)
+    Equals2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 11 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 140 }
+    Not
+    Not
+    BranchIfTrue { target: 15 }
+    EA:PushUndefined
+    Return
+    DictRef { kind: PushByte, index: 140 }
+    EA:PushFalse
+    SetVariable
+    DictRef { kind: PushByte, index: 142 }
+    PushRegister(2)
+    SetVariable
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 41 }
+    DictRef { kind: ByteGetVar, index: 142 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    PushByte(2)
+    DictRef { kind: CallFuncPop, index: 208 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 24 }
+  }
+  DefineFunction2 "setSpecialCaseView"(userCard, viewIndex) {
+    DictRef { kind: PushByte, index: 242 }
+    Trace
+    EA:Push0
+    PushRegister(2)
+    DictRef { kind: PushByte, index: 243 }
+    CallMethod
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 134 }
+    DictRef { kind: ByteGetMember, index: 244 }
+    DictRef { kind: ByteGetMember, index: 245 }
+    Equals2
+    PushDuplicate
+    BranchIfTrue { target: 23 }
+    Pop
+    EA:Push0
+    PushRegister(2)
+    DictRef { kind: PushByte, index: 243 }
+    CallMethod
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 134 }
+    DictRef { kind: ByteGetMember, index: 244 }
+    DictRef { kind: ByteGetMember, index: 246 }
+    Equals2
+    Not
+    BranchIfTrue { target: 30 }
+    PushRegister(3)
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 209 }
+    BranchAlways { target: 37 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 134 }
+    DictRef { kind: ByteGetMember, index: 247 }
+    DictRef { kind: ByteGetMember, index: 248 }
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 209 }
+  }
+  DefineFunction2 "animateSwap"(playerID, toSlot, startX, startY, onComplete, soundEvent) {
+    DictRef { kind: PushByte, index: 249 }
+    Trace
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: PushByte, index: 250 }
+    CallFunction
+    DictRef { kind: PushByte, index: 251 }
+    DictRef { kind: ByteGetVar, index: 252 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 132 }
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 62 }
+    CallMethod
+    StoreRegister(2)
+    Pop
+    DictRef { kind: PushByte, index: 252 }
+    DictRef { kind: ByteGetVar, index: 252 }
+    Increment
+    SetVariable
+    PushRegister(2)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    DictRef { kind: PushByte, index: 16 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 253 }
+    NewObject
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushByte, index: 254 }
+    PushRegister(8)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushByte, index: 255 }
+    PushRegister(7)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 256 }
+    PushRegister(5)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 78 }
+    Subtract
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    PushRegister(3)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 258 }
+    PushRegister(6)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 259 }
+    PushRegister(2)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 260 }
+    PushRegister(4)
+    SetMember
+    EA:PushNull
+    PushByte(3)
+    DictRef { kind: PushWord, index: 261 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(4)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 262 }
+    EA:CallMethodPop
+  }
+  DefineFunction2 "initAddedCard"() {
+    DictRef { kind: PushWord, index: 263 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 259 }
+    GetMember
+    StoreRegister(2)
+    Pop
+    PushByte(7)
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 218 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 219 }
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: ByteGetMember, index: 254 }
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 264 }
+    EA:CallMethodPop
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 265 }
+    DictRef { kind: ByteGetVar, index: 135 }
+    SetMember
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 266 }
+    DictRef { kind: ByteGetVar, index: 137 }
+    SetMember
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 256 }
+    GetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: ByteGetMember, index: 255 }
+    PushByte(3)
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 267 }
+    EA:CallMethodPop
+    DictRef { kind: ByteGetVar, index: 188 }
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 199 }
+    DictRef { kind: PushWord, index: 268 }
+    GetVariable
+    DictRef { kind: PushWord, index: 269 }
+    PushRegister(3)
+    DictRef { kind: PushWord, index: 270 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 33 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 197 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 90 }
+    Add2
+    PushRegister(2)
+    PushByte(7)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 271 }
+    GetMember
+    DictRef { kind: PushWord, index: 272 }
+    EA:CallMethodPop
+    DictRef { kind: ByteGetVar, index: 142 }
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 209 }
+    PushRegister(2)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+  }
+  DefineFunction2 "animateRemove"(index, targetX, targetY, fadeOut, onComplete) {
+    DictRef { kind: PushWord, index: 273 }
+    Trace
+    PushRegister(1)
+    Not
+    BranchIfTrue { target: 16 }
+    PushRegister(2)
+    PushRegister(1)
+    PushWord(300)
+    PushWord(65176)
+    PushRegister(4)
+    PushRegister(5)
+    PushRegister(3)
+    PushByte(7)
+    DictRef { kind: PushWord, index: 274 }
+    EA:CallFuncAndPop
+    BranchAlways { target: 26 }
+    PushRegister(2)
+    PushRegister(1)
+    PushByte(100)
+    PushByte(166)
+    PushRegister(4)
+    PushRegister(5)
+    PushRegister(3)
+    PushByte(7)
+    DictRef { kind: PushWord, index: 274 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "removeCardFromArray"(index) {
+    DictRef { kind: PushWord, index: 275 }
+    Trace
+    PushRegister(2)
+    EA:Push1
+    Add2
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    EA:Push1
+    Subtract
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    SetMember
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 7 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 276 }
+    EA:CallMethodPop
+    DictRef { kind: PushByte, index: 46 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    Decrement
+    SetVariable
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushWord, index: 277 }
+    EA:CallFuncAndPop
+    DictRef { kind: ByteGetVar, index: 93 }
+    PushRegister(2)
+    Greater
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 48 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 93 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 54 }
+    DictRef { kind: PushByte, index: 93 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    Decrement
+    SetVariable
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 66 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 36 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 73 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 80 }
+    DictRef { kind: PushByte, index: 36 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    Decrement
+    SetVariable
+    BranchAlways { target: 96 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushRegister(2)
+    Greater
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 90 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 96 }
+    DictRef { kind: PushByte, index: 36 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    Decrement
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 229 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushByte(255)
+    Equals2
+    Not
+    BranchIfTrue { target: 112 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Greater
+    Not
+    BranchIfTrue { target: 111 }
+    EA:Push0
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 154 }
+    BranchAlways { target: 121 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 121 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 154 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Equals2
+    Not
+    BranchIfTrue { target: 129 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 278 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "discardCard"(index) {
+    DictRef { kind: PushWord, index: 279 }
+    PushRegister(2)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    StoreRegister(1)
+    Pop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushWord, index: 280 }
+    EA:CallFuncAndPop
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+    EA:Push0
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 42 }
+  }
+  DefineFunction2 "animateRemoveWithAngleScale"(index, targetX, targetY, angle, scale, fadeOut, onComplete) {
+    DictRef { kind: PushWord, index: 281 }
+    Trace
+    DictRef { kind: PushWord, index: 282 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(4)
+    GetMember
+    DefineLocal
+    PushByte(15)
+    StoreRegister(3)
+    Pop
+    PushRegister(4)
+    EA:Push1
+    DictRef { kind: PushWord, index: 280 }
+    EA:CallFuncAndPop
+    PushRegister(8)
+    Not
+    BranchIfTrue { target: 41 }
+    DefineFunction ""() {
+      EA:Push0
+      DictRef { kind: PushWord, index: 282 }
+      GetVariable
+      DictRef { kind: CallMethodPop, index: 42 }
+      EA:Push0
+      DictRef { kind: PushWord, index: 283 }
+      EA:CallFuncAndPop
+    }
+    DictRef { kind: PushWord, index: 269 }
+    PushRegister(3)
+    EA:Push0
+    PushRegister(2)
+    PushRegister(2)
+    EA:Push0
+    PushRegister(5)
+    EA:Push0
+    EA:Push0
+    PushRegister(6)
+    PushRegister(7)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    DictRef { kind: PushWord, index: 282 }
+    GetVariable
+    PushByte(13)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 271 }
+    GetMember
+    DictRef { kind: PushWord, index: 284 }
+    EA:CallMethodPop
+    BranchAlways { target: 63 }
+    DefineFunction ""() {
+      EA:Push0
+      DictRef { kind: PushWord, index: 282 }
+      GetVariable
+      DictRef { kind: CallMethodPop, index: 42 }
+      EA:Push0
+      DictRef { kind: PushWord, index: 283 }
+      EA:CallFuncAndPop
+    }
+    DictRef { kind: PushWord, index: 269 }
+    PushRegister(3)
+    PushRegister(2)
+    PushRegister(2)
+    EA:Push0
+    PushRegister(5)
+    EA:Push0
+    EA:Push0
+    PushRegister(6)
+    PushRegister(7)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    DictRef { kind: PushWord, index: 282 }
+    GetVariable
+    PushByte(12)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 271 }
+    GetMember
+    DictRef { kind: PushWord, index: 285 }
+    EA:CallMethodPop
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+  }
+  DefineFunction2 "animateInternalSwap"(index1, index2, onComplete) {
+    DictRef { kind: PushWord, index: 286 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 96 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 12 }
+    DictRef { kind: PushByte, index: 96 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    Increment
+    SetVariable
+    DictRef { kind: PushWord, index: 287 }
+    PushRegister(2)
+    SetVariable
+    PushRegister(4)
+    PushRegister(2)
+    LessThan2
+    Not
+    BranchIfTrue { target: 27 }
+    DictRef { kind: PushWord, index: 288 }
+    PushRegister(2)
+    SetVariable
+    DictRef { kind: PushWord, index: 289 }
+    PushRegister(4)
+    SetVariable
+    BranchAlways { target: 33 }
+    DictRef { kind: PushWord, index: 288 }
+    PushRegister(4)
+    SetVariable
+    DictRef { kind: PushWord, index: 289 }
+    PushRegister(2)
+    SetVariable
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    DictRef { kind: CallMethodPop, index: 169 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    DictRef { kind: CallMethodPop, index: 169 }
+    DictRef { kind: PushWord, index: 290 }
+    PushRegister(7)
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    SetMember
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    PushRegister(3)
+    SetMember
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+    DictRef { kind: PushWord, index: 291 }
+    DictRef { kind: PushWord, index: 292 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: PushWord, index: 293 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    DictRef { kind: ByteGetMember, index: 26 }
+    PushByte(2)
+    InitObject
+    SetVariable
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: PushWord, index: 294 }
+    GetMember
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    DictRef { kind: PushWord, index: 295 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 296 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    DictRef { kind: ByteGetMember, index: 28 }
+    Subtract
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction2 "internalSwapFirstAnimateCardPullComplete"() {
+    DictRef { kind: PushWord, index: 297 }
+    Trace
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: PushByte, index: 250 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+    DictRef { kind: PushWord, index: 298 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 296 }
+    GetVariable
+    DictRef { kind: PushWord, index: 291 }
+    GetVariable
+    DictRef { kind: PushWord, index: 293 }
+    GetMember
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: PushWord, index: 299 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 296 }
+    GetVariable
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    DictRef { kind: ByteGetMember, index: 28 }
+    Subtract
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction "internalSwapFirstComplete"() {
+    DictRef { kind: PushWord, index: 300 }
+    Trace
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+  }
+  DefineFunction2 "internalSwapSecondAnimateCardPullComplete"() {
+    DictRef { kind: PushWord, index: 301 }
+    Trace
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+    DictRef { kind: PushWord, index: 302 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 296 }
+    GetVariable
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction "internalSwapSecondComplete"() {
+    DictRef { kind: PushWord, index: 303 }
+    Trace
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 233 }
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 233 }
+    EA:PushNull
+    PushByte(3)
+    DictRef { kind: PushWord, index: 304 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(4)
+    DictRef { kind: PushWord, index: 262 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction "internalSwapAllComplete"() {
+    DictRef { kind: PushWord, index: 305 }
+    Trace
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    DictRef { kind: PushWord, index: 288 }
+    GetVariable
+    LessThan2
+    EA:PushFalse
+    EA:PushTrue
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 289 }
+    GetVariable
+    GetMember
+    DictRef { kind: CallMethodPop, index: 207 }
+    DictRef { kind: PushWord, index: 287 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 154 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 89 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 290 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "animateRemoveForDiscardAll"(index, onComplete) {
+    DictRef { kind: PushWord, index: 306 }
+    Trace
+    DictRef { kind: PushWord, index: 282 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DefineLocal
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushWord, index: 280 }
+    EA:CallFuncAndPop
+    DefineFunction ""() {
+      EA:Push0
+      DictRef { kind: PushWord, index: 282 }
+      GetVariable
+      DictRef { kind: CallMethodPop, index: 42 }
+      EA:Push0
+      DictRef { kind: PushWord, index: 283 }
+      EA:CallFuncAndPop
+    }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 309 }
+    GetMember
+    DictRef { kind: PushWord, index: 282 }
+    GetVariable
+    PushByte(3)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 271 }
+    GetMember
+    DictRef { kind: PushWord, index: 310 }
+    EA:CallMethodPop
+  }
+  DefineFunction2 "preloadCardForAdding"(cardID) {
+    DictRef { kind: PushWord, index: 311 }
+    Trace
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 13 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    DictRef { kind: CallMethodPop, index: 42 }
+    DictRef { kind: PushWord, index: 313 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: PushWord, index: 312 }
+    DictRef { kind: PushWord, index: 314 }
+    GetVariable
+    DictRef { kind: PushByte, index: 251 }
+    DictRef { kind: ByteGetVar, index: 252 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 132 }
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: CallMethodSetVar, index: 62 }
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    DictRef { kind: PushByte, index: 252 }
+    DictRef { kind: ByteGetVar, index: 252 }
+    Increment
+    SetVariable
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    DictRef { kind: PushWord, index: 264 }
+    EA:CallMethodPop
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    DictRef { kind: PushWord, index: 265 }
+    DictRef { kind: ByteGetVar, index: 135 }
+    SetMember
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    DictRef { kind: PushWord, index: 266 }
+    DictRef { kind: ByteGetVar, index: 137 }
+    SetMember
+  }
+  DefineFunction2 "animateAdd"(cardID, index, startX, startY, onComplete) {
+    DictRef { kind: PushWord, index: 315 }
+    Trace
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 188 }
+    EA:Push0
+    PushRegister(1)
+    PushRegister(4)
+    PushRegister(5)
+    PushRegister(3)
+    PushByte(7)
+    DictRef { kind: PushWord, index: 316 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "getDepthForIndex"(index) {
+    DictRef { kind: PushWord, index: 317 }
+    GetVariable
+    PushByte(3)
+    PushRegister(1)
+    Multiply
+    Add2
+    Return
+  }
+  DefineFunction2 "getAlternativeDepthForIndex"(index) {
+    DictRef { kind: PushWord, index: 318 }
+    Trace
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    Add2
+    Return
+  }
+  DefineFunction2 "getTabDepthForIndex"(index) {
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    Subtract
+    Return
+  }
+  DefineFunction2 "animateAddWithAngleScale"(cardID, index, startX, startY, angle, scale, onComplete) {
+    DictRef { kind: PushWord, index: 319 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(3)
+    GetMember
+    StoreRegister(4)
+    Pop
+    DictRef { kind: PushByte, index: 46 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    Increment
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push1
+    Subtract
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    PushRegister(3)
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 49 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    EA:Push1
+    Add2
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    SetMember
+    PushRegister(2)
+    EA:Push1
+    Add2
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    EA:Push1
+    Add2
+    GetMember
+    DictRef { kind: CallMethodPop, index: 184 }
+    PushRegister(2)
+    Decrement
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 17 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    PushRegister(3)
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 59 }
+    DictRef { kind: PushByte, index: 93 }
+    DictRef { kind: ByteGetVar, index: 93 }
+    Increment
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 36 }
+    PushRegister(3)
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 69 }
+    DictRef { kind: PushByte, index: 36 }
+    DictRef { kind: ByteGetVar, index: 36 }
+    Increment
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 229 }
+    EA:PushNull
+    StoreRegister(4)
+    Pop
+    EA:Push0
+    DictRef { kind: PushWord, index: 320 }
+    EA:CallFuncAndPop
+    EA:PushUndefined
+    StoreRegister(5)
+    Pop
+    PushRegister(6)
+    DictRef { kind: PushWord, index: 313 }
+    GetVariable
+    Equals2
+    Not
+    BranchIfTrue { target: 104 }
+    DictRef { kind: PushWord, index: 312 }
+    GetVariable
+    StoreRegister(4)
+    Pop
+    DictRef { kind: PushWord, index: 312 }
+    EA:PushNull
+    SetVariable
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    EA:Push1
+    PushRegister(4)
+    DictRef { kind: CallMethodPop, index: 184 }
+    EA:PushFalse
+    StoreRegister(5)
+    Pop
+    BranchAlways { target: 129 }
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: PushByte, index: 189 }
+    CallFunction
+    DictRef { kind: PushByte, index: 251 }
+    DictRef { kind: ByteGetVar, index: 252 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 132 }
+    PushByte(3)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: PushByte, index: 62 }
+    CallMethod
+    StoreRegister(4)
+    Pop
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    DictRef { kind: PushByte, index: 252 }
+    DictRef { kind: ByteGetVar, index: 252 }
+    Increment
+    SetVariable
+    EA:PushTrue
+    StoreRegister(5)
+    Pop
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(3)
+    PushRegister(4)
+    SetMember
+    DictRef { kind: PushByte, index: 16 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 253 }
+    NewObject
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 321 }
+    PushRegister(6)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushByte, index: 255 }
+    PushRegister(10)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 256 }
+    PushRegister(7)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    PushRegister(3)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 259 }
+    PushRegister(4)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 322 }
+    PushRegister(11)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 323 }
+    PushRegister(8)
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 258 }
+    PushRegister(9)
+    SetMember
+    PushRegister(5)
+    Not
+    BranchIfTrue { target: 186 }
+    EA:PushNull
+    PushByte(3)
+    DictRef { kind: PushWord, index: 324 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(4)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 262 }
+    EA:CallMethodPop
+    BranchAlways { target: 189 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 324 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "initAddedCard2"() {
+    DictRef { kind: PushWord, index: 325 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 259 }
+    GetMember
+    StoreRegister(2)
+    Pop
+    PushByte(7)
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 218 }
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 97 }
+    DictRef { kind: ByteGetMember, index: 98 }
+    DictRef { kind: ByteGetMember, index: 99 }
+    DictRef { kind: PushByte, index: 100 }
+    CallMethod
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 219 }
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 321 }
+    GetMember
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 264 }
+    EA:CallMethodPop
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 265 }
+    DictRef { kind: ByteGetVar, index: 135 }
+    SetMember
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 266 }
+    DictRef { kind: ByteGetVar, index: 137 }
+    SetMember
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 256 }
+    GetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: ByteGetMember, index: 255 }
+    PushByte(3)
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 267 }
+    EA:CallMethodPop
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 323 }
+    GetMember
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 199 }
+    PushRegister(2)
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+    DictRef { kind: PushWord, index: 326 }
+    GetVariable
+    DictRef { kind: PushWord, index: 269 }
+    PushRegister(3)
+    DictRef { kind: PushWord, index: 270 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 33 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushByte, index: 197 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 90 }
+    Add2
+    PushRegister(2)
+    PushByte(7)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 271 }
+    GetMember
+    DictRef { kind: PushWord, index: 272 }
+    EA:CallMethodPop
+    DictRef { kind: ByteGetVar, index: 142 }
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: CallMethodPop, index: 209 }
+    EA:Push0
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 327 }
+    EA:CallMethodPop
+  }
+  DefineFunction "animateAddAnimationComplete"() {
+    DictRef { kind: PushWord, index: 328 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 154 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 258 }
+    EA:CallMethodPop
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+    DictRef { kind: PushByte, index: 16 }
+    EA:PushNull
+    SetVariable
+  }
+  DefineFunction2 "_animateRemove"() {
+    DictRef { kind: PushWord, index: 329 }
+    Trace
+    DictRef { kind: PushWord, index: 282 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    GetMember
+    DefineLocal
+    PushByte(7)
+    StoreRegister(2)
+    Pop
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 259 }
+    GetMember
+    SetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 257 }
+    GetMember
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 154 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 260 }
+    GetMember
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 41 }
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 260 }
+    GetMember
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    DefineFunction ""() {
+      EA:Push0
+      DictRef { kind: PushWord, index: 282 }
+      GetVariable
+      DictRef { kind: CallMethodPop, index: 42 }
+      EA:Push0
+      DictRef { kind: ByteGetVar, index: 16 }
+      DictRef { kind: PushWord, index: 258 }
+      EA:CallMethodPop
+      DictRef { kind: ByteGetVar, index: 16 }
+      DictRef { kind: PushWord, index: 257 }
+      GetMember
+      EA:Push1
+      DictRef { kind: PushByte, index: 189 }
+      CallFunction
+      EA:Push1
+      DictRef { kind: ByteGetVar, index: 44 }
+      DictRef { kind: ByteGetVar, index: 16 }
+      DictRef { kind: PushWord, index: 257 }
+      GetMember
+      GetMember
+      DictRef { kind: CallMethodPop, index: 184 }
+      DictRef { kind: PushByte, index: 16 }
+      EA:PushNull
+      SetVariable
+    }
+    DictRef { kind: PushWord, index: 269 }
+    PushRegister(2)
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: PushWord, index: 256 }
+    GetMember
+    DictRef { kind: ByteGetVar, index: 16 }
+    DictRef { kind: ByteGetMember, index: 255 }
+    DictRef { kind: PushWord, index: 282 }
+    GetVariable
+    PushByte(7)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 271 }
+    GetMember
+    DictRef { kind: PushWord, index: 272 }
+    EA:CallMethodPop
+  }
+  DefineFunction2 "animateDockDisable"(animationCallback) {
+    DictRef { kind: PushWord, index: 330 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 19 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: PushWord, index: 331 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 332 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 333 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 194 }
+    PushByte(2)
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "animateDockEnable"(animationCallback) {
+    DictRef { kind: PushWord, index: 335 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 19 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: PushWord, index: 331 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 332 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 333 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 92 }
+    PushByte(2)
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "animateDockOff"(animationCallback) {
+    DictRef { kind: PushWord, index: 336 }
+    Trace
+    DictRef { kind: PushByte, index: 19 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: PushWord, index: 331 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 332 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 333 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 195 }
+    PushByte(2)
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "animateDockLeft"(animationCallback) {
+    DictRef { kind: PushWord, index: 337 }
+    Trace
+    DictRef { kind: PushByte, index: 19 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: PushWord, index: 331 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 332 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 333 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 192 }
+    PushByte(2)
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "animateDockRight"(animationCallback) {
+    DictRef { kind: PushWord, index: 338 }
+    Trace
+    DictRef { kind: PushByte, index: 19 }
+    PushRegister(1)
+    SetVariable
+    DictRef { kind: PushWord, index: 331 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 332 }
+    EA:PushZeroSetVar
+    DictRef { kind: PushWord, index: 333 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 193 }
+    PushByte(2)
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction "positionDockOff"() {
+    DictRef { kind: PushWord, index: 339 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 195 }
+    EA:Push1
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction "positionDockEnable"() {
+    DictRef { kind: PushWord, index: 340 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 92 }
+    EA:Push1
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction "positionDockDisable"() {
+    DictRef { kind: PushWord, index: 341 }
+    Trace
+    DictRef { kind: ByteGetVar, index: 194 }
+    EA:Push1
+    DictRef { kind: PushWord, index: 334 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "postionDock"(dockState, animationTime) {
+    DictRef { kind: PushWord, index: 342 }
+    PushRegister(1)
+    PushRegister(2)
+    PushByte(2)
+    InitArray
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 91 }
+    PushRegister(2)
+    SetVariable
+    PushRegister(1)
+    EA:PushNull
+    Equals2
+    BranchIfTrue { target: 16 }
+    PushRegister(1)
+    BranchAlways { target: 17 }
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 200 }
+  }
+  DefineFunction2 "_animateDockDone"() {
+    DictRef { kind: PushWord, index: 343 }
+    Trace
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 234 }
+    DictRef { kind: PushByte, index: 96 }
+    EA:PushZeroSetVar
+    DictRef { kind: ByteGetVar, index: 19 }
+    EA:PushNull
+    Equals2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 20 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 19 }
+    EA:PushUndefined
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 32 }
+    DictRef { kind: ByteGetVar, index: 19 }
+    StoreRegister(1)
+    Pop
+    DictRef { kind: PushByte, index: 19 }
+    EA:PushNull
+    SetVariable
+    EA:Push0
+    PushRegister(1)
+    EA:PushUndefined
+    EA:CallMethodPop
+  }
+  DefineFunction "areCardsAnimating"() {
+    DictRef { kind: PushWord, index: 344 }
+    DictRef { kind: ByteGetVar, index: 96 }
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 96 }
+    EA:Push0
+    Greater
+    Return
+  }
+  DefineFunction2 "SetHideHighlightedCard"(val) {
+    DictRef { kind: PushWord, index: 345 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushWord, index: 346 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "IsCardVisible"(index) {
+    DictRef { kind: PushWord, index: 346 }
+    GetVariable
+    EA:PushTrue
+    Equals2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 11 }
+    Pop
+    PushRegister(5)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    BranchIfTrue { target: 15 }
+    EA:PushFalse
+    Return
+    PushRegister(5)
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Add2
+    StoreRegister(3)
+    Pop
+    PushRegister(5)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Greater
+    Not
+    BranchIfTrue { target: 34 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 75 }
+    Add2
+    StoreRegister(3)
+    Pop
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 85 }
+    Subtract
+    StoreRegister(4)
+    Pop
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    DictRef { kind: ByteGetVar, index: 85 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 75 }
+    Add2
+    StoreRegister(2)
+    Pop
+    EA:Push0
+    DictRef { kind: PushByte, index: 191 }
+    CallFunction
+    StoreRegister(1)
+    Pop
+    DictRef { kind: ByteGetVar, index: 91 }
+    StoreRegister(0)
+    DictRef { kind: ByteGetVar, index: 192 }
+    StrictEquals
+    BranchIfTrue { target: 62 }
+    PushRegister(0)
+    DictRef { kind: ByteGetVar, index: 193 }
+    StrictEquals
+    BranchIfTrue { target: 73 }
+    BranchAlways { target: 84 }
+    PushRegister(4)
+    PushRegister(1)
+    Subtract
+    StoreRegister(4)
+    Pop
+    PushRegister(2)
+    PushRegister(1)
+    Subtract
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 85 }
+    PushRegister(4)
+    PushRegister(1)
+    Add2
+    StoreRegister(4)
+    Pop
+    PushRegister(2)
+    PushRegister(1)
+    Add2
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 85 }
+    BranchAlways { target: 85 }
+    PushRegister(3)
+    PushRegister(4)
+    Greater
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 95 }
+    Pop
+    PushRegister(3)
+    PushRegister(2)
+    LessThan2
+    Not
+    BranchIfTrue { target: 99 }
+    EA:PushTrue
+    Return
+    EA:PushFalse
+    Return
+  }
+  DefineFunction2 "updateImages"(index) {
+    DictRef { kind: PushWord, index: 347 }
+    PushRegister(1)
+    Add2
+    Trace
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushByte, index: 95 }
+    CallFunction
+    Not
+    BranchIfTrue { target: 17 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushWord, index: 327 }
+    EA:CallMethodPop
+    BranchAlways { target: 23 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushWord, index: 348 }
+    EA:CallMethodPop
+  }
+  DefineFunction2 "updateAllImages"() {
+    DictRef { kind: PushWord, index: 349 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 18 }
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 210 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+  }
+  DefineFunction "IsActive"() {
+    DictRef { kind: PushWord, index: 350 }
+    DictRef { kind: ByteGetVar, index: 148 }
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 148 }
+    Return
+  }
+  DefineFunction2 "SetSelectCallback"(callback) {
+    DictRef { kind: PushWord, index: 351 }
+    Trace
+    DictRef { kind: PushByte, index: 17 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "SetHighlightCallback"(callback) {
+    DictRef { kind: PushWord, index: 352 }
+    Trace
+    DictRef { kind: PushByte, index: 18 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "localEventHandler"(keyCode, controllerID, ascii) {
+    DictRef { kind: PushWord, index: 353 }
+    Trace
+    PushRegister(2)
+    StoreRegister(0)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 355 }
+    GetMember
+    StrictEquals
+    BranchIfTrue { target: 44 }
+    PushRegister(0)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 356 }
+    GetMember
+    StrictEquals
+    BranchIfTrue { target: 59 }
+    PushRegister(0)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 357 }
+    GetMember
+    StrictEquals
+    BranchIfTrue { target: 78 }
+    PushRegister(0)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 358 }
+    GetMember
+    StrictEquals
+    BranchIfTrue { target: 82 }
+    PushRegister(0)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 359 }
+    GetMember
+    StrictEquals
+    BranchIfTrue { target: 82 }
+    BranchAlways { target: 91 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 360 }
+    EA:CallFuncAndPop
+    EA:Push0
+    DictRef { kind: PushWord, index: 361 }
+    CallFunction
+    EA:Push0
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 58 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 362 }
+    EA:CallFuncAndPop
+    BranchAlways { target: 93 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 363 }
+    EA:CallFuncAndPop
+    EA:Push0
+    DictRef { kind: PushWord, index: 361 }
+    CallFunction
+    EA:Push0
+    DictRef { kind: PushByte, index: 84 }
+    CallFunction
+    EA:Push1
+    Subtract
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 77 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 362 }
+    EA:CallFuncAndPop
+    BranchAlways { target: 93 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 364 }
+    EA:CallFuncAndPop
+    BranchAlways { target: 93 }
+    DictRef { kind: PushWord, index: 365 }
+    GetVariable
+    EA:PushFalse
+    Equals2
+    Not
+    BranchIfTrue { target: 90 }
+    EA:PushFalse
+    Return
+    BranchAlways { target: 93 }
+    EA:PushFalse
+    Return
+    EA:PushTrue
+    Return
+  }
+  DefineFunction2 "PileAnimation"(midPileCB, pileDoneCB, skipFullPileAnimation) {
+    DictRef { kind: PushWord, index: 366 }
+    PushRegister(5)
+    Add2
+    DictRef { kind: PushWord, index: 367 }
+    Add2
+    PushRegister(6)
+    Add2
+    DictRef { kind: PushWord, index: 367 }
+    Add2
+    PushRegister(7)
+    Add2
+    Trace
+    DictRef { kind: PushWord, index: 368 }
+    PushRegister(5)
+    SetVariable
+    DictRef { kind: PushWord, index: 369 }
+    PushRegister(6)
+    SetVariable
+    DictRef { kind: PushWord, index: 370 }
+    PushRegister(7)
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Greater
+    Not
+    Not
+    BranchIfTrue { target: 32 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 371 }
+    EA:CallFuncAndPop
+    EA:PushUndefined
+    Return
+    EA:Push0
+    DictRef { kind: PushWord, index: 278 }
+    EA:CallFuncAndPop
+    EA:Push0
+    StoreRegister(3)
+    Pop
+    DictRef { kind: ByteGetVar, index: 106 }
+    Not
+    BranchIfTrue { target: 46 }
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    StoreRegister(3)
+    Pop
+    BranchAlways { target: 58 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    PushByte(2)
+    Divide
+    Add2
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    StoreRegister(3)
+    Pop
+    DictRef { kind: PushWord, index: 372 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(4)
+    Pop
+    DictRef { kind: PushWord, index: 372 }
+    EA:Push0
+    DefineLocal
+    DictRef { kind: PushWord, index: 372 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 119 }
+    DictRef { kind: PushWord, index: 372 }
+    GetVariable
+    EA:Push0
+    Equals2
+    BranchIfTrue { target: 81 }
+    EA:PushNull
+    BranchAlways { target: 83 }
+    DictRef { kind: PushWord, index: 371 }
+    GetVariable
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 373 }
+    GetVariable
+    PushRegister(3)
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 372 }
+    GetVariable
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    EA:PushNull
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 373 }
+    GetVariable
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: PushWord, index: 372 }
+    GetVariable
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    DictRef { kind: PushWord, index: 372 }
+    DictRef { kind: PushWord, index: 372 }
+    GetVariable
+    Increment
+    SetVariable
+    BranchAlways { target: 68 }
+    DictRef { kind: PushByte, index: 79 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 80 }
+    PushByte(2)
+    Divide
+    Subtract
+    SetVariable
+    DictRef { kind: PushByte, index: 81 }
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 80 }
+    PushByte(2)
+    Divide
+    Add2
+    SetVariable
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: PushWord, index: 374 }
+    GetMember
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 375 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 376 }
+    EA:CallFuncAndPop
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 377 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 376 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "SetPileCoverArt"(assetPathsObj) {
+    DictRef { kind: PushWord, index: 378 }
+    Trace
+    DictRef { kind: PushWord, index: 379 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "_pauseOnPile"() {
+    DictRef { kind: PushWord, index: 380 }
+    Trace
+    EA:Push0
+    DictRef { kind: PushWord, index: 368 }
+    EA:CallFuncAndPop
+    DictRef { kind: PushWord, index: 368 }
+    EA:PushNull
+    SetVariable
+    DictRef { kind: PushWord, index: 370 }
+    GetVariable
+    Not
+    Not
+    BranchIfTrue { target: 21 }
+    DictRef { kind: PushWord, index: 381 }
+    GetVariable
+    DictRef { kind: PushWord, index: 382 }
+    GetVariable
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 5 }
+    DictRef { kind: CallMethodPop, index: 65 }
+  }
+  DefineFunction2 "spreadOutPile"(time, suppressSFX) {
+    DictRef { kind: PushWord, index: 383 }
+    PushRegister(3)
+    Add2
+    Trace
+    PushRegister(4)
+    EA:PushNull
+    Equals2
+    Not
+    BranchIfTrue { target: 12 }
+    DictRef { kind: PushWord, index: 384 }
+    GetVariable
+    BranchAlways { target: 13 }
+    PushRegister(4)
+    StoreRegister(2)
+    Pop
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Greater
+    Not
+    Not
+    BranchIfTrue { target: 26 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 385 }
+    EA:CallFuncAndPop
+    EA:PushUndefined
+    Return
+    PushRegister(3)
+    EA:PushTrue
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 40 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: PushWord, index: 386 }
+    GetMember
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: PushWord, index: 387 }
+    EA:CallFuncAndPop
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 63 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 388 }
+    EA:CallFuncAndPop
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push1
+    Subtract
+    EA:Push1
+    DictRef { kind: PushByte, index: 73 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 75 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 86 }
+    Add2
+    StoreRegister(6)
+    Pop
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push1
+    Subtract
+    EA:Push1
+    DictRef { kind: PushByte, index: 72 }
+    CallFunction
+    StoreRegister(5)
+    Pop
+    EA:PushNull
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 385 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 7 }
+    PushByte(4)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 262 }
+    EA:CallMethodPop
+  }
+  DefineFunction "_onPileAnimationDone"() {
+    DictRef { kind: PushWord, index: 389 }
+    Trace
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 369 }
+    EA:CallFuncAndPop
+    DictRef { kind: PushWord, index: 369 }
+    EA:PushNull
+    SetVariable
+  }
+  DefineFunction2 "animateSendCardToPosition"(index, targetX, targetY, fadeOut, onComplete) {
+    DictRef { kind: PushWord, index: 390 }
+    Trace
+    DictRef { kind: PushWord, index: 282 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(6)
+    GetMember
+    DefineLocal
+    PushByte(30)
+    StoreRegister(3)
+    Pop
+    EA:PushUndefined
+    StoreRegister(2)
+    Pop
+    PushRegister(5)
+    Not
+    BranchIfTrue { target: 20 }
+    DefineFunction2 ""() {
+      PushByte(10)
+      StoreRegister(2)
+      Pop
+      DictRef { kind: PushWord, index: 283 }
+      GetVariable
+      DictRef { kind: PushWord, index: 269 }
+      PushRegister(2)
+      EA:Push0
+      DictRef { kind: PushByte, index: 123 }
+      DictRef { kind: PushWord, index: 282 }
+      GetVariable
+      PushByte(6)
+      PushRegister(1)
+      DictRef { kind: ByteGetMember, index: 8 }
+      DictRef { kind: CallMethodPop, index: 77 }
+    }
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 24 }
+    DictRef { kind: PushWord, index: 283 }
+    GetVariable
+    StoreRegister(2)
+    Pop
+    EA:PushNull
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(3)
+    PushRegister(8)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: PushWord, index: 282 }
+    GetVariable
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(3)
+    PushRegister(7)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 78 }
+    Subtract
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: PushWord, index: 282 }
+    GetVariable
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction2 "isCardFullyVisible"(cardToTest, addTab) {
+    DictRef { kind: PushWord, index: 391 }
+    PushRegister(5)
+    Add2
+    Trace
+    PushRegister(5)
+    BranchIfTrue { target: 8 }
+    EA:Push0
+    BranchAlways { target: 10 }
+    DictRef { kind: PushWord, index: 392 }
+    GetVariable
+    StoreRegister(3)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 26 }
+    PushRegister(3)
+    Subtract
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Add2
+    DictRef { kind: PushWord, index: 393 }
+    GetVariable
+    Subtract
+    StoreRegister(4)
+    Pop
+    EA:PushUndefined
+    StoreRegister(2)
+    Pop
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 394 }
+    GetMember
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 48 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: PushWord, index: 395 }
+    GetVariable
+    Add2
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Add2
+    DictRef { kind: PushWord, index: 393 }
+    GetVariable
+    Subtract
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 60 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: ByteGetVar, index: 102 }
+    Add2
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Add2
+    DictRef { kind: PushWord, index: 393 }
+    GetVariable
+    Subtract
+    StoreRegister(2)
+    Pop
+    PushRegister(4)
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    LessThan2
+    PushDuplicate
+    BranchIfTrue { target: 74 }
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    Add2
+    Greater
+    Not
+    BranchIfTrue { target: 78 }
+    EA:PushFalse
+    Return
+    EA:PushTrue
+    Return
+  }
+  DefineFunction2 "showSeparator"(separatorSide) {
+    DictRef { kind: PushWord, index: 396 }
+    PushRegister(2)
+    Add2
+    Trace
+    PushRegister(2)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 377 }
+    GetMember
+    Equals2
+    Not
+    BranchIfTrue { target: 29 }
+    DictRef { kind: PushWord, index: 397 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: PushWord, index: 269 }
+    DictRef { kind: PushWord, index: 398 }
+    GetVariable
+    PushByte(100)
+    DictRef { kind: PushByte, index: 123 }
+    DictRef { kind: ByteGetVar, index: 1 }
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    BranchAlways { target: 42 }
+    DictRef { kind: PushWord, index: 399 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: PushWord, index: 269 }
+    DictRef { kind: PushWord, index: 398 }
+    GetVariable
+    PushByte(100)
+    DictRef { kind: PushByte, index: 123 }
+    DictRef { kind: ByteGetVar, index: 3 }
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction2 "hideSeparator"(separatorSide) {
+    DictRef { kind: PushWord, index: 400 }
+    PushRegister(2)
+    Add2
+    Trace
+    PushRegister(2)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 377 }
+    GetMember
+    Equals2
+    Not
+    BranchIfTrue { target: 29 }
+    DictRef { kind: PushWord, index: 397 }
+    EA:PushFalse
+    SetVariable
+    DictRef { kind: PushWord, index: 269 }
+    DictRef { kind: PushWord, index: 398 }
+    GetVariable
+    EA:Push0
+    DictRef { kind: PushByte, index: 123 }
+    DictRef { kind: ByteGetVar, index: 1 }
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    BranchAlways { target: 42 }
+    DictRef { kind: PushWord, index: 399 }
+    EA:PushFalse
+    SetVariable
+    DictRef { kind: PushWord, index: 269 }
+    DictRef { kind: PushWord, index: 398 }
+    GetVariable
+    EA:Push0
+    DictRef { kind: PushByte, index: 123 }
+    DictRef { kind: ByteGetVar, index: 3 }
+    PushByte(5)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+  }
+  DefineFunction2 "hasCardTab"(index) {
+    DictRef { kind: PushWord, index: 401 }
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 48 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 25 }
+    DictRef { kind: ByteGetVar, index: 48 }
+    PushRegister(1)
+    GetMember
+    PushRegister(2)
+    Equals2
+    Not
+    BranchIfTrue { target: 20 }
+    EA:PushTrue
+    Return
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 5 }
+    EA:PushFalse
+    Return
+  }
+  DefineFunction2 "updateSeparators"() {
+    DictRef { kind: PushWord, index: 402 }
+    Trace
+    DictRef { kind: PushWord, index: 403 }
+    GetVariable
+    EA:PushFalse
+    Equals2
+    PushDuplicate
+    BranchIfTrue { target: 13 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 91 }
+    DictRef { kind: ByteGetVar, index: 92 }
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 26 }
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    DictRef { kind: ByteGetVar, index: 3 }
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushFalse
+    SetMember
+    EA:PushUndefined
+    Return
+    BranchAlways { target: 34 }
+    DictRef { kind: ByteGetVar, index: 1 }
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+    DictRef { kind: ByteGetVar, index: 3 }
+    DictRef { kind: PushByte, index: 2 }
+    EA:PushTrue
+    SetMember
+    EA:Push0
+    EA:Push1
+    DictRef { kind: PushWord, index: 404 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 44 }
+    EA:Push0
+    GetMember
+    PushByte(2)
+    DictRef { kind: PushWord, index: 405 }
+    CallFunction
+    StoreRegister(2)
+    Pop
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push1
+    Subtract
+    EA:Push1
+    DictRef { kind: PushWord, index: 404 }
+    CallFunction
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push1
+    Subtract
+    GetMember
+    PushByte(2)
+    DictRef { kind: PushWord, index: 405 }
+    CallFunction
+    StoreRegister(3)
+    Pop
+    PushRegister(2)
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 71 }
+    Pop
+    DictRef { kind: PushWord, index: 399 }
+    GetVariable
+    Not
+    BranchIfTrue { target: 84 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 375 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 376 }
+    EA:CallFuncAndPop
+    BranchAlways { target: 105 }
+    PushRegister(2)
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 93 }
+    Pop
+    DictRef { kind: PushWord, index: 399 }
+    GetVariable
+    Not
+    Not
+    BranchIfTrue { target: 105 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 375 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 406 }
+    EA:CallFuncAndPop
+    PushRegister(3)
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 112 }
+    Pop
+    DictRef { kind: PushWord, index: 397 }
+    GetVariable
+    Not
+    BranchIfTrue { target: 125 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 377 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 376 }
+    EA:CallFuncAndPop
+    BranchAlways { target: 146 }
+    PushRegister(3)
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 134 }
+    Pop
+    DictRef { kind: PushWord, index: 397 }
+    GetVariable
+    Not
+    Not
+    BranchIfTrue { target: 146 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 377 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 406 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "enableSeparators"(enabled) {
+    DictRef { kind: PushWord, index: 407 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushWord, index: 403 }
+    PushRegister(1)
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+  }
+  DefineFunction2 "trimBottom"(enabled) {
+    DictRef { kind: PushWord, index: 408 }
+    PushRegister(1)
+    Add2
+    Trace
+    PushRegister(1)
+    EA:PushTrue
+    Equals2
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 15 }
+    Pop
+    DictRef { kind: PushWord, index: 409 }
+    GetVariable
+    EA:PushFalse
+    Equals2
+    Not
+    BranchIfTrue { target: 28 }
+    DictRef { kind: PushWord, index: 409 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 78 }
+    DictRef { kind: PushWord, index: 410 }
+    GetVariable
+    Add2
+    SetMember
+  }
+  DefineFunction2 "RepositionAll"(frameCount) {
+    DictRef { kind: PushWord, index: 411 }
+    Trace
+    DictRef { kind: PushWord, index: 412 }
+    GetVariable
+    EA:PushFalse
+    Equals2
+    Not
+    BranchIfTrue { target: 16 }
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: PushWord, index: 387 }
+    EA:CallFuncAndPop
+    PushRegister(1)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 63 }
+    BranchAlways { target: 18 }
+    DictRef { kind: PushWord, index: 413 }
+    Trace
+  }
+  DefineFunction "cardLoadedCallback"() {
+    DictRef { kind: PushWord, index: 414 }
+    DictRef { kind: ByteGetVar, index: 46 }
+    DictRef { kind: ByteGetVar, index: 143 }
+    EA:Push1
+    Add2
+    PushByte(2)
+    InitArray
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 143 }
+    DictRef { kind: ByteGetVar, index: 143 }
+    Increment
+    SetVariable
+    DictRef { kind: ByteGetVar, index: 143 }
+    EA:Push0
+    DictRef { kind: PushByte, index: 84 }
+    CallFunction
+    LessThan2
+    Not
+    Not
+    BranchIfTrue { target: 31 }
+    DictRef { kind: PushByte, index: 144 }
+    EA:PushFalse
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 20 }
+    DictRef { kind: PushByte, index: 20 }
+    EA:PushNull
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+  }
+  DefineFunction2 "allCardLoadedCallback"() {
+    DictRef { kind: PushWord, index: 415 }
+    Trace
+    EA:PushTrue
+    StoreRegister(2)
+    Pop
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 43 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushWord, index: 416 }
+    CallMethod
+    EA:PushFalse
+    Equals2
+    Not
+    BranchIfTrue { target: 38 }
+    DictRef { kind: PushWord, index: 417 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushWord, index: 418 }
+    GetMember
+    DictRef { kind: PushWord, index: 419 }
+    GetMember
+    Add2
+    Trace
+    EA:PushFalse
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 43 }
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 8 }
+    PushRegister(2)
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 77 }
+    DictRef { kind: ByteGetVar, index: 122 }
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 65 }
+    DictRef { kind: PushWord, index: 420 }
+    Trace
+    DictRef { kind: PushByte, index: 144 }
+    EA:PushFalse
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 20 }
+    DictRef { kind: PushByte, index: 20 }
+    EA:PushNull
+    SetVariable
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+    DictRef { kind: ByteGetVar, index: 12 }
+    PushByte(255)
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 77 }
+    DictRef { kind: ByteGetVar, index: 12 }
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 13 }
+    DictRef { kind: PushByte, index: 12 }
+    PushByte(255)
+    SetVariable
+  }
+  DefineFunction2 "WaitUntilCardsHaveFullyLoaded"(value) {
+    DictRef { kind: PushWord, index: 421 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 122 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "SetAllImagesLoadedCallback"(callback) {
+    DictRef { kind: PushWord, index: 422 }
+    Trace
+    DictRef { kind: PushByte, index: 20 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction "isLoadingCards"() {
+    DictRef { kind: PushWord, index: 423 }
+    DictRef { kind: ByteGetVar, index: 144 }
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 144 }
+    Return
+  }
+  DefineFunction2 "setDockedElementVisibility"(bShowElements) {
+    DictRef { kind: PushWord, index: 424 }
+    PushRegister(3)
+    Add2
+    Trace
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 46 }
+    EA:Push0
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushWord, index: 425 }
+    CallMethod
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 426 }
+    CallMethod
+    EA:PushTrue
+    Equals2
+    Not
+    BranchIfTrue { target: 34 }
+    EA:PushFalse
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushWord, index: 427 }
+    EA:CallMethodPop
+    BranchAlways { target: 41 }
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushWord, index: 427 }
+    EA:CallMethodPop
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 7 }
+  }
+  DefineFunction2 "getCardIndex"(card) {
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 23 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    Equals2
+    Not
+    BranchIfTrue { target: 18 }
+    PushRegister(1)
+    Return
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 3 }
+    PushByte(255)
+    Return
+  }
+  DefineFunction "_advance"() {
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 164 }
+    DictRef { kind: ByteGetVar, index: 17 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 13 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 428 }
+    CallFunction
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 17 }
+  }
+  DefineFunction2 "AnimateDockDisable_Yonly"(cb) {
+    DictRef { kind: PushWord, index: 429 }
+    PushRegister(4)
+    Add2
+    Trace
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 43 }
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    EA:Push1
+    Subtract
+    Equals2
+    BranchIfTrue { target: 22 }
+    EA:PushNull
+    BranchAlways { target: 23 }
+    PushRegister(4)
+    StoreRegister(3)
+    Pop
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 76 }
+    DictRef { kind: PushWord, index: 373 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 196 }
+    DictRef { kind: PushByte, index: 78 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 7 }
+  }
+  DefineFunction2 "setOnRollOverCb"(callback) {
+    DictRef { kind: PushWord, index: 430 }
+    Trace
+    DictRef { kind: PushByte, index: 24 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction2 "setMouseInputEnabled"(enabled) {
+    DictRef { kind: PushWord, index: 431 }
+    PushRegister(2)
+    Add2
+    DictRef { kind: PushWord, index: 432 }
+    Add2
+    Trace
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 433 }
+    GetVariable
+    Equals2
+    Not
+    BranchIfTrue { target: 14 }
+    EA:PushUndefined
+    Return
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 44 }
+    DictRef { kind: ByteGetMember, index: 40 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 35 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushWord, index: 434 }
+    EA:CallMethodPop
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 17 }
+    DictRef { kind: PushWord, index: 433 }
+    PushRegister(2)
+    SetVariable
+  }
+  DefineFunction2 "onRollOverCard"(card) {
+    DictRef { kind: PushWord, index: 435 }
+    Trace
+    DictRef { kind: PushWord, index: 433 }
+    GetVariable
+    Not
+    PushDuplicate
+    BranchIfTrue { target: 11 }
+    Pop
+    EA:Push0
+    DictRef { kind: PushWord, index: 436 }
+    CallFunction
+    PushDuplicate
+    BranchIfTrue { target: 17 }
+    Pop
+    EA:Push0
+    DictRef { kind: PushWord, index: 437 }
+    CallFunction
+    PushDuplicate
+    BranchIfTrue { target: 23 }
+    Pop
+    EA:Push0
+    DictRef { kind: PushWord, index: 438 }
+    CallFunction
+    Not
+    BranchIfTrue { target: 27 }
+    EA:PushUndefined
+    Return
+    EA:Push0
+    DictRef { kind: PushWord, index: 439 }
+    CallFunction
+    Not
+    BranchIfTrue { target: 72 }
+    PushRegister(3)
+    EA:Push1
+    DictRef { kind: PushWord, index: 440 }
+    CallFunction
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    PushByte(255)
+    Equals2
+    Not
+    PushDuplicate
+    Not
+    BranchIfTrue { target: 50 }
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 36 }
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 64 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: ByteGetMember, index: 159 }
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 154 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 101 }
+    DictRef { kind: ByteGetVar, index: 24 }
+    EA:PushNull
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 72 }
+    EA:Push0
+    DictRef { kind: CallFuncPop, index: 24 }
+  }
+  DefineFunction2 "onCardRelease"(card) {
+    DictRef { kind: PushWord, index: 441 }
+    PushRegister(2)
+    Add2
+    Trace
+    EA:Push0
+    DictRef { kind: PushWord, index: 439 }
+    CallFunction
+    Not
+    BranchIfTrue { target: 26 }
+    EA:Push0
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 442 }
+    GetMember
+    DictRef { kind: PushWord, index: 443 }
+    CallMethod
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 357 }
+    GetMember
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 444 }
+    GetMember
+    DictRef { kind: PushWord, index: 445 }
+    EA:CallMethodPop
+  }
+  DefineFunction2 "onChangeView"(card) {
+    DictRef { kind: PushWord, index: 446 }
+    PushRegister(2)
+    Add2
+    Trace
+    EA:Push0
+    DictRef { kind: PushWord, index: 439 }
+    CallFunction
+    Not
+    BranchIfTrue { target: 26 }
+    EA:Push0
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 442 }
+    GetMember
+    DictRef { kind: PushWord, index: 443 }
+    CallMethod
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 354 }
+    GetMember
+    DictRef { kind: PushWord, index: 359 }
+    GetMember
+    PushByte(2)
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 444 }
+    GetMember
+    DictRef { kind: PushWord, index: 445 }
+    EA:CallMethodPop
+  }
+  DefineFunction2 "isMouseInsideMask"() {
+    EA:PushTrue
+    StoreRegister(1)
+    Pop
+    DictRef { kind: ByteGetVar, index: 7 }
+    DictRef { kind: PushWord, index: 447 }
+    GetMember
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    LessThan2
+    PushDuplicate
+    BranchIfTrue { target: 21 }
+    Pop
+    DictRef { kind: ByteGetVar, index: 7 }
+    DictRef { kind: PushWord, index: 447 }
+    GetMember
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    Add2
+    Greater
+    Not
+    BranchIfTrue { target: 26 }
+    EA:PushFalse
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    Return
+  }
+  DefineFunction "lockRepositioning"() {
+    DictRef { kind: PushWord, index: 412 }
+    EA:PushTrue
+    SetVariable
+  }
+  DefineFunction "unlockRepositioning"() {
+    DictRef { kind: PushWord, index: 412 }
+    EA:PushFalse
+    SetVariable
+  }
+  DefineFunction2 "CollapseDock"(xLocation, animationTime, onComplete, muteSFX) {
+    DictRef { kind: PushWord, index: 448 }
+    PushRegister(4)
+    Add2
+    DictRef { kind: PushWord, index: 367 }
+    Add2
+    PushRegister(6)
+    Add2
+    DictRef { kind: PushWord, index: 367 }
+    Add2
+    PushRegister(7)
+    Add2
+    Trace
+    DictRef { kind: ByteGetVar, index: 46 }
+    EA:Push0
+    Greater
+    Not
+    Not
+    BranchIfTrue { target: 24 }
+    EA:Push0
+    PushRegister(6)
+    EA:PushUndefined
+    EA:CallMethodPop
+    EA:PushUndefined
+    Return
+    EA:Push0
+    DictRef { kind: PushWord, index: 278 }
+    EA:CallFuncAndPop
+    PushRegister(4)
+    EA:PushNull
+    Equals2
+    Not
+    BranchIfTrue { target: 45 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    DictRef { kind: ByteGetVar, index: 27 }
+    DictRef { kind: ByteGetMember, index: 28 }
+    PushByte(2)
+    Divide
+    Add2
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    StoreRegister(4)
+    Pop
+    BranchAlways { target: 57 }
+    PushRegister(4)
+    DictRef { kind: ByteGetVar, index: 61 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    DictRef { kind: ByteGetVar, index: 7 }
+    DictRef { kind: ByteGetMember, index: 26 }
+    Subtract
+    DictRef { kind: PushWord, index: 395 }
+    GetVariable
+    Add2
+    StoreRegister(4)
+    Pop
+    EA:Push0
+    StoreRegister(2)
+    Pop
+    PushRegister(2)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 110 }
+    PushRegister(2)
+    EA:Push0
+    Equals2
+    BranchIfTrue { target: 71 }
+    EA:PushNull
+    BranchAlways { target: 72 }
+    PushRegister(6)
+    StoreRegister(3)
+    Pop
+    EA:PushFalse
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    DictRef { kind: PushWord, index: 449 }
+    EA:CallMethodPop
+    PushRegister(3)
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(5)
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    EA:PushNull
+    DictRef { kind: ByteGetVar, index: 76 }
+    PushRegister(5)
+    PushRegister(4)
+    DictRef { kind: PushByte, index: 26 }
+    DictRef { kind: ByteGetVar, index: 39 }
+    PushRegister(2)
+    GetMember
+    PushByte(6)
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 8 }
+    DictRef { kind: CallMethodPop, index: 77 }
+    PushRegister(2)
+    Increment
+    StoreRegister(2)
+    Pop
+    BranchAlways { target: 60 }
+    PushRegister(7)
+    EA:PushTrue
+    Equals2
+    Not
+    Not
+    BranchIfTrue { target: 124 }
+    PushRegister(1)
+    DictRef { kind: ByteGetMember, index: 157 }
+    DictRef { kind: ByteGetMember, index: 158 }
+    DictRef { kind: PushWord, index: 374 }
+    GetMember
+    EA:Push1
+    PushRegister(1)
+    DictRef { kind: CallMethodPop, index: 160 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 375 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 376 }
+    EA:CallFuncAndPop
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 307 }
+    GetMember
+    DictRef { kind: PushWord, index: 308 }
+    GetMember
+    DictRef { kind: PushWord, index: 377 }
+    GetMember
+    EA:Push1
+    DictRef { kind: PushWord, index: 376 }
+    EA:CallFuncAndPop
+  }
+  DefineFunction2 "setDockedCardDisabled"(b) {
+    DictRef { kind: PushWord, index: 450 }
+    PushRegister(2)
+    Add2
+    Trace
+    EA:Push0
+    StoreRegister(1)
+    Pop
+    PushRegister(1)
+    DictRef { kind: ByteGetVar, index: 46 }
+    LessThan2
+    Not
+    BranchIfTrue { target: 24 }
+    PushRegister(2)
+    EA:Push1
+    DictRef { kind: ByteGetVar, index: 44 }
+    PushRegister(1)
+    GetMember
+    DictRef { kind: PushWord, index: 451 }
+    EA:CallMethodPop
+    PushRegister(1)
+    Increment
+    StoreRegister(1)
+    Pop
+    BranchAlways { target: 7 }
+  }
+  DefineFunction2 "getCardPositionInScreenSpace"(i) {
+    DictRef { kind: PushWord, index: 452 }
+    EA:Push0
+    DictRef { kind: PushWord, index: 453 }
+    EA:Push0
+    PushByte(2)
+    InitObject
+    StoreRegister(1)
+    Pop
+    PushRegister(5)
+    EA:Push1
+    DictRef { kind: PushWord, index: 454 }
+    CallFunction
+    StoreRegister(2)
+    Pop
+    PushRegister(1)
+    EA:Push1
+    PushRegister(2)
+    DictRef { kind: PushWord, index: 455 }
+    EA:CallMethodPop
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 456 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 452 }
+    GetMember
+    SetMember
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 457 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 453 }
+    GetMember
+    SetMember
+    DictRef { kind: PushWord, index: 458 }
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 456 }
+    GetMember
+    Add2
+    DictRef { kind: PushWord, index: 367 }
+    Add2
+    PushRegister(1)
+    DictRef { kind: PushWord, index: 457 }
+    GetMember
+    Add2
+    Trace
+    PushRegister(1)
+    Return
+  }
+  DefineFunction2 "performingOpenPackAnimation"(b) {
+    DictRef { kind: PushWord, index: 459 }
+    PushRegister(1)
+    Add2
+    Trace
+    DictRef { kind: PushByte, index: 104 }
+    PushRegister(1)
+    SetVariable
+  }
+  DefineFunction "LockChangeCardView"() {
+    DictRef { kind: PushWord, index: 460 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 13 }
+    DictRef { kind: PushWord, index: 365 }
+    EA:PushTrue
+    SetVariable
+    DictRef { kind: PushWord, index: 460 }
+    DictRef { kind: PushWord, index: 461 }
+    GetVariable
+    DictRef { kind: ByteGetVar, index: 10 }
+    PushByte(2)
+    DictRef { kind: CallFuncSetVar, index: 227 }
+  }
+  DefineFunction "UnlockDockViewChange"() {
+    DictRef { kind: PushWord, index: 460 }
+    GetVariable
+    EA:Push1
+    DictRef { kind: CallFuncPop, index: 13 }
+    DictRef { kind: PushWord, index: 365 }
+    EA:PushFalse
+    SetVariable
+  }
+  DictRef { kind: PushByte, index: 7 }
+  EA:PushThisVariable
+  DefineLocal
+  DictRef { kind: PushByte, index: 188 }
+  PushByte(100)
+  DefineLocal
+  DictRef { kind: PushByte, index: 180 }
+  PushByte(110)
+  DefineLocal
+  DictRef { kind: PushWord, index: 463 }
+  PushByte(12)
+  DefineLocal
+  DictRef { kind: PushByte, index: 127 }
+  PushByte(70)
+  DefineLocal
+  DictRef { kind: PushByte, index: 125 }
+  PushByte(142)
+  DefineLocal
+  DictRef { kind: PushByte, index: 126 }
+  DictRef { kind: ByteGetVar, index: 127 }
+  DictRef { kind: ByteGetVar, index: 125 }
+  Subtract
+  DefineLocal
+  DictRef { kind: PushByte, index: 196 }
+  PushWord(258)
+  DefineLocal
+  DictRef { kind: PushByte, index: 102 }
+  PushWord(150)
+  DefineLocal
+  DictRef { kind: PushByte, index: 80 }
+  PushWord(176)
+  DefineLocal
+  DictRef { kind: PushWord, index: 392 }
+  PushByte(28)
+  DefineLocal
+  DictRef { kind: PushWord, index: 395 }
+  PushByte(88)
+  DefineLocal
+  DictRef { kind: PushWord, index: 393 }
+  PushByte(77)
+  DefineLocal
+  DictRef { kind: PushByte, index: 85 }
+  PushByte(85)
+  DefineLocal
+  DictRef { kind: PushByte, index: 74 }
+  PushByte(10)
+  DefineLocal
+  DictRef { kind: PushByte, index: 86 }
+  DictRef { kind: PushWord, index: 392 }
+  GetVariable
+  DefineLocal
+  DictRef { kind: PushByte, index: 75 }
+  DictRef { kind: ByteGetVar, index: 102 }
+  DictRef { kind: ByteGetVar, index: 85 }
+  Subtract
+  PushByte(25)
+  Add2
+  DefineLocal
+  DictRef { kind: PushByte, index: 90 }
+  PushByte(15)
+  DefineLocal
+  DictRef { kind: PushByte, index: 33 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushWord, index: 270 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 34 }
+  DictRef { kind: ByteGetVar, index: 33 }
+  DefineLocal
+  DictRef { kind: PushByte, index: 156 }
+  PushByte(20)
+  DefineLocal
+  DictRef { kind: PushWord, index: 464 }
+  PushByte(6)
+  DefineLocal
+  DictRef { kind: PushWord, index: 465 }
+  PushByte(2)
+  DefineLocal
+  DictRef { kind: PushByte, index: 112 }
+  PushByte(50)
+  DefineLocal
+  DictRef { kind: PushByte, index: 118 }
+  PushByte(20)
+  DefineLocal
+  DictRef { kind: PushByte, index: 113 }
+  DictRef { kind: ByteGetVar, index: 112 }
+  DictRef { kind: ByteGetVar, index: 118 }
+  Add2
+  DefineLocal
+  DictRef { kind: PushByte, index: 117 }
+  PushWord(170)
+  DefineLocal
+  DictRef { kind: PushByte, index: 107 }
+  DictRef { kind: ByteGetVar, index: 112 }
+  DefineLocal
+  DictRef { kind: PushByte, index: 87 }
+  DictRef { kind: ByteGetVar, index: 113 }
+  DefineLocal
+  DictRef { kind: PushByte, index: 29 }
+  PushWord(1046)
+  DefineLocal
+  DictRef { kind: PushByte, index: 151 }
+  PushByte(6)
+  DefineLocal
+  DictRef { kind: PushWord, index: 333 }
+  PushByte(10)
+  DefineLocal
+  DictRef { kind: PushWord, index: 296 }
+  PushByte(15)
+  DefineLocal
+  DictRef { kind: PushWord, index: 398 }
+  PushByte(5)
+  DefineLocal
+  DictRef { kind: PushWord, index: 466 }
+  PushByte(10)
+  DefineLocal
+  DictRef { kind: PushWord, index: 467 }
+  PushWord(200)
+  DefineLocal
+  DictRef { kind: PushWord, index: 373 }
+  PushByte(20)
+  DefineLocal
+  DictRef { kind: PushWord, index: 382 }
+  PushByte(10)
+  DefineLocal
+  DictRef { kind: PushWord, index: 384 }
+  DictRef { kind: ByteGetVar, index: 151 }
+  DefineLocal
+  DictRef { kind: PushByte, index: 195 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 194 }
+  EA:Push1
+  DefineLocal
+  DictRef { kind: PushByte, index: 92 }
+  PushByte(2)
+  DefineLocal
+  DictRef { kind: PushByte, index: 192 }
+  PushByte(3)
+  DefineLocal
+  DictRef { kind: PushByte, index: 193 }
+  PushByte(4)
+  DefineLocal
+  DictRef { kind: PushByte, index: 204 }
+  PushByte(8)
+  DefineLocal
+  DictRef { kind: PushByte, index: 225 }
+  PushByte(30)
+  DefineLocal
+  DictRef { kind: PushWord, index: 410 }
+  PushByte(33)
+  DefineLocal
+  DictRef { kind: PushWord, index: 461 }
+  PushWord(166)
+  DefineLocal
+  DictRef { kind: PushByte, index: 76 }
+  DictRef { kind: PushWord, index: 468 }
+  DefineLocal
+  DictRef { kind: PushByte, index: 46 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 36 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 15 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 148 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 132 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 44 }
+  EA:Push0
+  DictRef { kind: PushByte, index: 43 }
+  NewObject
+  DefineLocal
+  DictRef { kind: PushWord, index: 469 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 142 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 93 }
+  PushByte(255)
+  DefineLocal
+  DictRef { kind: PushWord, index: 433 }
+  EA:PushTrue
+  DefineLocal
+  DictRef { kind: PushByte, index: 133 }
+  EA:PushTrue
+  DefineLocal
+  DictRef { kind: PushByte, index: 167 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 135 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 137 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 312 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushWord, index: 313 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 252 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 155 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 162 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushWord, index: 470 }
+  EA:PushGlobalVariable
+  DictRef { kind: PushWord, index: 271 }
+  GetMember
+  DictRef { kind: PushWord, index: 472 }
+  GetMember
+  DefineLocal
+  DictRef { kind: PushWord, index: 287 }
+  DefineLocal2
+  DictRef { kind: PushWord, index: 288 }
+  DefineLocal2
+  DictRef { kind: PushWord, index: 289 }
+  DefineLocal2
+  DictRef { kind: PushWord, index: 291 }
+  DefineLocal2
+  DictRef { kind: PushWord, index: 473 }
+  DefineLocal2
+  DictRef { kind: PushWord, index: 474 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 129 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 317 }
+  PushWord(5000)
+  DefineLocal
+  DictRef { kind: PushByte, index: 183 }
+  PushWord(5100)
+  DefineLocal
+  DictRef { kind: PushWord, index: 314 }
+  PushWord(6000)
+  DefineLocal
+  DictRef { kind: PushByte, index: 111 }
+  DefineLocal2
+  DictRef { kind: PushByte, index: 140 }
+  EA:PushTrue
+  DefineLocal
+  DictRef { kind: PushByte, index: 17 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 18 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 19 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 91 }
+  DictRef { kind: ByteGetVar, index: 92 }
+  DefineLocal
+  DictRef { kind: PushWord, index: 331 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushWord, index: 332 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 96 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushWord, index: 475 }
+  EA:PushTrue
+  DefineLocal
+  DictRef { kind: PushByte, index: 79 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushByte, index: 81 }
+  EA:Push0
+  DefineLocal
+  DictRef { kind: PushWord, index: 476 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 48 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 39 }
+  EA:Push0
+  DictRef { kind: PushByte, index: 43 }
+  NewObject
+  DefineLocal
+  DictRef { kind: PushByte, index: 47 }
+  EA:Push0
+  DictRef { kind: PushByte, index: 43 }
+  NewObject
+  DefineLocal
+  DictRef { kind: PushWord, index: 379 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushWord, index: 368 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushWord, index: 369 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushWord, index: 370 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 477 }
+  EA:PushTrue
+  DefineLocal
+  DictRef { kind: PushByte, index: 16 }
+  EA:Push0
+  DictRef { kind: PushByte, index: 253 }
+  NewObject
+  DefineLocal
+  DictRef { kind: PushWord, index: 399 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 397 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 403 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 409 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 346 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 122 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 20 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 144 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 143 }
+  DefineLocal2
+  DictRef { kind: PushWord, index: 412 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 146 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 104 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushByte, index: 179 }
+  EA:PushTrue
+  DefineLocal
+  DictRef { kind: PushByte, index: 24 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 23 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 22 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushWord, index: 365 }
+  EA:PushFalse
+  DefineLocal
+  DictRef { kind: PushWord, index: 460 }
+  PushByte(255)
+  DefineLocal
+  DictRef { kind: PushByte, index: 21 }
+  EA:PushNull
+  DefineLocal
+  DictRef { kind: PushByte, index: 106 }
+  EA:PushFalse
+  DefineLocal
+  EA:Push0
+  DictRef { kind: PushWord, index: 478 }
+  EA:CallFuncAndPop
+  Stop
+  End

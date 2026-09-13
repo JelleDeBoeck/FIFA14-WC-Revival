@@ -1,0 +1,1193 @@
+
+  extracted\cardstackhorz\cardstackhorz-actions.txt:205:    DictRef { kind: ByteGetMember, index: 26 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:206:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:207:    DictRef { kind: ByteGetVar, index: 27 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:208:    DictRef { kind: ByteGetMember, index: 28 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:209:    Subtract
+  extracted\cardstackhorz\cardstackhorz-actions.txt:210:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:211:    SetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:212:    DictRef { kind: ByteGetVar, index: 27 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:213:    DictRef { kind: PushByte, index: 28 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:214:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:215:    SetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:216:    DictRef { kind: PushByte, index: 29 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:217:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:218:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:219:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:220:  DefineFunction2 "SetMaskHeight"(height) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:221:    DictRef { kind: PushByte, index: 30 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:222:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:223:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:224:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:225:    DictRef { kind: ByteGetVar, index: 27 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:226:    DictRef { kind: PushByte, index: 31 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:227:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:228:    SetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:229:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:230:  DefineFunction2 "SetHighlightRise"(yOffset) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:231:    DictRef { kind: PushByte, index: 32 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:232:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:233:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:234:    Trace
+> extracted\cardstackhorz\cardstackhorz-actions.txt:235:    DictRef { kind: PushByte, index: 33 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:236:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:237:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:238:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:239:  DefineFunction2 "SetSelectRise"(yOffset) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:240:    DictRef { kind: PushByte, index: 32 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:241:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:242:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:243:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:244:    DictRef { kind: PushByte, index: 34 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:245:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:246:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:247:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:248:  DefineFunction2 "ClearHighlight"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:249:    DictRef { kind: PushByte, index: 35 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:250:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:251:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:252:    StoreRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:253:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:254:    DictRef { kind: PushByte, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:255:    PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:256:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:257:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:258:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:259:    PushByte(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:260:    DictRef { kind: CallFuncPop, index: 37 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:261:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:262:  DefineFunction2 "clear"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:263:    DictRef { kind: PushByte, index: 38 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:264:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:265:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:266:    StoreRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:267:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:268:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:269:    DictRef { kind: ByteGetVar, index: 39 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:270:    DictRef { kind: ByteGetMember, index: 40 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:271:    LessThan2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:272:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:273:    BranchIfTrue { target: 29 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:274:    DictRef { kind: ByteGetVar, index: 39 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:275:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:276:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:277:    DictRef { kind: ByteGetMember, index: 41 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:278:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:279:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:280:    DictRef { kind: ByteGetMember, index: 8 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1006:    StoreRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1007:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1008:    DictRef { kind: ByteGetVar, index: 89 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1009:    StoreRegister(5)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1010:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1011:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1012:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1013:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1014:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1015:    BranchIfTrue { target: 58 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1016:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1017:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1018:    DictRef { kind: PushByte, index: 72 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1019:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1020:    StoreRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1021:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1022:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1023:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1024:    DictRef { kind: PushByte, index: 73 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1025:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1026:    DictRef { kind: ByteGetVar, index: 90 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1027:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1028:    StoreRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1029:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1030:    DictRef { kind: ByteGetVar, index: 91 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1031:    DictRef { kind: ByteGetVar, index: 92 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1032:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1033:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1034:    BranchIfTrue { target: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1035:    PushRegister(4)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:1036:    DictRef { kind: ByteGetVar, index: 33 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1037:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1038:    StoreRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1039:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1040:    BranchAlways { target: 54 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1041:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1042:    DictRef { kind: ByteGetVar, index: 93 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1043:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1044:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1045:    BranchIfTrue { target: 54 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1046:    PushRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1047:    DictRef { kind: ByteGetVar, index: 34 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1048:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1049:    StoreRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1050:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1051:    DictRef { kind: ByteGetVar, index: 94 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1052:    StoreRegister(5)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1053:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1054:    BranchAlways { target: 124 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1055:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1056:    DictRef { kind: ByteGetVar, index: 93 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1057:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1058:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1059:    BranchIfTrue { target: 92 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1060:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1061:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1062:    DictRef { kind: PushByte, index: 72 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1063:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1064:    DictRef { kind: ByteGetVar, index: 34 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1065:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1066:    StoreRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1067:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1068:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1069:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1070:    Greater
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1071:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1072:    BranchIfTrue { target: 85 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1073:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1074:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1075:    DictRef { kind: PushByte, index: 73 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1076:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1077:    DictRef { kind: ByteGetVar, index: 75 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1078:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1079:    StoreRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1080:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1081:    BranchAlways { target: 91 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1596:    DictRef { kind: ByteGetVar, index: 46 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1597:    LessThan2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1598:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1599:    BranchIfTrue { target: 160 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1600:    DictRef { kind: PushByte, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1601:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1602:    DictRef { kind: ByteGetMember, index: 128 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1603:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1604:    BranchAlways { target: 162 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1605:    DictRef { kind: PushByte, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1606:    EA:PushZeroSetVar
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1607:    DictRef { kind: PushByte, index: 129 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1608:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1609:    DictRef { kind: ByteGetMember, index: 130 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1610:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1611:    DictRef { kind: PushByte, index: 15 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1612:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1613:    DictRef { kind: ByteGetMember, index: 15 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1614:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1615:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1616:    DictRef { kind: ByteGetMember, index: 131 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1617:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1618:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1619:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1620:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1621:    BranchIfTrue { target: 185 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1622:    DictRef { kind: PushByte, index: 132 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1623:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1624:    DictRef { kind: ByteGetMember, index: 131 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1625:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:1626:    DictRef { kind: PushByte, index: 133 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1627:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1628:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1629:    BranchAlways { target: 191 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1630:    DictRef { kind: PushByte, index: 132 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1631:    DictRef { kind: PushByte, index: 134 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1632:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:1633:    DictRef { kind: PushByte, index: 133 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1634:    EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1635:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1636:    DictRef { kind: PushByte, index: 135 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1637:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1638:    DictRef { kind: ByteGetMember, index: 136 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1639:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1640:    DictRef { kind: PushByte, index: 137 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1641:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1642:    DictRef { kind: ByteGetMember, index: 138 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1643:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1644:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1645:    DictRef { kind: CallFuncPop, index: 139 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1646:    DictRef { kind: PushByte, index: 140 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1647:    EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1648:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1649:    DictRef { kind: ByteGetVar, index: 111 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1650:    DictRef { kind: ByteGetMember, index: 141 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1651:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1652:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1653:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1654:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1655:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1656:    BranchIfTrue { target: 218 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1657:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1658:    DictRef { kind: ByteGetVar, index: 111 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1659:    DictRef { kind: ByteGetMember, index: 141 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1660:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1661:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1662:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1663:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1664:    BranchIfTrue { target: 224 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1665:    DictRef { kind: PushByte, index: 142 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1666:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1667:    DictRef { kind: ByteGetMember, index: 141 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1668:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1669:    DictRef { kind: PushByte, index: 143 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1670:    EA:PushZeroSetVar
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1671:    DictRef { kind: ByteGetVar, index: 46 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1672:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1673:    Greater
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1674:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1675:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1676:    BranchIfTrue { target: 234 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1677:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:1678:    DictRef { kind: ByteGetVar, index: 122 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2529:    BranchIfTrue { target: 21 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2530:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2531:    DictRef { kind: ByteGetMember, index: 40 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2532:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2533:    Greater
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2534:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2535:    BranchIfTrue { target: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2536:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2537:    StoreRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2538:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2539:    BranchAlways { target: 21 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2540:    EA:PushUndefined
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2541:    Return
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2542:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2543:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2544:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2545:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2546:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2547:    BranchIfTrue { target: 71 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2548:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2549:    StoreRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2550:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2551:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2552:    PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2553:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2554:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2555:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2556:    BranchIfTrue { target: 39 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2557:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2558:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:2559:    DictRef { kind: CallFuncPop, index: 233 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2560:    DictRef { kind: PushByte, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2561:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2562:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2563:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2564:    PushRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2565:    Greater
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2566:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2567:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2568:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2569:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2570:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2571:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2572:    DictRef { kind: CallMethodPop, index: 207 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2573:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2574:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2575:    BranchIfTrue { target: 58 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2576:    DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2577:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2578:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2579:    DictRef { kind: ByteGetVar, index: 151 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2580:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2581:    DictRef { kind: CallFuncPop, index: 200 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2582:    DictRef { kind: ByteGetVar, index: 18 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2583:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2584:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2585:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2586:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2587:    BranchIfTrue { target: 70 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2588:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2589:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2590:    DictRef { kind: CallFuncPop, index: 18 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2591:    BranchAlways { target: 91 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2592:    DictRef { kind: ByteGetVar, index: 148 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2593:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2594:    BranchIfTrue { target: 91 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2595:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2596:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2597:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2598:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2599:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2600:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2601:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2602:    DictRef { kind: CallMethodPop, index: 207 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2603:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2604:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2637:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2638:    BranchIfTrue { target: 28 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2639:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2640:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2641:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2642:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2643:    DictRef { kind: CallMethodPop, index: 164 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2644:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2645:    DictRef { kind: CallFuncPop, index: 101 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2646:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2647:  DefineFunction "onCardMoveComplete"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2648:    DictRef { kind: PushByte, index: 237 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2649:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2650:    DictRef { kind: ByteGetVar, index: 96 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2651:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2652:    Greater
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2653:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2654:    BranchIfTrue { target: 11 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2655:    DictRef { kind: PushByte, index: 96 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2656:    DictRef { kind: ByteGetVar, index: 96 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2657:    Decrement
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2658:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2659:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2660:    DictRef { kind: CallFuncPop, index: 101 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2661:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2662:  DefineFunction "unhighlight"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2663:    DictRef { kind: PushByte, index: 238 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2664:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2665:    PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2666:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:2667:    DictRef { kind: CallFuncPop, index: 233 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2668:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2669:  DefineFunction2 "unhighlightIndex"(newIndex) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2670:    DictRef { kind: PushByte, index: 239 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2671:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2672:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2673:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2674:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2675:    PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2676:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2677:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2678:    BranchIfTrue { target: 11 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2679:    EA:PushUndefined
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2680:    Return
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2681:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2682:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2683:    Greater
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2684:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2685:    EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2686:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2687:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2688:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2689:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2690:    DictRef { kind: CallMethodPop, index: 207 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2691:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2692:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2693:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2694:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2695:    DictRef { kind: CallMethodPop, index: 169 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2696:    DictRef { kind: PushByte, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2697:    PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2698:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2699:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2700:  DefineFunction2 "setView"(view, mute) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2701:    DictRef { kind: PushByte, index: 240 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2702:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2703:    DictRef { kind: ByteGetVar, index: 142 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2704:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2705:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2706:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2707:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2708:    BranchIfTrue { target: 11 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2709:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2710:    DictRef { kind: ByteGetVar, index: 140 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2711:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2712:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2932:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2933:    DictRef { kind: PushWord, index: 266 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2934:    DictRef { kind: ByteGetVar, index: 137 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2935:    SetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2936:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2937:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2938:    DictRef { kind: PushWord, index: 256 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2939:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2940:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2941:    DictRef { kind: ByteGetMember, index: 255 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2942:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2943:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2944:    DictRef { kind: PushWord, index: 267 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2945:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2946:    DictRef { kind: ByteGetVar, index: 188 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2947:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2948:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2949:    DictRef { kind: CallMethodPop, index: 199 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2950:    DictRef { kind: PushWord, index: 268 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2951:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2952:    DictRef { kind: PushWord, index: 269 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2953:    PushRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2954:    DictRef { kind: PushWord, index: 270 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2955:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2956:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2957:    DictRef { kind: PushWord, index: 257 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2958:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2959:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2960:    DictRef { kind: PushByte, index: 72 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2961:    CallFunction
+> extracted\cardstackhorz\cardstackhorz-actions.txt:2962:    DictRef { kind: ByteGetVar, index: 33 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2963:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2964:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2965:    DictRef { kind: PushWord, index: 257 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2966:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2967:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2968:    DictRef { kind: PushByte, index: 197 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2969:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2970:    DictRef { kind: ByteGetVar, index: 90 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2971:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2972:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2973:    PushByte(7)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2974:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2975:    DictRef { kind: PushWord, index: 271 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2976:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2977:    DictRef { kind: PushWord, index: 272 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2978:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2979:    DictRef { kind: ByteGetVar, index: 142 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2980:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2981:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2982:    DictRef { kind: CallMethodPop, index: 209 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2983:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2984:    DictRef { kind: PushByte, index: 2 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2985:    EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2986:    SetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2987:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2988:  DefineFunction2 "animateRemove"(index, targetX, targetY, fadeOut, onComplete) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2989:    DictRef { kind: PushWord, index: 273 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2990:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2991:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2992:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2993:    BranchIfTrue { target: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2994:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2995:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2996:    PushWord(300)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2997:    PushWord(65176)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2998:    PushRegister(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:2999:    PushRegister(5)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3000:    PushRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3001:    PushByte(7)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3002:    DictRef { kind: PushWord, index: 274 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3003:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3004:    BranchAlways { target: 26 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3005:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3006:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3007:    PushByte(100)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3453:    DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3454:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3455:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3456:    DictRef { kind: CallMethodPop, index: 184 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3457:    DictRef { kind: PushWord, index: 302 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3458:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3459:    DictRef { kind: ByteGetVar, index: 76 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3460:    DictRef { kind: PushWord, index: 296 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3461:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3462:    DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3463:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3464:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3465:    DictRef { kind: PushByte, index: 73 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3466:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3467:    DictRef { kind: PushByte, index: 26 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3468:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3469:    DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3470:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3471:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3472:    PushByte(6)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3473:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3474:    DictRef { kind: ByteGetMember, index: 8 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3475:    DictRef { kind: CallMethodPop, index: 77 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3476:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3477:  DefineFunction "internalSwapSecondComplete"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3478:    DictRef { kind: PushWord, index: 303 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3479:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3480:    DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3481:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3482:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:3483:    DictRef { kind: CallFuncPop, index: 233 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3484:    DictRef { kind: PushWord, index: 288 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3485:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3486:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:3487:    DictRef { kind: CallFuncPop, index: 233 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3488:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3489:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3490:    DictRef { kind: PushWord, index: 304 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3491:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3492:    DictRef { kind: ByteGetVar, index: 7 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3493:    PushByte(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3494:    DictRef { kind: PushWord, index: 262 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3495:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3496:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3497:  DefineFunction "internalSwapAllComplete"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3498:    DictRef { kind: PushWord, index: 305 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3499:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3500:    DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3501:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3502:    DictRef { kind: PushWord, index: 288 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3503:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3504:    LessThan2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3505:    EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3506:    EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3507:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3508:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3509:    DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3510:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3511:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3512:    DictRef { kind: CallMethodPop, index: 207 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3513:    DictRef { kind: PushWord, index: 287 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3514:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3515:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3516:    DictRef { kind: CallFuncPop, index: 154 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3517:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3518:    DictRef { kind: CallFuncPop, index: 89 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3519:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3520:    DictRef { kind: PushWord, index: 290 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3521:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3522:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3523:  DefineFunction2 "animateRemoveForDiscardAll"(index, onComplete) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3524:    DictRef { kind: PushWord, index: 306 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3525:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3526:    DictRef { kind: PushWord, index: 282 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3527:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3528:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3529:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3530:    DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3531:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3532:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3887:    DictRef { kind: PushWord, index: 256 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3888:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3889:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3890:    DictRef { kind: ByteGetMember, index: 255 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3891:    PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3892:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3893:    DictRef { kind: PushWord, index: 267 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3894:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3895:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3896:    DictRef { kind: PushWord, index: 323 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3897:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3898:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3899:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3900:    DictRef { kind: CallMethodPop, index: 199 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3901:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3902:    DictRef { kind: PushByte, index: 2 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3903:    EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3904:    SetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3905:    DictRef { kind: PushWord, index: 326 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3906:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3907:    DictRef { kind: PushWord, index: 269 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3908:    PushRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3909:    DictRef { kind: PushWord, index: 270 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3910:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3911:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3912:    DictRef { kind: PushWord, index: 257 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3913:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3914:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3915:    DictRef { kind: PushByte, index: 72 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3916:    CallFunction
+> extracted\cardstackhorz\cardstackhorz-actions.txt:3917:    DictRef { kind: ByteGetVar, index: 33 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3918:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3919:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3920:    DictRef { kind: PushWord, index: 257 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3921:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3922:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3923:    DictRef { kind: PushByte, index: 197 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3924:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3925:    DictRef { kind: ByteGetVar, index: 90 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3926:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3927:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3928:    PushByte(7)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3929:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3930:    DictRef { kind: PushWord, index: 271 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3931:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3932:    DictRef { kind: PushWord, index: 272 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3933:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3934:    DictRef { kind: ByteGetVar, index: 142 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3935:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3936:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3937:    DictRef { kind: CallMethodPop, index: 209 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3938:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3939:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3940:    DictRef { kind: PushWord, index: 327 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3941:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3942:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3943:  DefineFunction "animateAddAnimationComplete"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3944:    DictRef { kind: PushWord, index: 328 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3945:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3946:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3947:    DictRef { kind: PushWord, index: 257 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3948:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3949:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3950:    DictRef { kind: CallFuncPop, index: 154 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3951:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3952:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3953:    DictRef { kind: PushWord, index: 258 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3954:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3955:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3956:    DictRef { kind: CallFuncPop, index: 234 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3957:    DictRef { kind: PushByte, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3958:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3959:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3960:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3961:  DefineFunction2 "_animateRemove"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:3962:    DictRef { kind: PushWord, index: 329 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4017:      CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4018:      EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4019:      DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4020:      DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4021:      DictRef { kind: PushWord, index: 257 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4022:      GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4023:      GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4024:      DictRef { kind: CallMethodPop, index: 184 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4025:      DictRef { kind: PushByte, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4026:      EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4027:      SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4028:    }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4029:    DictRef { kind: PushWord, index: 269 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4030:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4031:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4032:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4033:    DictRef { kind: PushWord, index: 256 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4034:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4035:    DictRef { kind: ByteGetVar, index: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4036:    DictRef { kind: ByteGetMember, index: 255 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4037:    DictRef { kind: PushWord, index: 282 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4038:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4039:    PushByte(7)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4040:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4041:    DictRef { kind: PushWord, index: 271 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4042:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4043:    DictRef { kind: PushWord, index: 272 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4044:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4045:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4046:  DefineFunction2 "animateDockDisable"(animationCallback) {
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4047:    DictRef { kind: PushWord, index: 330 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4048:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4049:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4050:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4051:    DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4052:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4053:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4054:    DictRef { kind: PushWord, index: 331 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4055:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4056:    DictRef { kind: PushWord, index: 332 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4057:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4058:    DictRef { kind: PushWord, index: 333 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4059:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4060:    DictRef { kind: ByteGetVar, index: 194 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4061:    PushByte(2)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4062:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4063:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4064:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4065:  DefineFunction2 "animateDockEnable"(animationCallback) {
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4066:    DictRef { kind: PushWord, index: 335 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4067:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4068:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4069:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4070:    DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4071:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4072:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4073:    DictRef { kind: PushWord, index: 331 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4074:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4075:    DictRef { kind: PushWord, index: 332 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4076:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4077:    DictRef { kind: PushWord, index: 333 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4078:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4079:    DictRef { kind: ByteGetVar, index: 92 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4080:    PushByte(2)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4081:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4082:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4083:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4084:  DefineFunction2 "animateDockOff"(animationCallback) {
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4085:    DictRef { kind: PushWord, index: 336 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4086:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4087:    DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4088:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4089:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4090:    DictRef { kind: PushWord, index: 331 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4091:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4092:    DictRef { kind: PushWord, index: 332 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4093:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4094:    DictRef { kind: PushWord, index: 333 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4095:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4096:    DictRef { kind: ByteGetVar, index: 195 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4097:    PushByte(2)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4098:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4099:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4100:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4101:  DefineFunction2 "animateDockLeft"(animationCallback) {
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4102:    DictRef { kind: PushWord, index: 337 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4103:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4104:    DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4105:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4106:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4107:    DictRef { kind: PushWord, index: 331 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4108:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4109:    DictRef { kind: PushWord, index: 332 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4110:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4111:    DictRef { kind: PushWord, index: 333 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4112:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4113:    DictRef { kind: ByteGetVar, index: 192 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4114:    PushByte(2)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4115:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4116:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4117:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4118:  DefineFunction2 "animateDockRight"(animationCallback) {
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4119:    DictRef { kind: PushWord, index: 338 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4120:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4121:    DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4122:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4123:    SetVariable
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4124:    DictRef { kind: PushWord, index: 331 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4125:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4126:    DictRef { kind: PushWord, index: 332 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4127:    EA:PushZeroSetVar
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4128:    DictRef { kind: PushWord, index: 333 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4129:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4130:    DictRef { kind: ByteGetVar, index: 193 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4131:    PushByte(2)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4132:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4133:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4134:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4135:  DefineFunction "positionDockOff"() {
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4136:    DictRef { kind: PushWord, index: 339 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4137:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4138:    DictRef { kind: ByteGetVar, index: 195 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4139:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4140:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4141:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4142:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4143:  DefineFunction "positionDockEnable"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4144:    DictRef { kind: PushWord, index: 340 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4145:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4146:    DictRef { kind: ByteGetVar, index: 92 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4147:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4148:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4149:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4150:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4151:  DefineFunction "positionDockDisable"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4152:    DictRef { kind: PushWord, index: 341 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4153:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4154:    DictRef { kind: ByteGetVar, index: 194 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4155:    EA:Push1
+> extracted\cardstackhorz\cardstackhorz-actions.txt:4156:    DictRef { kind: PushWord, index: 334 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4157:    EA:CallFuncAndPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4158:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4159:  DefineFunction2 "postionDock"(dockState, animationTime) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4160:    DictRef { kind: PushWord, index: 342 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4161:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4162:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4163:    PushByte(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4164:    InitArray
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4165:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4166:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4167:    DictRef { kind: PushByte, index: 91 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4168:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4169:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4170:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4171:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4172:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4173:    BranchIfTrue { target: 16 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4174:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4175:    BranchAlways { target: 17 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4176:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4177:    StoreRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4178:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4179:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4180:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4181:    DictRef { kind: CallFuncPop, index: 200 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4182:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4183:  DefineFunction2 "_animateDockDone"() {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4184:    DictRef { kind: PushWord, index: 343 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4185:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4186:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4187:    DictRef { kind: CallFuncPop, index: 101 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4188:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4189:    DictRef { kind: CallFuncPop, index: 234 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4190:    DictRef { kind: PushByte, index: 96 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4191:    EA:PushZeroSetVar
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4192:    DictRef { kind: ByteGetVar, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4193:    EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4194:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4195:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4196:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4197:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4198:    BranchIfTrue { target: 20 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4199:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4200:    DictRef { kind: ByteGetVar, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:4201:    EA:PushUndefined
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5523:    DictRef { kind: ByteGetVar, index: 196 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5524:    DictRef { kind: PushByte, index: 78 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5525:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5526:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5527:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5528:    PushByte(6)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5529:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5530:    DictRef { kind: ByteGetMember, index: 8 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5531:    DictRef { kind: CallMethodPop, index: 77 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5532:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5533:    Increment
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5534:    StoreRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5535:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5536:    BranchAlways { target: 7 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5537:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5538:  DefineFunction2 "setOnRollOverCb"(callback) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5539:    DictRef { kind: PushWord, index: 430 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5540:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5541:    DictRef { kind: PushByte, index: 24 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5542:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5543:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5544:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5545:  DefineFunction2 "setMouseInputEnabled"(enabled) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5546:    DictRef { kind: PushWord, index: 431 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5547:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5548:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5549:    DictRef { kind: PushWord, index: 432 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5550:    Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5551:    Trace
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5552:    PushRegister(2)
+> extracted\cardstackhorz\cardstackhorz-actions.txt:5553:    DictRef { kind: PushWord, index: 433 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5554:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5555:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5556:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5557:    BranchIfTrue { target: 14 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5558:    EA:PushUndefined
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5559:    Return
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5560:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5561:    StoreRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5562:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5563:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5564:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5565:    DictRef { kind: ByteGetMember, index: 40 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5566:    LessThan2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5567:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5568:    BranchIfTrue { target: 35 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5569:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5570:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5571:    DictRef { kind: ByteGetVar, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5572:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5573:    GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5574:    DictRef { kind: PushWord, index: 434 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5575:    EA:CallMethodPop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5576:    PushRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5577:    Increment
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5578:    StoreRegister(1)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5579:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5580:    BranchAlways { target: 17 }
+> extracted\cardstackhorz\cardstackhorz-actions.txt:5581:    DictRef { kind: PushWord, index: 433 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5582:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5583:    SetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5584:  }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5585:  DefineFunction2 "onRollOverCard"(card) {
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5586:    DictRef { kind: PushWord, index: 435 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5587:    Trace
+> extracted\cardstackhorz\cardstackhorz-actions.txt:5588:    DictRef { kind: PushWord, index: 433 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5589:    GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5590:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5591:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5592:    BranchIfTrue { target: 11 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5593:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5594:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5595:    DictRef { kind: PushWord, index: 436 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5596:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5597:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5598:    BranchIfTrue { target: 17 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5599:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5600:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5601:    DictRef { kind: PushWord, index: 437 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5602:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5603:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5604:    BranchIfTrue { target: 23 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5605:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5606:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5607:    DictRef { kind: PushWord, index: 438 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5608:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5609:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5610:    BranchIfTrue { target: 27 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5611:    EA:PushUndefined
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5612:    Return
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5613:    EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5614:    DictRef { kind: PushWord, index: 439 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5615:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5616:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5617:    BranchIfTrue { target: 72 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5618:    PushRegister(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5619:    EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5620:    DictRef { kind: PushWord, index: 440 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5621:    CallFunction
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5622:    StoreRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5623:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5624:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5625:    PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5626:    Equals2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5627:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5628:    PushDuplicate
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5629:    Not
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5630:    BranchIfTrue { target: 50 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5631:    Pop
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5632:    PushRegister(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:5633:    DictRef { kind: ByteGetVar, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6038:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6039:  DictRef { kind: PushWord, index: 392 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6040:  PushByte(28)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6041:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6042:  DictRef { kind: PushWord, index: 395 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6043:  PushByte(88)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6044:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6045:  DictRef { kind: PushWord, index: 393 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6046:  PushByte(77)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6047:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6048:  DictRef { kind: PushByte, index: 85 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6049:  PushByte(85)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6050:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6051:  DictRef { kind: PushByte, index: 74 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6052:  PushByte(10)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6053:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6054:  DictRef { kind: PushByte, index: 86 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6055:  DictRef { kind: PushWord, index: 392 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6056:  GetVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6057:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6058:  DictRef { kind: PushByte, index: 75 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6059:  DictRef { kind: ByteGetVar, index: 102 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6060:  DictRef { kind: ByteGetVar, index: 85 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6061:  Subtract
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6062:  PushByte(25)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6063:  Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6064:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6065:  DictRef { kind: PushByte, index: 90 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6066:  PushByte(15)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6067:  DefineLocal
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6068:  DictRef { kind: PushByte, index: 33 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6069:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6070:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6071:  DictRef { kind: PushWord, index: 270 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6072:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6073:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6074:  DictRef { kind: PushByte, index: 34 }
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6075:  DictRef { kind: ByteGetVar, index: 33 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6076:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6077:  DictRef { kind: PushByte, index: 156 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6078:  PushByte(20)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6079:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6080:  DictRef { kind: PushWord, index: 464 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6081:  PushByte(6)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6082:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6083:  DictRef { kind: PushWord, index: 465 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6084:  PushByte(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6085:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6086:  DictRef { kind: PushByte, index: 112 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6087:  PushByte(50)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6088:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6089:  DictRef { kind: PushByte, index: 118 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6090:  PushByte(20)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6091:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6092:  DictRef { kind: PushByte, index: 113 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6093:  DictRef { kind: ByteGetVar, index: 112 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6094:  DictRef { kind: ByteGetVar, index: 118 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6095:  Add2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6096:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6097:  DictRef { kind: PushByte, index: 117 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6098:  PushWord(170)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6099:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6100:  DictRef { kind: PushByte, index: 107 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6101:  DictRef { kind: ByteGetVar, index: 112 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6102:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6103:  DictRef { kind: PushByte, index: 87 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6104:  DictRef { kind: ByteGetVar, index: 113 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6105:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6106:  DictRef { kind: PushByte, index: 29 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6107:  PushWord(1046)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6108:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6109:  DictRef { kind: PushByte, index: 151 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6110:  PushByte(6)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6111:  DefineLocal
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6112:  DictRef { kind: PushWord, index: 333 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6113:  PushByte(10)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6114:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6115:  DictRef { kind: PushWord, index: 296 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6116:  PushByte(15)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6117:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6118:  DictRef { kind: PushWord, index: 398 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6119:  PushByte(5)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6120:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6121:  DictRef { kind: PushWord, index: 466 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6122:  PushByte(10)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6123:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6124:  DictRef { kind: PushWord, index: 467 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6125:  PushWord(200)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6126:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6127:  DictRef { kind: PushWord, index: 373 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6128:  PushByte(20)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6129:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6130:  DictRef { kind: PushWord, index: 382 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6131:  PushByte(10)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6132:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6133:  DictRef { kind: PushWord, index: 384 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6134:  DictRef { kind: ByteGetVar, index: 151 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6135:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6136:  DictRef { kind: PushByte, index: 195 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6137:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6138:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6139:  DictRef { kind: PushByte, index: 194 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6140:  EA:Push1
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6141:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6142:  DictRef { kind: PushByte, index: 92 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6143:  PushByte(2)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6144:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6145:  DictRef { kind: PushByte, index: 192 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6146:  PushByte(3)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6147:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6148:  DictRef { kind: PushByte, index: 193 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6149:  PushByte(4)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6150:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6151:  DictRef { kind: PushByte, index: 204 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6152:  PushByte(8)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6153:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6154:  DictRef { kind: PushByte, index: 225 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6155:  PushByte(30)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6156:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6157:  DictRef { kind: PushWord, index: 410 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6160:  DictRef { kind: PushWord, index: 461 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6161:  PushWord(166)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6162:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6163:  DictRef { kind: PushByte, index: 76 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6164:  DictRef { kind: PushWord, index: 468 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6165:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6166:  DictRef { kind: PushByte, index: 46 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6167:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6168:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6169:  DictRef { kind: PushByte, index: 36 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6170:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6171:  DictRef { kind: PushByte, index: 15 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6172:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6173:  DictRef { kind: PushByte, index: 148 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6174:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6175:  DictRef { kind: PushByte, index: 132 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6176:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6177:  DictRef { kind: PushByte, index: 44 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6178:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6179:  DictRef { kind: PushByte, index: 43 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6180:  NewObject
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6181:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6182:  DictRef { kind: PushWord, index: 469 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6183:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6184:  DictRef { kind: PushByte, index: 142 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6185:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6186:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6187:  DictRef { kind: PushByte, index: 93 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6188:  PushByte(255)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6189:  DefineLocal
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6190:  DictRef { kind: PushWord, index: 433 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6191:  EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6192:  DefineLocal
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6193:  DictRef { kind: PushByte, index: 133 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6194:  EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6195:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6196:  DictRef { kind: PushByte, index: 167 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6197:  EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6198:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6199:  DictRef { kind: PushByte, index: 135 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6200:  EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6201:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6202:  DictRef { kind: PushByte, index: 137 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6203:  EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6204:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6205:  DictRef { kind: PushWord, index: 312 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6206:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6207:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6208:  DictRef { kind: PushWord, index: 313 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6209:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6210:  DictRef { kind: PushByte, index: 252 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6211:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6212:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6213:  DictRef { kind: PushByte, index: 155 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6214:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6215:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6216:  DictRef { kind: PushByte, index: 162 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6217:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6218:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6219:  DictRef { kind: PushWord, index: 470 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6220:  EA:PushGlobalVariable
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6221:  DictRef { kind: PushWord, index: 271 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6222:  GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6223:  DictRef { kind: PushWord, index: 472 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6224:  GetMember
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6225:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6226:  DictRef { kind: PushWord, index: 287 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6227:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6228:  DictRef { kind: PushWord, index: 288 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6229:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6230:  DictRef { kind: PushWord, index: 289 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6231:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6232:  DictRef { kind: PushWord, index: 291 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6233:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6234:  DictRef { kind: PushWord, index: 473 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6235:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6236:  DictRef { kind: PushWord, index: 474 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6237:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6238:  DictRef { kind: PushByte, index: 129 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6239:  EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6240:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6241:  DictRef { kind: PushWord, index: 317 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6242:  PushWord(5000)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6243:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6244:  DictRef { kind: PushByte, index: 183 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6245:  PushWord(5100)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6246:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6247:  DictRef { kind: PushWord, index: 314 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6248:  PushWord(6000)
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6249:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6250:  DictRef { kind: PushByte, index: 111 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6251:  DefineLocal2
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6252:  DictRef { kind: PushByte, index: 140 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6253:  EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6254:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6255:  DictRef { kind: PushByte, index: 17 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6256:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6257:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6258:  DictRef { kind: PushByte, index: 18 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6259:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6260:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6261:  DictRef { kind: PushByte, index: 19 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6262:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6263:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6264:  DictRef { kind: PushByte, index: 91 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6265:  DictRef { kind: ByteGetVar, index: 92 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6266:  DefineLocal
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6267:  DictRef { kind: PushWord, index: 331 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6268:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6269:  DefineLocal
+> extracted\cardstackhorz\cardstackhorz-actions.txt:6270:  DictRef { kind: PushWord, index: 332 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6271:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6272:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6273:  DictRef { kind: PushByte, index: 96 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6274:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6275:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6276:  DictRef { kind: PushWord, index: 475 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6277:  EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6278:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6279:  DictRef { kind: PushByte, index: 79 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6280:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6281:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6282:  DictRef { kind: PushByte, index: 81 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6283:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6284:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6285:  DictRef { kind: PushWord, index: 476 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6286:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6287:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6288:  DictRef { kind: PushByte, index: 48 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6289:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6290:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6291:  DictRef { kind: PushByte, index: 39 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6292:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6293:  DictRef { kind: PushByte, index: 43 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6294:  NewObject
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6295:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6296:  DictRef { kind: PushByte, index: 47 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6297:  EA:Push0
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6298:  DictRef { kind: PushByte, index: 43 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6299:  NewObject
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6300:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6301:  DictRef { kind: PushWord, index: 379 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6302:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6303:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6304:  DictRef { kind: PushWord, index: 368 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6305:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6306:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6307:  DictRef { kind: PushWord, index: 369 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6308:  EA:PushNull
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6309:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6310:  DictRef { kind: PushWord, index: 370 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6311:  EA:PushFalse
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6312:  DefineLocal
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6313:  DictRef { kind: PushWord, index: 477 }
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6314:  EA:PushTrue
+  extracted\cardstackhorz\cardstackhorz-actions.txt:6315:  DefineLocal
+
