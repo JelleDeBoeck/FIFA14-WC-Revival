@@ -3985,7 +3985,9 @@ class HttpProbe(BaseHTTPRequestHandler):
                 response = identity_store.store_pack_quantities()
                 response_name = "store-pack-quantities"
             else:
-                response = identity_store.store_pack_types()
+                response = identity_store.store_pack_types(
+                    world_cup=is_world_cup_path(self.path)
+                )
                 response_name = "store-pack-types-v237"
             payload = build_fut_json_payload(response)
             self.send_response(200)

@@ -50,6 +50,25 @@ SPECIAL_CATALOG_DOCUMENT = _load_json(SPECIAL_CATALOG_PATH)
 LEGEND_CATALOG_DOCUMENT = _load_json(LEGEND_CATALOG_PATH)
 CONSUMABLE_CATALOG_DOCUMENT = _load_json(CONSUMABLE_CATALOG_PATH)
 PACK_DEFINITIONS = {int(entry["packType"]): entry for entry in PACK_CATALOG_DOCUMENT.get("packs", [])}
+
+WC_STANDARD_PACK_DEFINITION = {
+    "packType": 5,
+    "packId": 5,
+    "name": "2014 FIFA World Cup Standard Pack",
+    "category": "GOLD",
+    "regular": True,
+    "priceCoins": 5000,
+    "pricePoints": 0,
+    "totalCards": 13,
+    "rareCards": 1,
+    "minQuality": "gold",
+    "playerSlots": 5,
+    "description": (
+        "13 items, including at least 5 Untradeable FIFA World Cup Players "
+        "and a guaranteed FUT Standard Gold Pack Consumable."
+    ),
+}
+
 PLAYER_CATALOG = list(PLAYER_CATALOG_DOCUMENT.get("players", []))
 PLAYER_BY_ASSET = {int(player["assetId"]): player for player in PLAYER_CATALOG}
 SPECIAL_PLAYER_CATALOG = list(SPECIAL_CATALOG_DOCUMENT.get("players", []))
@@ -257,6 +276,7 @@ class LocalIdentityStore:
                     persona_id INTEGER NOT NULL,
                     pack_type INTEGER NOT NULL,
                     pack_name TEXT NOT NULL,
+                    sku_mode TEXT NOT NULL DEFAULT 'NORMAL',
                     unopened INTEGER NOT NULL DEFAULT 1,
                     created_at INTEGER NOT NULL
                 );
@@ -346,6 +366,13 @@ class LocalIdentityStore:
             squad_player_columns = {row[1] for row in connection.execute("PRAGMA table_info(squad_players)").fetchall()}
             if "kit_number" not in squad_player_columns:
                 connection.execute("ALTER TABLE squad_players ADD COLUMN kit_number INTEGER NOT NULL DEFAULT 0")
+
+            pack_columns = {row[1] for row in connection.execute("PRAGMA table_info(packs)").fetchall()}
+            if "sku_mode" not in pack_columns:
+                connection.execute(
+                    "ALTER TABLE packs ADD COLUMN sku_mode TEXT NOT NULL DEFAULT 'NORMAL'"
+                )
+
             market_listing_columns = {row[1] for row in connection.execute("PRAGMA table_info(market_listings)").fetchall()}
             if "item_payload" not in market_listing_columns:
                 connection.execute("ALTER TABLE market_listings ADD COLUMN item_payload TEXT NOT NULL DEFAULT '{}'")
@@ -1152,12 +1179,25 @@ class LocalIdentityStore:
 
                     item_id = 180_000_000_000 + index + 1
 
+                    starter_source = dict(player)
+                    starter_source.update({
+                        "untradeable": True,
+                        "tradeable": False,
+                        "discardValue": 0,
+                        "lastSalePrice": 0,
+                    })
+
                     payload = self._canonical_player_payload(
                         item_id=item_id,
                         asset_id=asset_id,
-                        existing=dict(player),
+                        existing=starter_source,
                         slot_index=db_slot_index,
                     )
+
+                    payload["untradeable"] = True
+                    payload["tradeable"] = False
+                    payload["discardValue"] = 0
+                    payload["lastSalePrice"] = 0
 
                     attrs = [
                         int(entry["value"])
@@ -2582,13 +2622,21 @@ class LocalIdentityStore:
         with self._lock, closing(self._connect()) as connection, connection:
             identity = self._identity(connection)
             rows = connection.execute(
-                "SELECT pack_id, pack_type FROM packs WHERE persona_id = ? AND unopened = 1 ORDER BY pack_id",
+                "SELECT pack_id, pack_type, sku_mode FROM packs WHERE persona_id = ? AND unopened = 1 ORDER BY pack_id",
                 (identity["persona_id"],),
             ).fetchall()
             for row in rows:
                 inspected += 1
                 pack_id = int(row["pack_id"])
-                definition = PACK_DEFINITIONS.get(int(row["pack_type"]))
+                world_cup = str(row["sku_mode"] or "").strip().upper() == "WC"
+
+                if world_cup:
+                    if int(row["pack_type"]) != int(WC_STANDARD_PACK_DEFINITION["packType"]):
+                        continue
+                    definition = WC_STANDARD_PACK_DEFINITION
+                else:
+                    definition = PACK_DEFINITIONS.get(int(row["pack_type"]))
+
                 if definition is None:
                     continue
                 expected_count = int(definition.get("totalCards", 12))
@@ -2615,7 +2663,12 @@ class LocalIdentityStore:
                 if valid:
                     continue
                 connection.execute("DELETE FROM pack_contents WHERE pack_id = ?", (pack_id,))
-                items = self._generate_pack_contents_locked(connection, pack_id=pack_id, definition=definition)
+                items = self._generate_pack_contents_locked(
+                    connection,
+                    pack_id=pack_id,
+                    definition=definition,
+                    world_cup=world_cup,
+                )
                 rebuilt_packs += 1
                 rebuilt_cards += len(items)
             connection.execute(
@@ -2835,25 +2888,38 @@ class LocalIdentityStore:
         asset_id = int(player["assetId"])
         version = int(player.get("version", 1))
         expected_resource = asset_id if version == 1 else definition_id_for(asset_id, version)
+
+        is_world_cup = (
+            str(player.get("cardType", "")).strip().lower() == "worldcup"
+        )
+
         initial = dict(player)
         initial.update({
-            "untradeable": False,
-            "tradeable": True,
+            "untradeable": is_world_cup,
+            "tradeable": not is_world_cup,
             "contract": 7,
             "fitness": 99,
             "morale": 99,
             "formation": "f442",
             "pile": 6,
-            "discardValue": self._player_discard_value(player),
+            "discardValue": (
+                0 if is_world_cup
+                else self._player_discard_value(player)
+            ),
+            "lastSalePrice": 0,
             "localPackSchema": PACK_FIDELITY_SCHEMA,
         })
         payload = self._canonical_player_payload(
             item_id=int(item_id), asset_id=asset_id, existing=initial, pile=6
         )
         # Preserve backend markers/explicit tradeability after canonicalization.
-        payload["untradeable"] = False
-        payload["tradeable"] = True
-        payload["discardValue"] = self._player_discard_value(player)
+        payload["untradeable"] = is_world_cup
+        payload["tradeable"] = not is_world_cup
+        payload["discardValue"] = (
+            0 if is_world_cup
+            else self._player_discard_value(player)
+        )
+        payload["lastSalePrice"] = 0
         payload["localPackSchema"] = PACK_FIDELITY_SCHEMA
         if bool(player.get("specialCard")) or int(player.get("rareFlag", 0)) > 1:
             payload["specialCard"] = True
@@ -3373,7 +3439,7 @@ class LocalIdentityStore:
             )
         return items
 
-    def store_pack_types(self) -> dict[str, Any]:
+    def store_pack_types(self, *, world_cup: bool = False) -> dict[str, Any]:
         """Return the native FIFA 14 FutStoreGetPackTypesServerResponse shape.
 
         Static validation against the retail CardsDLLzf.dll parser shows that
@@ -3392,7 +3458,13 @@ class LocalIdentityStore:
         native_offers: list[dict[str, Any]] = []
         compatibility_entries: list[dict[str, Any]] = []
         now = int(time.time())
-        for priority, definition in enumerate(PACK_CATALOG_DOCUMENT.get("packs", []), start=1):
+        store_definitions = (
+            [WC_STANDARD_PACK_DEFINITION]
+            if world_cup
+            else PACK_CATALOG_DOCUMENT.get("packs", [])
+        )
+
+        for priority, definition in enumerate(store_definitions, start=1):
             coins = int(definition.get("priceCoins", 0))
             points = int(definition.get("pricePoints", 0))
             pack_type = int(definition["packType"])
@@ -3661,7 +3733,13 @@ class LocalIdentityStore:
         currency: str = "COINS",
         world_cup: bool = False,
     ) -> dict[str, Any]:
-        definition = PACK_DEFINITIONS.get(int(pack_type))
+        if world_cup:
+            if int(pack_type) != int(WC_STANDARD_PACK_DEFINITION["packType"]):
+                raise ValueError(f"unknown World Cup pack type {pack_type}")
+            definition = WC_STANDARD_PACK_DEFINITION
+        else:
+            definition = PACK_DEFINITIONS.get(int(pack_type))
+
         if definition is None:
             raise ValueError(f"unknown local FIFA 14 pack type {pack_type}")
         currency = str(currency or "COINS").upper()
@@ -3699,8 +3777,15 @@ class LocalIdentityStore:
                     (price, identity["persona_id"]),
                 )
             cursor = connection.execute(
-                "INSERT INTO packs (persona_id, pack_type, pack_name, unopened, created_at) VALUES (?, ?, ?, 1, ?)",
-                (identity["persona_id"], int(pack_type), str(definition["name"]), int(time.time())),
+                "INSERT INTO packs (persona_id, pack_type, pack_name, sku_mode, unopened, created_at) "
+                "VALUES (?, ?, ?, ?, 1, ?)",
+                (
+                    identity["persona_id"],
+                    int(pack_type),
+                    str(definition["name"]),
+                    "WC" if world_cup else "NORMAL",
+                    int(time.time()),
+                ),
             )
             pack_id = int(cursor.lastrowid)
             items = self._generate_pack_contents_locked(
@@ -3734,13 +3819,21 @@ class LocalIdentityStore:
         with self._lock, closing(self._connect()) as connection:
             identity = self._identity(connection)
             pack = connection.execute(
-                "SELECT pack_id, pack_type FROM packs WHERE persona_id = ? AND pack_id = ?",
+                "SELECT pack_id, pack_type, sku_mode FROM packs WHERE persona_id = ? AND pack_id = ?",
                 (identity["persona_id"], int(transaction_id)),
             ).fetchone()
             if pack is None:
                 return None
             pack_type = int(pack["pack_type"])
-            definition = PACK_DEFINITIONS.get(pack_type)
+            world_cup = str(pack["sku_mode"] or "").strip().upper() == "WC"
+
+            if world_cup:
+                if pack_type != int(WC_STANDARD_PACK_DEFINITION["packType"]):
+                    return None
+                definition = WC_STANDARD_PACK_DEFINITION
+            else:
+                definition = PACK_DEFINITIONS.get(pack_type)
+
             if definition is None:
                 return None
             item_rows = connection.execute(
@@ -3872,14 +3965,44 @@ class LocalIdentityStore:
                 else:
                     payload["pile"] = target_client_pile
 
-                payload["untradeable"] = False
-                payload["tradeable"] = True
+                is_untradeable = bool(payload.get("untradeable", False))
+
+                if to_transfer and is_untradeable:
+                    results.append({
+                        "id": item_id,
+                        "itemId": item_id,
+                        "success": False,
+                        "reason": "Item is untradeable",
+                        "errorCode": 461,
+                    })
+                    continue
+
+                payload["untradeable"] = is_untradeable
+                payload["tradeable"] = not is_untradeable
+                payload["discardValue"] = (
+                    0
+                    if is_untradeable
+                    else max(0, int(payload.get("discardValue", 0)))
+                )
+                payload["lastSalePrice"] = (
+                    0
+                    if is_untradeable
+                    else max(0, int(payload.get("lastSalePrice", 0)))
+                )
                 payload["itemState"] = "forSale" if to_transfer else "free"
+
                 connection.execute(
                     "INSERT OR REPLACE INTO items (item_id,persona_id,asset_id,item_type,pile,tradeable,payload) "
-                    "VALUES (?,?,?,?,?,1,?)",
-                    (item_id, persona_id, asset_id, item_type, target_db_pile,
-                     json.dumps(payload, separators=(",", ":"), ensure_ascii=False)),
+                    "VALUES (?,?,?,?,?,?,?)",
+                    (
+                        item_id,
+                        persona_id,
+                        asset_id,
+                        item_type,
+                        target_db_pile,
+                        0 if is_untradeable else 1,
+                        json.dumps(payload, separators=(",", ":"), ensure_ascii=False),
+                    ),
                 )
                 if packed is not None:
                     connection.execute(
