@@ -171,9 +171,12 @@ function install() {
                 arg4: args[4].toString(),
                 arg5: args[5].toString(),
 
-                arg0_preview: safePreview(args[0], 48),
-                arg1_preview: safePreview(args[1], 48),
-                arg2_preview: safePreview(args[2], 48),
+                arg0_preview: safePreview(args[0], 64),
+                arg1_preview: safePreview(args[1], 64),
+                arg2_preview: safePreview(args[2], 64),
+                arg3_preview: safePreview(args[3], 64),
+                arg4_preview: safePreview(args[4], 64),
+                arg5_preview: safePreview(args[5], 64),
 
                 registers: snapshotRegs(this.context)
             });
@@ -227,24 +230,88 @@ function install() {
         0x00024847
     );
 
+    const wcNationMap = {
+        // GROUP A
+        54:  { teamId: 1370,   confederationId: 4 }, // Brazil
+        10:  { teamId: 1328,   confederationId: 2 }, // Croatia
+        83:  { teamId: 1386,   confederationId: 7 }, // Mexico
+        103: { teamId: 1395,   confederationId: 3 }, // Cameroon
+
+        // GROUP B
+        45:  { teamId: 1362,   confederationId: 2 }, // Spain
+        34:  { teamId: 105035, confederationId: 2 }, // Netherlands / Holland
+        55:  { teamId: 111459, confederationId: 4 }, // Chile
+        195: { teamId: 1415,   confederationId: 5 }, // Australia
+
+        // GROUP C
+        56:  { teamId: 111109, confederationId: 4 }, // Colombia
+        22:  { teamId: 1338,   confederationId: 2 }, // Greece
+        108: { teamId: 111112, confederationId: 3 }, // Ivory Coast
+        163: { teamId: 1411,   confederationId: 5 }, // Japan
+
+        // GROUP D
+        60:  { teamId: 1377,   confederationId: 4 }, // Uruguay
+        72:  { teamId: 1383,   confederationId: 7 }, // Costa Rica
+        14:  { teamId: 1318,   confederationId: 2 }, // England
+        27:  { teamId: 1343,   confederationId: 2 }, // Italy
+
+        // GROUP E
+        47:  { teamId: 1364,   confederationId: 2 }, // Switzerland
+        57:  { teamId: 111465, confederationId: 4 }, // Ecuador
+        18:  { teamId: 1335,   confederationId: 2 }, // France
+        81:  { teamId: 111548, confederationId: 7 }, // Honduras
+
+        // GROUP F
+        52:  { teamId: 1369,   confederationId: 4 }, // Argentina
+        8:   { teamId: 105013, confederationId: 2 }, // Bosnia & Herzegovina
+        161: { teamId: 111115, confederationId: 5 }, // Iran
+        133: { teamId: 1393,   confederationId: 3 }, // Nigeria
+
+        // GROUP G
+        21:  { teamId: 1337,   confederationId: 2 }, // Germany
+        38:  { teamId: 1354,   confederationId: 2 }, // Portugal
+        117: { teamId: 111462, confederationId: 3 }, // Ghana
+        95:  { teamId: 1387,   confederationId: 7 }, // United States
+
+        // GROUP H
+        7:   { teamId: 1325,   confederationId: 2 }, // Belgium
+        97:  { teamId: 111448, confederationId: 3 }, // Algeria
+        40:  { teamId: 1357,   confederationId: 2 }, // Russia
+        167: { teamId: 974,    confederationId: 5 }  // Korea Republic
+    };
+
+    const currentNationByThread = {};
+
     function hookActualValue(name, rva) {
         const address = base.add(rva);
 
         Interceptor.attach(address, {
             onEnter(args) {
+                const tid = Process.getCurrentThreadId();
                 const original = u32(this.context.eax);
 
-                if (name === 'CONFEDERATION_ASSET_ID') {
-                    this.context.eax = ptr(5);
+                if (name === 'NATIONALITY_ASSET_ID') {
+                    currentNationByThread[tid] = original;
                 }
 
-                if (name === 'TEAM_ASSET_ID') {
-                    this.context.eax = ptr(1415);
+                const nation = currentNationByThread[tid];
+                const wc = wcNationMap[nation];
+
+                if (wc) {
+                    if (name === 'CONFEDERATION_ASSET_ID') {
+                        this.context.eax = ptr(wc.confederationId);
+                    }
+
+                    if (name === 'TEAM_ASSET_ID') {
+                        this.context.eax = ptr(wc.teamId);
+                    }
                 }
 
                 emit('wc-card-actual-value', {
                     field: name,
                     rva: '0x' + rva.toString(16),
+
+                    nation: nation || null,
 
                     original_u32: original,
                     original_hex: '0x' + original.toString(16),
@@ -263,6 +330,11 @@ function install() {
             address: address.toString()
         });
     }
+
+    hookActualValue(
+        'NATIONALITY_ASSET_ID',
+        0x00024C4A
+    );
 
     hookActualValue(
         'CONFEDERATION_ASSET_ID',
