@@ -2963,7 +2963,11 @@ class HttpProbe(BaseHTTPRequestHandler):
                                 or ("COINS" if request.get("useCredits", True) else "FIFA_POINTS")
                             )
                             try:
-                                response = identity_store.purchase_pack(raw_pack_type, currency=currency)
+                                response = identity_store.purchase_pack(
+                                    raw_pack_type,
+                                    currency=currency,
+                                    world_cup=is_world_cup_path(self.path),
+                                )
                                 response_name = "fut-store-transaction-pack-purchase"
                                 status = 200
                             except (TypeError, ValueError) as error:
@@ -3851,7 +3855,11 @@ class HttpProbe(BaseHTTPRequestHandler):
                 try:
                     if raw_pack_type is None:
                         raise ValueError("purchased/items request did not include a numeric packId/id/packType/serverId")
-                    response = identity_store.purchase_pack(raw_pack_type, currency=currency)
+                    response = identity_store.purchase_pack(
+                        raw_pack_type,
+                        currency=currency,
+                        world_cup=is_world_cup_path(self.path),
+                    )
                     status = 200
                     response_name = "local-purchased-items-pack-purchase"
                     emit(
@@ -3934,7 +3942,11 @@ class HttpProbe(BaseHTTPRequestHandler):
             try:
                 if raw_pack_type is None:
                     raise ValueError("store purchase did not include a numeric packId/id/packType/serverId")
-                response = identity_store.purchase_pack(raw_pack_type, currency=currency)
+                response = identity_store.purchase_pack(
+                    raw_pack_type,
+                    currency=currency,
+                    world_cup=is_world_cup_path(self.path),
+                )
                 payload = build_fut_json_payload(response)
                 self.send_response(200)
                 response_name = "local-store-pack-purchase"

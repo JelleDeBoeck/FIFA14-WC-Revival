@@ -12,37 +12,37 @@ const db = openFifaDatabase({
 });
 
 const players = db.readTable("players");
-const links = db.readTable("teamplayerlinks");
-const nations = db.readTable("nations");
-const teams = db.readTable("teams");
+const names = db.readTable("playernames");
 
-const player = players.rows.find(
-  (row) => Number(row.playerid) === 158023
-);
+const candidates = [176518, 178691, 182103, 186408];
 
-const playerLinks = links.rows.filter(
-  (row) => Number(row.playerid) === 158023
-);
+function nameById(id) {
+  return names.rows.find(
+    (row) => Number(row.nameid) === Number(id)
+  )?.name ?? `UNKNOWN(${id})`;
+}
 
-const nation = nations.rows.find(
-  (row) => Number(row.nationid) === Number(player?.nationality)
-);
-
-console.log("PLAYER:");
-console.dir(player, { depth: null });
-
-console.log("\nTEAMPLAYERLINKS:");
-console.dir(playerLinks, { depth: null });
-
-console.log("\nNATION:");
-console.dir(nation, { depth: null });
-
-console.log("\nLINKED TEAMS:");
-for (const link of playerLinks) {
-  const team = teams.rows.find(
-    (row) => Number(row.teamid) === Number(link.teamid)
+for (const id of candidates) {
+  const p = players.rows.find(
+    (row) => Number(row.playerid) === id
   );
 
-  console.log("\nteamid =", link.teamid);
-  console.dir(team, { depth: null });
+  if (!p) {
+    console.log(`\n${id}: NIET GEVONDEN`);
+    continue;
+  }
+
+  const first = nameById(p.firstnameid);
+  const last = nameById(p.lastnameid);
+  const jersey = nameById(p.playerjerseynameid);
+
+  console.log(`\n========== ${id} ==========`);
+  console.log("firstname :", first);
+  console.log("lastname  :", last);
+  console.log("jersey    :", jersey);
+  console.log("rating    :", p.overallrating);
+  console.log("position  :", p.preferredposition1);
+  console.log("height    :", p.height);
+  console.log("weight    :", p.weight);
+  console.log("birthdate :", p.birthdate);
 }

@@ -2715,6 +2715,42 @@ class LocalIdentityStore:
         return rng.choice(chosen_members)
 
     @staticmethod
+    def _weighted_world_cup_player(
+        rng: random.Random,
+        *,
+        quality: str,
+        excluded_resources: set[int] | None = None,
+        max_rating: int | None = None,
+    ) -> dict[str, Any]:
+        excluded_resources = excluded_resources or set()
+        quality_key = str(quality).lower()
+
+        candidates = [
+            player
+            for player in SPECIAL_PLAYER_CATALOG
+            if str(player.get("cardType", "")).strip().lower() == "worldcup"
+            and int(player.get("assetId", 0)) in WC_NATIVE_PLAYER_IDS
+            and int(player.get("resourceId", 0)) not in excluded_resources
+            and str(
+                player.get(
+                    "quality",
+                    LocalIdentityStore._quality_for_rating(
+                        int(player.get("rating", 0))
+                    ),
+                )
+            ).lower() == quality_key
+            and (
+                max_rating is None
+                or int(player.get("rating", 0)) <= int(max_rating)
+            )
+        ]
+
+        if not candidates:
+            raise RuntimeError(
+                f"no native FUT World Cup {quality_key} players available for pack"
+            )
+
+        return rng.choice(candidates)
     def _weighted_special_player(
         rng: random.Random, *, quality: str, excluded_resources: set[int] | None = None,
         max_rating: int | None = None
@@ -3161,7 +3197,12 @@ class LocalIdentityStore:
             }
 
     def _generate_pack_contents_locked(
-        self, connection: sqlite3.Connection, *, pack_id: int, definition: dict[str, Any]
+        self,
+        connection: sqlite3.Connection,
+        *,
+        pack_id: int,
+        definition: dict[str, Any],
+        world_cup: bool = False,
     ) -> list[dict[str, Any]]:
         count = int(definition.get("totalCards", 12))
         rare_count = min(count, int(definition.get("rareCards", 0)))
@@ -3251,22 +3292,29 @@ class LocalIdentityStore:
             item_id = 180_000_000_000 + int(pack_id) * 100 + source_ordinal + 1
             if kind == "player":
                 player: dict[str, Any] | None = None
+                if world_cup:
+                    player = self._weighted_world_cup_player(
+                        rng,
+                        quality=quality,
+                        excluded_resources=used_resources,
+                        max_rating=89 if elite_count >= max_elites else None,
+                    )
                 jackpot_pending = any(source_ordinal < int(target) for target in jackpot_targets)
                 # Reserve one elite slot for a pending special/Legend jackpot.
                 base_elite_limit = max_elites - 1 if jackpot_pending else max_elites
                 base_max_rating = 89 if elite_count >= max(0, base_elite_limit) else None
 
-                if legend_target == source_ordinal:
+                if not world_cup and legend_target == source_ordinal:
                     player = self._weighted_legend(
                         rng, excluded_resources=used_resources,
                         max_rating=89 if elite_count >= max_elites else None,
                     )
-                elif source_ordinal in special_targets:
+                elif not world_cup and source_ordinal in special_targets:
                     player = self._weighted_special_player(
                         rng, quality=quality, excluded_resources=used_resources,
                         max_rating=89 if elite_count >= max_elites else None,
                     )
-                if player is None:
+                if player is None and not world_cup:
                     player = self._weighted_player(
                         rng, quality=quality, rare_slot=rare, promo=promo,
                         excluded_assets=used_assets, max_rating=base_max_rating,
@@ -3277,10 +3325,24 @@ class LocalIdentityStore:
                 while resource in used_resources and attempts < 20:
                     attempts += 1
                     fallback_max = 89 if elite_count >= max_elites else None
-                    player = self._weighted_player(
-                        rng, quality=quality, rare_slot=rare, promo=promo,
-                        excluded_assets=used_assets, max_rating=fallback_max,
-                    )
+
+                    if world_cup:
+                        player = self._weighted_world_cup_player(
+                            rng,
+                            quality=quality,
+                            excluded_resources=used_resources,
+                            max_rating=fallback_max,
+                        )
+                    else:
+                        player = self._weighted_player(
+                            rng,
+                            quality=quality,
+                            rare_slot=rare,
+                            promo=promo,
+                            excluded_assets=used_assets,
+                            max_rating=fallback_max,
+                        )
+
                     resource = int(player.get("resourceId", player.get("assetId", 0)))
                 used_assets.add(int(player.get("assetId", 0)))
                 used_resources.add(resource)
@@ -3592,7 +3654,13 @@ class LocalIdentityStore:
             "unopenedPacks": int(unopened_packs),
         }
 
-    def purchase_pack(self, pack_type: int, *, currency: str = "COINS") -> dict[str, Any]:
+    def purchase_pack(
+        self,
+        pack_type: int,
+        *,
+        currency: str = "COINS",
+        world_cup: bool = False,
+    ) -> dict[str, Any]:
         definition = PACK_DEFINITIONS.get(int(pack_type))
         if definition is None:
             raise ValueError(f"unknown local FIFA 14 pack type {pack_type}")
@@ -3635,7 +3703,12 @@ class LocalIdentityStore:
                 (identity["persona_id"], int(pack_type), str(definition["name"]), int(time.time())),
             )
             pack_id = int(cursor.lastrowid)
-            items = self._generate_pack_contents_locked(connection, pack_id=pack_id, definition=definition)
+            items = self._generate_pack_contents_locked(
+                connection,
+                pack_id=pack_id,
+                definition=definition,
+                world_cup=world_cup,
+            )
             balances = connection.execute(
                 "SELECT coins, fifa_points FROM clubs WHERE persona_id = ?", (identity["persona_id"],)
             ).fetchone()

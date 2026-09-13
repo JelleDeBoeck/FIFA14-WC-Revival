@@ -1,26 +1,58 @@
 import { readFile } from "node:fs/promises";
 import { openFifaDatabase } from "fifa-t3db";
 
-const [databaseBytes, metadataXml] = await Promise.all([
-  readFile("./extracted/futwc_db/futwc_ng_db.db"),
-  readFile("./extracted/futwc_db/futwc_ng_db-meta.xml", "utf8"),
-]);
+async function loadDb(dbPath, metaPath) {
+  const [databaseBytes, metadataXml] = await Promise.all([
+    readFile(dbPath),
+    readFile(metaPath, "utf8"),
+  ]);
 
-const db = openFifaDatabase({
-  database: databaseBytes,
-  metadataXml,
-});
+  return openFifaDatabase({
+    database: databaseBytes,
+    metadataXml,
+  });
+}
 
-const players = db.readTable("players");
-
-console.log("records:", players.info.recordCount);
-
-const messi = players.rows.find(
-  (row) => Number(row.playerid) === 158023
+const wcDb = await loadDb(
+  "./extracted/futwc_db/futwc_ng_db.db",
+  "./extracted/futwc_db/futwc_ng_db-meta.xml"
 );
 
-console.log("MESSI:");
-console.dir(messi, { depth: null });
+const cardsDb = await loadDb(
+  "./extracted/cards_db/cards_ng_db.db",
+  "./extracted/cards_db/cards_ng_db-meta.xml"
+);
 
-console.log("\nPLAYER KEYS:");
-console.log(Object.keys(players.rows[0] ?? {}).sort());
+const ids = [
+  172114, // Arevalo
+  167495, // Neuer
+  158023, // Messi
+];
+
+function dump(db, label) {
+  const players = db.readTable("players");
+
+  console.log(`\n\n================ ${label} ================`);
+  console.log("records:", players.info.recordCount);
+
+  for (const id of ids) {
+    const row = players.rows.find(
+      (row) => Number(row.playerid) === id
+    );
+
+    console.log(`\n---------- ${id} ----------`);
+
+    if (!row) {
+      console.log("NIET GEVONDEN");
+      continue;
+    }
+
+    console.dir(row, {
+      depth: null,
+      sorted: true,
+    });
+  }
+}
+
+dump(wcDb, "FUTWC DB");
+dump(cardsDb, "CARDS DB");
