@@ -34,6 +34,10 @@ if str(SERVER_DIRECTORY) not in sys.path:
 from local_identity import LocalIdentityStore, PLAYER_CATALOG, PLAYER_BY_ASSET, PLAYER_REFERENCE_BY_ASSET
 from beta_identity import BetaIdentityStore
 
+WC_NATION_CATALOG_PATH = SERVER_DIRECTORY / "fifa14-wc-nations.v1.json"
+
+with WC_NATION_CATALOG_PATH.open("r", encoding="utf-8") as handle:
+    WC_NATION_CATALOG = json.load(handle)
 
 def emit(kind: str, **fields) -> None:
     print(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "kind": kind, **fields}), flush=True)
@@ -3162,19 +3166,40 @@ class HttpProbe(BaseHTTPRequestHandler):
                     request = json.loads(body.decode("utf-8"))
 
                     if world_cup_active and effective_method == "POST":
-                        nation_id = int(request.get("clubName") or 0)
+                        support_team_id = int(request.get("clubName") or 0)
+                        nation = WC_NATION_CATALOG.get(str(support_team_id))
 
+                        if nation is None:
+                            raise ValueError(
+                                f"unknown World Cup Support Nation team id {support_team_id}"
+                            )
+
+                        team_id = int(nation["teamId"])
+                        nation_id = int(nation["nationId"])
+                        club_name = str(nation["name"])
+
+                        badge = nation.get("badge")
+                        badge_id = int(badge["assetId"]) if badge else 0
+
+                        # FIFA's WC Support Nation request gives us the national-team ID in
+                        # clubName. Resolve it through the native FUTWC database-derived catalog
+                        # instead of persisting the numeric value as a placeholder club identity.
                         persisted = identity_store.create_club(
-                            "Local FUT",
-                            "LFT",
-                            badge_id=0,
-                            team_id=nation_id,
+                            club_name,
+                            club_name[:3].upper(),
+                            badge_id=badge_id,
+                            team_id=team_id,
                         )
 
                         emit(
                             "fut-wc-support-nation-selected",
                             path=self.path,
+                            support_team_id=support_team_id,
                             nation_id=nation_id,
+                            nation_name=club_name,
+                            team_id=team_id,
+                            badge_id=badge_id,
+                            confederation=int(nation["confederation"]),
                         )
                     elif isinstance(request, dict) and (request.get("clubName") or request.get("clubAbbr")):
                         persisted = identity_store.update_club_profile(request)
@@ -3650,6 +3675,17 @@ class HttpProbe(BaseHTTPRequestHandler):
                 elif path_without_query == "/ut/game/fifa14/squad/active":
                     response = identity_store.active_squad_document()
                     response_name = "squad-active-detail-beta222"
+
+                    if world_cup_active and isinstance(response, dict):
+                        wc_account = identity_store.account_info()
+                        emit(
+                            "fut-wc-squad-identity-diagnostic",
+                            path=self.path,
+                            squad_id=response.get("id"),
+                            squad_keys=list(response.keys()),
+                            account_keys=list(wc_account.keys()) if isinstance(wc_account, dict) else [],
+                            account_document=wc_account,
+                        )
                 elif requested_id is not None:
                     response = identity_store.squad_detail(requested_id) if hasattr(identity_store, "squad_detail") else identity_store.active_squad_document()
                     response_name = "squad-id-detail-beta222"
@@ -3891,15 +3927,16 @@ class HttpProbe(BaseHTTPRequestHandler):
                     )
             else:
                 if world_cup_active:
-                    response = identity_store.world_cup_starter_items()
-                    response_name = "local-wc-starter-items-diagnostic"
+                    response = identity_store.purchased_items(world_cup=True)
+                    response_name = "local-wc-purchased-items"
                     emit(
-                        "fut-wc-starter-items-served",
+                        "fut-wc-pack-items-served",
                         path=self.path,
                         item_count=len(response.get("itemData", [])),
+                        unopened_pack_count=len(response.get("unopenedPacks", [])),
                     )
                 else:
-                    response = identity_store.purchased_items()
+                    response = identity_store.purchased_items(world_cup=False)
                     response_name = "local-purchased-items"
 
                 status = 200

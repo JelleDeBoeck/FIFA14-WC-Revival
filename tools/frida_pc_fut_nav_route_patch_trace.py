@@ -956,6 +956,156 @@ function hookCompetitionOperationDescriptors(module, service, vtable) {
     }
   }
 }
+
+function hookTeamNameIdGetterResult(module) {
+    const site = module.base.add(0x8183d);
+
+    Interceptor.attach(site, {
+        onEnter(args) {
+            let objectPtr = ptr(0);
+            let vtablePtr = ptr(0);
+            let getterPtr = ptr(0);
+
+            try {
+                objectPtr = this.context.ebp.add(0x0c).readPointer();
+
+                if (!objectPtr.isNull()) {
+                    vtablePtr = objectPtr.readPointer();
+
+                    if (!vtablePtr.isNull()) {
+                        getterPtr = vtablePtr.add(0x1f8).readPointer();
+                    }
+                }
+            } catch (_) {}
+
+            send({
+                event: "cards-team-name-id-result",
+                team_id: this.context.eax.toUInt32(),
+                team_id_hex: "0x" + this.context.eax.toUInt32().toString(16),
+                object: objectPtr.toString(),
+                vtable: vtablePtr.toString(),
+                getter: getterPtr.toString(),
+                site: site.toString()
+            });
+        }
+    });
+
+    send({
+        event: "cards-team-name-id-hook-ready",
+        site: site.toString()
+    });
+}
+
+function watchExeTeamNameFormat(module) {
+    const target = module.base.add(0x038ab1cc);
+
+    let armed = 0;
+
+    Process.enumerateThreads().forEach(function(thread) {
+        try {
+            thread.setHardwareWatchpoint(
+                0,
+                target,
+                4,
+                "r"
+            );
+
+            armed += 1;
+
+            send({
+                event: "exe-team-name-watchpoint-armed",
+                thread_id: thread.id,
+                target: target.toString()
+            });
+        } catch (e) {
+            send({
+                event: "exe-team-name-watchpoint-arm-failed",
+                thread_id: thread.id,
+                error: String(e)
+            });
+        }
+    });
+
+    Process.setExceptionHandler(function(details) {
+        try {
+            if (details.type !== "single-step") {
+                return false;
+            }
+
+            const address = details.address;
+            const pc = details.context.pc;
+
+            send({
+                event: "exe-team-name-format-read",
+                address: address.toString(),
+                pc: pc.toString(),
+                pc_rva: "0x" + pc.sub(module.base).toString(16),
+                target: target.toString(),
+                thread_id: Process.getCurrentThreadId()
+            });
+
+            return false;
+        } catch (e) {
+            send({
+                event: "exe-team-name-watchpoint-error",
+                error: String(e)
+            });
+
+            return false;
+        }
+    });
+
+    send({
+        event: "exe-team-name-watch-ready",
+        target: target.toString(),
+        armed_threads: armed
+    });
+}
+
+function hookGetHubDataTarget(module) {
+  const snapshot = webSessionSnapshot(module, 'wc-gethubdata-install');
+  const service = ptr(snapshot.service);
+  const vtable = ptr(snapshot.vtable);
+
+  emit('cards-wc-gethubdata-snapshot', snapshot);
+
+  if (service.isNull() || vtable.isNull()) return;
+
+  let target = ptr(0);
+  try {
+    target = vtable.add(0x224).readPointer();
+  } catch (_) {}
+
+  emit('cards-wc-gethubdata-target', {
+    operation_index: 97,
+    slot: '0x224',
+    target: target.toString()
+  });
+
+  if (!pointerInModule(module, target) || !executable(target)) return;
+
+  Interceptor.attach(target, {
+    onEnter(args) {
+      emit('cards-wc-gethubdata-enter', {
+        thread_id: tid(),
+        ecx: safePtr(this.context.ecx),
+        return_address: safePtr(this.returnAddress),
+        backtrace: normalizedBacktrace(this.context)
+      });
+    },
+
+    onLeave(retval) {
+      emit('cards-wc-gethubdata-leave', {
+        thread_id: tid(),
+        retval: retval.toString()
+      });
+    }
+  });
+
+  emit('cards-wc-gethubdata-hook-ready', {
+    target: target.toString()
+  });
+}
 function hookServiceApiTargets(module) {
   const snapshot = webSessionSnapshot(module, 'auth-gate-service-api-install');
   let service = ptr(snapshot.service), vtable = ptr(snapshot.vtable);
@@ -3222,6 +3372,15 @@ function attachCardsHooksOnce(reason) {
     onLeave(retval) {
       const rawResult = retval.toUInt32();
       const succeeded = (rawResult & 0xff) !== 0;
+      if (succeeded && !counters['wc-gethubdata-hook-scheduled']) {
+        counters['wc-gethubdata-hook-scheduled'] = 1;
+
+        setTimeout(function() {
+          hookGetHubDataTarget(module);
+          hookTeamNameIdGetterResult(module);
+          watchExeTeamNameFormat(module);
+        }, 250);
+      }
       getUserInfoParserCompleted = true;
       getUserInfoParserSucceeded = succeeded;
       emit('cards-get-user-info-parser-leave', {
@@ -3242,22 +3401,75 @@ function attachCardsHooksOnce(reason) {
   installCardsHook(module, byName['GetUserInfo user subparser'], {
     onEnter(args) {
       const key = String(tid());
-      getUserInfoSubparserDepthByThread[key] = (getUserInfoSubparserDepthByThread[key] || 0) + 1;
+      getUserInfoSubparserDepthByThread[key] =
+        (getUserInfoSubparserDepthByThread[key] || 0) + 1;
+
       this.threadKey = key;
       this.self = ptr(this.context.ecx);
       this.outUser = ptr(args[0]);
+
+      // Snapshot alleen het directe native output-object.
+      // 0x300 bytes / 4 = 192 dwords.
+      this.beforeWords = [];
+      for (let offset = 0; offset < 0x300; offset += 4) {
+        let value = null;
+        try {
+          value = this.outUser.add(offset).readU32();
+        } catch (_) {}
+        this.beforeWords.push(value);
+      }
+
       emit('cards-get-user-info-subparser-enter', {
-        thread_id: tid(), self: pointerProbe(this.self, 0x100),
-        arg0: pointerProbe(args[0], 0x100), arg1: pointerProbe(args[1], 0x100),
+        thread_id: tid(),
+        self: pointerProbe(this.self, 0x100),
+        arg0: pointerProbe(args[0], 0x100),
+        arg1: pointerProbe(args[1], 0x100),
         backtrace: normalizedBacktrace(this.context)
       });
     },
+
     onLeave(retval) {
-      emit('cards-get-user-info-subparser-leave', {
-        thread_id: tid(), retval_u32: retval.toUInt32(), self: pointerProbe(this.self, 0x180),
-        output: pointerProbe(this.outUser, 0x300), output_pointer_fields: pointerFields(this.outUser, 0x300)
+      const changedWords = [];
+
+      for (let offset = 0; offset < 0x300; offset += 4) {
+        let after = null;
+        try {
+          after = this.outUser.add(offset).readU32();
+        } catch (_) {}
+
+        const before = this.beforeWords[offset >>> 2];
+
+        if (before !== null && after !== null && before !== after) {
+          changedWords.push({
+            offset: '0x' + offset.toString(16),
+            before: before,
+            before_hex: '0x' + before.toString(16),
+            after: after,
+            after_hex: '0x' + after.toString(16)
+          });
+        }
+      }
+
+      emit('cards-get-user-info-subparser-word-diff', {
+        thread_id: tid(),
+        output: safePtr(this.outUser),
+        retval_u32: retval.toUInt32(),
+        changed_count: changedWords.length,
+        changed: changedWords
       });
-      getUserInfoSubparserDepthByThread[this.threadKey] = Math.max(0, (getUserInfoSubparserDepthByThread[this.threadKey] || 1) - 1);
+
+      emit('cards-get-user-info-subparser-leave', {
+        thread_id: tid(),
+        retval_u32: retval.toUInt32(),
+        self: pointerProbe(this.self, 0x180),
+        output: pointerProbe(this.outUser, 0x300),
+        output_pointer_fields: pointerFields(this.outUser, 0x300)
+      });
+
+      getUserInfoSubparserDepthByThread[this.threadKey] = Math.max(
+        0,
+        (getUserInfoSubparserDepthByThread[this.threadKey] || 1) - 1
+      );
     }
   });
 
@@ -3295,7 +3507,13 @@ function attachCardsHooksOnce(reason) {
         });
       }
       if (this.operation92Active) emit('cards-operation92-json-key', payload);
-      if (this.getUserInfoActive) emit('cards-get-user-info-json-key', payload);
+      if (this.getUserInfoActive) {
+        emit('cards-get-user-info-json-key', {
+          ...payload,
+          return_address: this.mapperReturnAddress,
+          backtrace: this.mapperBacktrace
+        });
+      }
       if (this.icebreakerPackListActive || this.icebreakerPackEntryActive) {
         emit('cards-icebreaker-packlist-json-key', {
           ...payload,

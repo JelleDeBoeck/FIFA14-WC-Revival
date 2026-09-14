@@ -1,0 +1,1282 @@
+{
+  "974": {
+    "teamId": 974,
+    "teamAssetId": 974,
+    "nationId": 167,
+    "name": "Korea Republic",
+    "teamName": "Korea Republic",
+    "confederation": 5,
+    "worldCupQualified": 9,
+    "badge": {
+      "cardDbId": 6000000,
+      "assetId": 974,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_974",
+      "description": "Korea Republic"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300000,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_974",
+        "description": "Korea Republic"
+      },
+      "away": {
+        "cardDbId": 6400000,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_974",
+        "description": "Korea Republic"
+      }
+    }
+  },
+  "1318": {
+    "teamId": 1318,
+    "teamAssetId": 1318,
+    "nationId": 14,
+    "name": "England",
+    "teamName": "England",
+    "confederation": 2,
+    "worldCupQualified": 14,
+    "badge": {
+      "cardDbId": 6000001,
+      "assetId": 1318,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1318",
+      "description": "England"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300001,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1318",
+        "description": "England"
+      },
+      "away": {
+        "cardDbId": 6400001,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1318",
+        "description": "England"
+      }
+    }
+  },
+  "1325": {
+    "teamId": 1325,
+    "teamAssetId": 1325,
+    "nationId": 7,
+    "name": "Belgium",
+    "teamName": "Belgium",
+    "confederation": 2,
+    "worldCupQualified": 12,
+    "badge": {
+      "cardDbId": 6000002,
+      "assetId": 1325,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1325",
+      "description": "Belgium"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300002,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1325",
+        "description": "Belgium"
+      },
+      "away": {
+        "cardDbId": 6400002,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1325",
+        "description": "Belgium"
+      }
+    }
+  },
+  "1328": {
+    "teamId": 1328,
+    "teamAssetId": 1328,
+    "nationId": 10,
+    "name": "Croatia",
+    "teamName": "Croatia",
+    "confederation": 2,
+    "worldCupQualified": 4,
+    "badge": {
+      "cardDbId": 6000003,
+      "assetId": 1328,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1328",
+      "description": "Croatia"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300003,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1328",
+        "description": "Croatia"
+      },
+      "away": {
+        "cardDbId": 6400003,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1328",
+        "description": "Croatia"
+      }
+    }
+  },
+  "1335": {
+    "teamId": 1335,
+    "teamAssetId": 1335,
+    "nationId": 18,
+    "name": "France",
+    "teamName": "France",
+    "confederation": 2,
+    "worldCupQualified": 14,
+    "badge": {
+      "cardDbId": 6000004,
+      "assetId": 1335,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1335",
+      "description": "France"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300004,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1335",
+        "description": "France"
+      },
+      "away": {
+        "cardDbId": 6400004,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1335",
+        "description": "France"
+      }
+    }
+  },
+  "1337": {
+    "teamId": 1337,
+    "teamAssetId": 1337,
+    "nationId": 21,
+    "name": "Germany",
+    "teamName": "Germany",
+    "confederation": 2,
+    "worldCupQualified": 18,
+    "badge": {
+      "cardDbId": 6000005,
+      "assetId": 1337,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1337",
+      "description": "Germany"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300005,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1337",
+        "description": "Germany"
+      },
+      "away": {
+        "cardDbId": 6400005,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1337",
+        "description": "Germany"
+      }
+    }
+  },
+  "1338": {
+    "teamId": 1338,
+    "teamAssetId": 1338,
+    "nationId": 22,
+    "name": "Greece",
+    "teamName": "Greece",
+    "confederation": 2,
+    "worldCupQualified": 3,
+    "badge": {
+      "cardDbId": 6000006,
+      "assetId": 1338,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1338",
+      "description": "Greece"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300006,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1338",
+        "description": "Greece"
+      },
+      "away": {
+        "cardDbId": 6400006,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1338",
+        "description": "Greece"
+      }
+    }
+  },
+  "1343": {
+    "teamId": 1343,
+    "teamAssetId": 1343,
+    "nationId": 27,
+    "name": "Italy",
+    "teamName": "Italy",
+    "confederation": 2,
+    "worldCupQualified": 18,
+    "badge": {
+      "cardDbId": 6000007,
+      "assetId": 1343,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1343",
+      "description": "Italy"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300007,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1343",
+        "description": "Italy"
+      },
+      "away": {
+        "cardDbId": 6400007,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1343",
+        "description": "Italy"
+      }
+    }
+  },
+  "1354": {
+    "teamId": 1354,
+    "teamAssetId": 1354,
+    "nationId": 38,
+    "name": "Portugal",
+    "teamName": "Portugal",
+    "confederation": 2,
+    "worldCupQualified": 6,
+    "badge": {
+      "cardDbId": 6000008,
+      "assetId": 1354,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1354",
+      "description": "Portugal"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300008,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1354",
+        "description": "Portugal"
+      },
+      "away": {
+        "cardDbId": 6400008,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1354",
+        "description": "Portugal"
+      }
+    }
+  },
+  "1357": {
+    "teamId": 1357,
+    "teamAssetId": 1357,
+    "nationId": 40,
+    "name": "Russia",
+    "teamName": "Russia",
+    "confederation": 2,
+    "worldCupQualified": 10,
+    "badge": {
+      "cardDbId": 6000009,
+      "assetId": 1357,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1357",
+      "description": "Russia"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300009,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1357",
+        "description": "Russia"
+      },
+      "away": {
+        "cardDbId": 6400009,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1357",
+        "description": "Russia"
+      }
+    }
+  },
+  "1362": {
+    "teamId": 1362,
+    "teamAssetId": 1362,
+    "nationId": 45,
+    "name": "Spain",
+    "teamName": "Spain",
+    "confederation": 2,
+    "worldCupQualified": 14,
+    "badge": {
+      "cardDbId": 6000010,
+      "assetId": 1362,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1362",
+      "description": "Spain"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300010,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1362",
+        "description": "Spain"
+      },
+      "away": {
+        "cardDbId": 6400010,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1362",
+        "description": "Spain"
+      }
+    }
+  },
+  "1364": {
+    "teamId": 1364,
+    "teamAssetId": 1364,
+    "nationId": 47,
+    "name": "Switzerland",
+    "teamName": "Switzerland",
+    "confederation": 2,
+    "worldCupQualified": 10,
+    "badge": {
+      "cardDbId": 6000011,
+      "assetId": 1364,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1364",
+      "description": "Switzerland"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300011,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1364",
+        "description": "Switzerland"
+      },
+      "away": {
+        "cardDbId": 6400011,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1364",
+        "description": "Switzerland"
+      }
+    }
+  },
+  "1369": {
+    "teamId": 1369,
+    "teamAssetId": 1369,
+    "nationId": 52,
+    "name": "Argentina",
+    "teamName": "Argentina",
+    "confederation": 4,
+    "worldCupQualified": 16,
+    "badge": {
+      "cardDbId": 6000012,
+      "assetId": 1369,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1369",
+      "description": "Argentina"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300012,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1369",
+        "description": "Argentina"
+      },
+      "away": {
+        "cardDbId": 6400012,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1369",
+        "description": "Argentina"
+      }
+    }
+  },
+  "1370": {
+    "teamId": 1370,
+    "teamAssetId": 1370,
+    "nationId": 54,
+    "name": "Brazil",
+    "teamName": "Brazil",
+    "confederation": 4,
+    "worldCupQualified": 20,
+    "badge": {
+      "cardDbId": 6000013,
+      "assetId": 1370,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1370",
+      "description": "Brazil"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300013,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1370",
+        "description": "Brazil"
+      },
+      "away": {
+        "cardDbId": 6400013,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1370",
+        "description": "Brazil"
+      }
+    }
+  },
+  "1377": {
+    "teamId": 1377,
+    "teamAssetId": 1377,
+    "nationId": 60,
+    "name": "Uruguay",
+    "teamName": "Uruguay",
+    "confederation": 4,
+    "worldCupQualified": 12,
+    "badge": {
+      "cardDbId": 6000014,
+      "assetId": 1377,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1377",
+      "description": "Uruguay"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300014,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1377",
+        "description": "Uruguay"
+      },
+      "away": {
+        "cardDbId": 6400014,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1377",
+        "description": "Uruguay"
+      }
+    }
+  },
+  "1383": {
+    "teamId": 1383,
+    "teamAssetId": 1383,
+    "nationId": 72,
+    "name": "Costa Rica",
+    "teamName": "Costa Rica",
+    "confederation": 7,
+    "worldCupQualified": 4,
+    "badge": {
+      "cardDbId": 6000015,
+      "assetId": 1383,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1383",
+      "description": "Costa Rica"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300015,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1383",
+        "description": "Costa Rica"
+      },
+      "away": {
+        "cardDbId": 6400015,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1383",
+        "description": "Costa Rica"
+      }
+    }
+  },
+  "1386": {
+    "teamId": 1386,
+    "teamAssetId": 1386,
+    "nationId": 83,
+    "name": "Mexico",
+    "teamName": "Mexico",
+    "confederation": 7,
+    "worldCupQualified": 15,
+    "badge": {
+      "cardDbId": 6000016,
+      "assetId": 1386,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1386",
+      "description": "Mexico"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300016,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1386",
+        "description": "Mexico"
+      },
+      "away": {
+        "cardDbId": 6400016,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1386",
+        "description": "Mexico"
+      }
+    }
+  },
+  "1387": {
+    "teamId": 1387,
+    "teamAssetId": 1387,
+    "nationId": 95,
+    "name": "United States",
+    "teamName": "United States",
+    "confederation": 7,
+    "worldCupQualified": 10,
+    "badge": {
+      "cardDbId": 6000017,
+      "assetId": 1387,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1387",
+      "description": "United States"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300017,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1387",
+        "description": "United States"
+      },
+      "away": {
+        "cardDbId": 6400017,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1387",
+        "description": "United States"
+      }
+    }
+  },
+  "1393": {
+    "teamId": 1393,
+    "teamAssetId": 1393,
+    "nationId": 133,
+    "name": "Nigeria",
+    "teamName": "Nigeria",
+    "confederation": 3,
+    "worldCupQualified": 5,
+    "badge": {
+      "cardDbId": 6000018,
+      "assetId": 1393,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1393",
+      "description": "Nigeria"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300018,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1393",
+        "description": "Nigeria"
+      },
+      "away": {
+        "cardDbId": 6400018,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1393",
+        "description": "Nigeria"
+      }
+    }
+  },
+  "1395": {
+    "teamId": 1395,
+    "teamAssetId": 1395,
+    "nationId": 103,
+    "name": "Cameroon",
+    "teamName": "Cameroon",
+    "confederation": 3,
+    "worldCupQualified": 7,
+    "badge": {
+      "cardDbId": 6000019,
+      "assetId": 1395,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1395",
+      "description": "Cameroon"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300019,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1395",
+        "description": "Cameroon"
+      },
+      "away": {
+        "cardDbId": 6400019,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1395",
+        "description": "Cameroon"
+      }
+    }
+  },
+  "1411": {
+    "teamId": 1411,
+    "teamAssetId": 1411,
+    "nationId": 163,
+    "name": "Japan",
+    "teamName": "Japan",
+    "confederation": 5,
+    "worldCupQualified": 5,
+    "badge": {
+      "cardDbId": 6000020,
+      "assetId": 1411,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1411",
+      "description": "Japan"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300020,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1411",
+        "description": "Japan"
+      },
+      "away": {
+        "cardDbId": 6400020,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1411",
+        "description": "Japan"
+      }
+    }
+  },
+  "1415": {
+    "teamId": 1415,
+    "teamAssetId": 1415,
+    "nationId": 195,
+    "name": "Australia",
+    "teamName": "Australia",
+    "confederation": 5,
+    "worldCupQualified": 4,
+    "badge": {
+      "cardDbId": 6000021,
+      "assetId": 1415,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_1415",
+      "description": "Australia"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300021,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1415",
+        "description": "Australia"
+      },
+      "away": {
+        "cardDbId": 6400021,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_1415",
+        "description": "Australia"
+      }
+    }
+  },
+  "105013": {
+    "teamId": 105013,
+    "teamAssetId": 105013,
+    "nationId": 8,
+    "name": "Bosnia Herzegovina",
+    "teamName": "Bosnia & Herzegovina",
+    "confederation": 2,
+    "worldCupQualified": 1,
+    "badge": {
+      "cardDbId": 6000022,
+      "assetId": 105013,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_105013",
+      "description": "Bosnia & Herzegovina"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300022,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_105013",
+        "description": "Bosnia & Herzegovina"
+      },
+      "away": {
+        "cardDbId": 6400022,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_105013",
+        "description": "Bosnia & Herzegovina"
+      }
+    }
+  },
+  "105035": {
+    "teamId": 105035,
+    "teamAssetId": 105035,
+    "nationId": 34,
+    "name": "Holland",
+    "teamName": "Holland",
+    "confederation": 2,
+    "worldCupQualified": 10,
+    "badge": {
+      "cardDbId": 6000023,
+      "assetId": 105035,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_105035",
+      "description": "Holland"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300023,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_105035",
+        "description": "Holland"
+      },
+      "away": {
+        "cardDbId": 6400023,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_105035",
+        "description": "Holland"
+      }
+    }
+  },
+  "111109": {
+    "teamId": 111109,
+    "teamAssetId": 111109,
+    "nationId": 56,
+    "name": "Colombia",
+    "teamName": "Colombia",
+    "confederation": 4,
+    "worldCupQualified": 5,
+    "badge": {
+      "cardDbId": 6000024,
+      "assetId": 111109,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111109",
+      "description": "Colombia"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300024,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111109",
+        "description": "Colombia"
+      },
+      "away": {
+        "cardDbId": 6400024,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111109",
+        "description": "Colombia"
+      }
+    }
+  },
+  "111112": {
+    "teamId": 111112,
+    "teamAssetId": 111112,
+    "nationId": 108,
+    "name": "Ivory Coast",
+    "teamName": "Ivory Coast",
+    "confederation": 3,
+    "worldCupQualified": 3,
+    "badge": {
+      "cardDbId": 6000025,
+      "assetId": 111112,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111112",
+      "description": "Ivory Coast"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300025,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111112",
+        "description": "Ivory Coast"
+      },
+      "away": {
+        "cardDbId": 6400025,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111112",
+        "description": "Ivory Coast"
+      }
+    }
+  },
+  "111115": {
+    "teamId": 111115,
+    "teamAssetId": 111115,
+    "nationId": 161,
+    "name": "Iran",
+    "teamName": "Iran",
+    "confederation": 5,
+    "worldCupQualified": 4,
+    "badge": {
+      "cardDbId": 6000026,
+      "assetId": 111115,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111115",
+      "description": "Iran"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300026,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111115",
+        "description": "Iran"
+      },
+      "away": {
+        "cardDbId": 6400026,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111115",
+        "description": "Iran"
+      }
+    }
+  },
+  "111448": {
+    "teamId": 111448,
+    "teamAssetId": 111448,
+    "nationId": 97,
+    "name": "Algeria",
+    "teamName": "Algeria",
+    "confederation": 3,
+    "worldCupQualified": 4,
+    "badge": {
+      "cardDbId": 6000027,
+      "assetId": 111448,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111448",
+      "description": "Algeria"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300027,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111448",
+        "description": "Algeria"
+      },
+      "away": {
+        "cardDbId": 6400027,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111448",
+        "description": "Algeria"
+      }
+    }
+  },
+  "111459": {
+    "teamId": 111459,
+    "teamAssetId": 111459,
+    "nationId": 55,
+    "name": "Chile",
+    "teamName": "Chile",
+    "confederation": 4,
+    "worldCupQualified": 9,
+    "badge": {
+      "cardDbId": 6000028,
+      "assetId": 111459,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111459",
+      "description": "Chile"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300028,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111459",
+        "description": "Chile"
+      },
+      "away": {
+        "cardDbId": 6400028,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111459",
+        "description": "Chile"
+      }
+    }
+  },
+  "111462": {
+    "teamId": 111462,
+    "teamAssetId": 111462,
+    "nationId": 117,
+    "name": "Ghana",
+    "teamName": "Ghana",
+    "confederation": 3,
+    "worldCupQualified": 3,
+    "badge": {
+      "cardDbId": 6000029,
+      "assetId": 111462,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111462",
+      "description": "Ghana"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300029,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111462",
+        "description": "Ghana"
+      },
+      "away": {
+        "cardDbId": 6400029,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111462",
+        "description": "Ghana"
+      }
+    }
+  },
+  "111465": {
+    "teamId": 111465,
+    "teamAssetId": 111465,
+    "nationId": 57,
+    "name": "Ecuador",
+    "teamName": "Ecuador",
+    "confederation": 4,
+    "worldCupQualified": 3,
+    "badge": {
+      "cardDbId": 6000030,
+      "assetId": 111465,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111465",
+      "description": "Ecuador"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300030,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111465",
+        "description": "Ecuador"
+      },
+      "away": {
+        "cardDbId": 6400030,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111465",
+        "description": "Ecuador"
+      }
+    }
+  },
+  "111548": {
+    "teamId": 111548,
+    "teamAssetId": 111548,
+    "nationId": 81,
+    "name": "Honduras",
+    "teamName": "Honduras",
+    "confederation": 7,
+    "worldCupQualified": 3,
+    "badge": {
+      "cardDbId": 6000031,
+      "assetId": 111548,
+      "cardAssetId": 39,
+      "name": "TeamName_Abbr15_111548",
+      "description": "Honduras"
+    },
+    "kits": {
+      "home": {
+        "cardDbId": 6300031,
+        "assetId": 14,
+        "cardAssetId": 35,
+        "category": 2,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111548",
+        "description": "Honduras"
+      },
+      "away": {
+        "cardDbId": 6400031,
+        "assetId": 15,
+        "cardAssetId": 35,
+        "category": 3,
+        "value": 75,
+        "year": 0,
+        "weightrare": 0,
+        "name": "TeamName_Abbr15_111548",
+        "description": "Honduras"
+      }
+    }
+  }
+}

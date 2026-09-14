@@ -31,6 +31,9 @@ SPECIAL_CATALOG_PATH = Path(__file__).with_name("fifa14-special-catalog.v240.jso
 WC_NATIVE_PLAYER_IDS_PATH = Path(__file__).with_name(
     "fifa14-wc-native-playerids.v1.json"
 )
+WC_NATION_CATALOG_PATH = Path(__file__).with_name(
+    "fifa14-wc-nations.v1.json"
+)
 LEGEND_CATALOG_PATH = Path(__file__).with_name("fifa14-legend-catalog.v24013.json")
 CONSUMABLE_CATALOG_PATH = Path(__file__).with_name("fifa14-consumable-catalog.v2412.json")
 
@@ -90,6 +93,7 @@ VERIFIED_PLAYER_BY_ASSET = PLAYER_BY_ASSET
 LOCAL_TEST_STARTING_COINS = int(PACK_WEIGHTS_DOCUMENT.get("localTestStartingCoins", 500000))
 
 WC_NATIVE_PLAYER_IDS_DOCUMENT = _load_json(WC_NATIVE_PLAYER_IDS_PATH)
+WC_NATION_CATALOG = _load_json(WC_NATION_CATALOG_PATH)
 
 WC_NATIVE_PLAYER_IDS = frozenset(
     int(player_id)
@@ -847,6 +851,245 @@ class LocalIdentityStore:
                 (identity["persona_id"], int(time.time())),
             )
             return {"club": club, "activeSquadId": squad_id, "players": 23}
+    @staticmethod
+    def _world_cup_kit_payload(
+        *,
+        item_id: int,
+        kit: dict[str, Any],
+        team_id: int,
+        home: bool,
+    ) -> dict[str, Any]:
+        """Build an owned native FUTWC kit from fcc_kitcards metadata."""
+        asset_id = int(kit["assetId"])
+        resource_id = int(kit["cardDbId"])
+        category = int(kit["category"])
+        rating = int(kit.get("value", 0))
+        name = str(kit.get("description") or kit.get("name") or "")
+
+        return {
+            "id": int(item_id),
+            "itemId": int(item_id),
+            "timestamp": int(time.time()),
+            "itemType": "kit",
+            "category": category,
+            "teamkittypetechid": 0 if home else 1,
+            "rating": rating,
+            "assetId": asset_id,
+            "resourceId": resource_id,
+            "definitionId": resource_id,
+            "itemState": "activeHomeKit" if category == 2 else "activeAwayKit",
+            "rareflag": 0,
+            "formation": "",
+            "leagueId": 0,
+            "injuryType": "none",
+            "injuryGames": 0,
+            "lastSalePrice": 0,
+            "fitness": 0,
+            "training": 0,
+            "suspension": 0,
+            "contract": 0,
+            "discardValue": 0,
+            "owners": 1,
+            "teamid": int(team_id),
+            "teamId": int(team_id),
+            "untradeable": True,
+            "duplicate": False,
+            "pile": 7,
+            "resourceGameYear": 2014,
+            "name": name,
+            "description": name,
+            "carddbid": resource_id,
+            "cardassetid": int(kit.get("cardAssetId", 35)),
+            "year": int(kit.get("year", 0)),
+            "value": rating,
+            "weightrare": int(kit.get("weightrare", 0)),
+        }
+    def _world_cup_badge_payload(
+        self,
+        *,
+        item_id: int,
+        team_id: int,
+        nation: dict,
+    ) -> dict:
+        badge = nation.get("badge") or {}
+
+        resource_id = int(badge.get("cardDbId") or 0)
+        asset_id = int(badge.get("assetId") or 0)
+
+        if resource_id <= 0 or asset_id <= 0:
+            raise ValueError(
+                f"World Cup nation {team_id} has no valid native badge metadata"
+            )
+
+        name = str(
+            badge.get("name")
+            or badge.get("description")
+            or nation.get("name")
+            or nation.get("teamName")
+            or f"Team {team_id}"
+        )
+
+        return {
+            "id": item_id,
+            "itemId": item_id,
+            "timestamp": int(time.time()),
+            "itemType": "badge",
+            "category": 1,
+            "assetId": asset_id,
+            "resourceId": resource_id,
+            "definitionId": resource_id,
+            "itemState": "activeBadge",
+            "rareflag": 0,
+            "tradeable": False,
+            "untradeable": True,
+            "duplicate": False,
+            "discardValue": 0,
+            "lastSalePrice": 0,
+            "pile": 7,
+            "resourceGameYear": 2014,
+            "teamid": team_id,
+            "teamId": team_id,
+            "name": name,
+            "description": name,
+            "carddbid": resource_id,
+            "cardassetid": int(badge.get("cardAssetId") or 0),
+        }    
+
+    def _ensure_world_cup_support_kits_locked(
+        self,
+        connection: sqlite3.Connection,
+        persona_id: int,
+        team_id: int,
+    ) -> int:
+        """Ensure the selected FUTWC Support Nation owns its native home/away kits."""
+        nation = WC_NATION_CATALOG.get(str(int(team_id)))
+        if not isinstance(nation, dict):
+            return 0
+
+        kits = nation.get("kits")
+        if not isinstance(kits, dict):
+            return 0
+
+        definitions = (
+            (1, kits.get("home"), True),
+            (2, kits.get("away"), False),
+        )
+
+        granted = 0
+
+        for ordinal, kit, is_home in definitions:
+            if not isinstance(kit, dict):
+                continue
+
+            resource_id = int(kit.get("cardDbId", 0) or 0)
+            asset_id = int(kit.get("assetId", 0) or 0)
+
+            if resource_id <= 0 or asset_id <= 0:
+                continue
+
+            item_id = 195_000_000_000 + int(persona_id) * 10 + ordinal
+
+            payload = self._world_cup_kit_payload(
+                item_id=item_id,
+                kit=kit,
+                team_id=int(team_id),
+                home=is_home,
+            )
+
+            connection.execute(
+                """
+                INSERT INTO items (
+                    item_id,
+                    persona_id,
+                    asset_id,
+                    item_type,
+                    pile,
+                    tradeable,
+                    payload
+                ) VALUES (?, ?, ?, 'kit', 'club', 0, ?)
+                ON CONFLICT(item_id) DO UPDATE SET
+                    persona_id = excluded.persona_id,
+                    asset_id = excluded.asset_id,
+                    item_type = 'kit',
+                    pile = 'club',
+                    tradeable = 0,
+                    payload = excluded.payload
+                """,
+                (
+                    item_id,
+                    int(persona_id),
+                    asset_id,
+                    json.dumps(
+                        payload,
+                        separators=(",", ":"),
+                        ensure_ascii=False,
+                        sort_keys=True,
+                    ),
+                ),
+            )
+
+            granted += 1
+
+        return granted   
+
+    def _ensure_world_cup_support_badge_locked(
+        self,
+        connection: sqlite3.Connection,
+        *,
+        persona_id: int,
+        team_id: int,
+    ) -> dict | None:
+        nation = WC_NATION_CATALOG.get(str(team_id))
+        if not nation:
+            return None
+
+        badge = nation.get("badge")
+        if not badge:
+            return None
+
+        # Same reserved WC cosmetic range as the two support kits.
+        # Kits use ordinals 1/2; badge gets ordinal 3.
+        item_id = 195_000_000_000 + persona_id * 10 + 3
+
+        payload = self._world_cup_badge_payload(
+            item_id=item_id,
+            team_id=team_id,
+            nation=nation,
+        )
+
+        connection.execute(
+            """
+            INSERT INTO items (
+                item_id,
+                persona_id,
+                asset_id,
+                item_type,
+                pile,
+                tradeable,
+                payload
+            ) VALUES (?, ?, ?, 'badge', 'club', 0, ?)
+            ON CONFLICT(item_id) DO UPDATE SET
+                persona_id = excluded.persona_id,
+                asset_id = excluded.asset_id,
+                item_type = 'badge',
+                pile = 'club',
+                tradeable = 0,
+                payload = excluded.payload
+            """,
+            (
+                item_id,
+                int(persona_id),
+                int(payload["assetId"]),
+                json.dumps(
+                    payload,
+                    separators=(",", ":"),
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
+            ),
+        )
+
+        return payload     
 
     def provision_world_cup_starter(self) -> dict[str, Any]:
             """Provision one deterministic World Cup-only starter squad.
@@ -1084,11 +1327,33 @@ class LocalIdentityStore:
                     ).fetchone()
     
                     if existing_count > 0 and existing_club is not None:
+                        existing_club_document = self._club_document(existing_club)
+
+                        kits_granted = self._ensure_world_cup_support_kits_locked(
+                            connection,
+                            persona_id,
+                            int(existing_club["team_id"]),
+                        )
+
+                        badge_granted = self._ensure_world_cup_support_badge_locked(
+                            connection,
+                            persona_id=persona_id,
+                            team_id=int(existing_club["team_id"]),
+                        )
+
                         return {
-                            "club": self._club_document(existing_club),
-                            "activeSquadId": int(existing_squad_id),
-                            "players": existing_count,
-                            "alreadyProvisioned": True,
+                            "club": club,
+                            "activeSquadId": squad_id,
+                            "players": len(selected),
+                            "worldCupPlayers": len(selected),
+                            "worldCupKits": kits_granted,
+                            "worldCupBadge": badge_granted,
+                            "starterRatingMin": min(
+                                int(player["rating"]) for player in selected
+                            ),
+                            "starterRatingMax": max(
+                                int(player["rating"]) for player in selected
+                            ),
                         }
     
                 # Support Nation selection has already created the WC club.
@@ -1109,7 +1374,19 @@ class LocalIdentityStore:
                     )
                 else:
                     club = self._club_document(club_row)
-    
+
+                kits_granted = self._ensure_world_cup_support_kits_locked(
+                    connection,
+                    persona_id,
+                    int(club.get("teamId", 0) or 0),
+                )    
+
+                badge_granted = self._ensure_world_cup_support_badge_locked(
+                    connection,
+                    persona_id=persona_id,
+                    team_id=int(club.get("teamId", 0) or 0),
+                )
+                
                 row = connection.execute(
                     """
                     SELECT squad_id
@@ -1270,13 +1547,14 @@ class LocalIdentityStore:
                     "activeSquadId": squad_id,
                     "players": len(selected),
                     "worldCupPlayers": len(selected),
+                    "worldCupKits": kits_granted,
                     "starterRatingMin": min(
                         int(player["rating"]) for player in selected
                     ),
                     "starterRatingMax": max(
                         int(player["rating"]) for player in selected
                     ),
-                }        
+                }       
     
     @staticmethod
     def _full_club_item_id(asset_id: int) -> int:
@@ -2943,11 +3221,23 @@ class LocalIdentityStore:
         }
 
     @classmethod
-    def _weighted_consumable(cls, rng: random.Random, *, quality: str, rare_slot: bool) -> dict[str, Any]:
+    def _weighted_consumable(
+        cls,
+        rng: random.Random,
+        *,
+        quality: str,
+        rare_slot: bool,
+        world_cup: bool = False,
+    ) -> dict[str, Any]:
         quality = str(quality).lower()
         pool = [
             row for row in CONSUMABLE_CATALOG
-            if str(row.get("quality", "")).lower() == quality and bool(row.get("packEligible", True))
+            if str(row.get("quality", "")).lower() == quality
+            and bool(row.get("packEligible", True))
+            and not (
+                world_cup
+                and str(row.get("category", "")).strip().casefold() == "manager league"
+            )
         ]
         if not pool:
             raise RuntimeError(f"no {quality} consumables in local catalogue")
@@ -3416,7 +3706,12 @@ class LocalIdentityStore:
                     elite_count += 1
                 payload = self._local_pack_player_payload(item_id=item_id, player=player, quality=quality, rare=rare)
             else:
-                consumable = self._weighted_consumable(rng, quality=quality, rare_slot=rare)
+                consumable = self._weighted_consumable(
+                    rng,
+                    quality=quality,
+                    rare_slot=rare,
+                    world_cup=world_cup,
+                )
                 payload = self._local_consumable_payload(item_id=item_id, consumable=consumable)
             items.append(payload)
 
@@ -3753,10 +4048,11 @@ class LocalIdentityStore:
             # Pack reveal is single-pile in the retail PC frontend. Do not allow
             # a second purchase while any New Items remain unresolved; older
             # builds could return 24+ flattened items and hang the animation.
+            pending_sku_mode = "WC" if world_cup else "NORMAL"
             pending_items = int(connection.execute(
                 "SELECT COUNT(*) FROM pack_contents pc JOIN packs p ON p.pack_id=pc.pack_id "
-                "WHERE p.persona_id=? AND p.unopened=1",
-                (identity["persona_id"],),
+                "WHERE p.persona_id=? AND p.unopened=1 AND UPPER(COALESCE(p.sku_mode,'NORMAL'))=?",
+                (identity["persona_id"], pending_sku_mode),
             ).fetchone()[0])
             if pending_items > 0:
                 raise ValueError(f"resolve the {pending_items} current New Items before opening another pack")
@@ -4109,13 +4405,17 @@ class LocalIdentityStore:
                 "packList": [],
             }
 
-    def purchased_items(self) -> dict[str, Any]:
+    def purchased_items(self, *, world_cup: bool = False) -> dict[str, Any]:
         with self._lock, closing(self._connect()) as connection:
             identity = self._identity(connection)
             persona_id = int(identity["persona_id"])
+            sku_mode = "WC" if world_cup else "NORMAL"
             rows = connection.execute(
-                "SELECT pack_id, pack_type, pack_name, created_at FROM packs WHERE persona_id = ? AND unopened = 1 ORDER BY pack_id",
-                (persona_id,),
+                "SELECT pack_id, pack_type, pack_name, created_at FROM packs "
+                "WHERE persona_id = ? AND unopened = 1 "
+                "AND UPPER(COALESCE(sku_mode,'NORMAL')) = ? "
+                "ORDER BY pack_id",
+                (persona_id, sku_mode),
             ).fetchall()
             unopened = []
             for row in rows:
@@ -4296,6 +4596,11 @@ class LocalIdentityStore:
         with self._lock, closing(self._connect()) as connection, connection:
             identity = self._identity(connection)
             persona_id = int(identity["persona_id"])
+            club_row = connection.execute(
+                "SELECT team_id FROM clubs WHERE persona_id = ?",
+                (persona_id,),
+            ).fetchone()
+            club_team_id = int(club_row["team_id"]) if club_row is not None else 0
             self._market_tick_locked(connection, persona_id, now)
             club_players = int(connection.execute(
                 "SELECT COUNT(*) FROM items WHERE persona_id = ? AND item_type = ?",
@@ -4318,6 +4623,7 @@ class LocalIdentityStore:
             user_total = user_live + user_sold
             auction_count = max(0, MARKET_LIVE_LISTING_COUNT - recent_sold) + user_live
             return {
+                "teamId": club_team_id,
                 "auctionCount": int(auction_count),
                 "clubPlayers": club_players,
                 # The PC transfer-hub tile has several binders across retail UI
@@ -5702,6 +6008,14 @@ class LocalIdentityStore:
         with self._lock, closing(self._connect()) as connection, connection:
             identity = self._identity(connection)
             persona_id = int(identity["persona_id"])
+
+            club_row = connection.execute(
+                "SELECT team_id FROM clubs WHERE persona_id = ?",
+                (persona_id,),
+            ).fetchone()
+
+            club_team_id = int(club_row["team_id"]) if club_row is not None else 0
+
             self._repair_owned_items_locked(connection, persona_id)
             self._repair_active_squad_locked(connection, persona_id)
             squads = []
@@ -5742,6 +6056,7 @@ class LocalIdentityStore:
                 squads.append({
                     "id": int(row["squad_id"]), "squadId": int(row["squad_id"]),
                     "personaId": persona_id,
+                    "teamId": club_team_id,
                     "squadName": row["squad_name"], "formation": row["formation"],
                     "active": bool(row["active"]),
                     "changed": False,
@@ -5771,6 +6086,7 @@ class LocalIdentityStore:
         return {
             "id": int(squad.get("id", squad.get("squadId", 0)) or 0),
             "personaId": int(squad.get("personaId", 0) or 0),
+            "teamId": int(squad.get("teamId", 0) or 0),
             "squadName": str(squad.get("squadName") or "Local XI"),
             "formation": str(squad.get("formation") or "f442"),
             "active": bool(squad.get("active", False)),
