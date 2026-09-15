@@ -1247,6 +1247,37 @@ function hookServiceApiTargets(module) {
     }
   });
   hookOperationStatusSetters(module);
+
+    // WC tournament discovery: snapshot candidate service slots only.
+    // Known anchor: UpdateTournament = operation 60 / slot 0x190.
+    // No hooks and no memory writes.
+    {
+      const tournamentCandidates = [];
+
+      for (let operationIndex = 40; operationIndex <= 65; operationIndex++) {
+        const slot = 0xa0 + operationIndex * Process.pointerSize;
+
+        let target = ptr(0);
+        try {
+          target = vtable.add(slot).readPointer();
+        } catch (_) {}
+
+        tournamentCandidates.push({
+          operation_index: operationIndex,
+          slot: '0x' + slot.toString(16),
+          target: target.toString(),
+          in_cardsdll: pointerInModule(module, target),
+          executable: executable(target),
+          bytes: hexBytes(raw(target, 16))
+        });
+      }
+
+      emit('cards-wc-tournament-vtable-snapshot', {
+        service: service.toString(),
+        vtable: vtable.toString(),
+        candidates: tournamentCandidates
+      });
+    }
   hookCompetitionOperationDescriptors(module, service, vtable);
 }
 
@@ -4631,3 +4662,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

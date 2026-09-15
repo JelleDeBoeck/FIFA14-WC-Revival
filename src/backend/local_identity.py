@@ -1543,8 +1543,7 @@ class LocalIdentityStore:
                 connection.execute(
                     """
                     UPDATE fut_users
-                    SET active_squad_id = ?,
-                        starter_pack_claimed = 1
+                    SET active_squad_id=?, starter_pack_claimed=1
                     WHERE persona_id = ?
                     """,
                     (squad_id, persona_id),
