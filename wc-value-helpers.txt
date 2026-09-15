@@ -1,0 +1,178 @@
+
+======================================================================
+NATIONALITY helper 0xd4a20
+======================================================================
+000D4A20  mov      eax, dword ptr [ecx + 0xc]
+000D4A23  movzx    eax, word ptr [eax + 0x102]
+000D4A2A  ret      
+000D4A2B  int3     
+000D4A2C  int3     
+000D4A2D  int3     
+000D4A2E  int3     
+000D4A2F  int3     
+000D4A30  mov      eax, dword ptr [ecx + 0xc]
+000D4A33  movzx    eax, byte ptr [eax + 0x108]
+000D4A3A  ret      
+000D4A3B  int3     
+000D4A3C  int3     
+000D4A3D  int3     
+000D4A3E  int3     
+000D4A3F  int3     
+000D4A40  mov      eax, dword ptr [ecx + 0xc]
+000D4A43  mov      eax, dword ptr [eax + 0x104]
+000D4A49  ret      
+000D4A4A  int3     
+000D4A4B  int3     
+000D4A4C  int3     
+000D4A4D  int3     
+000D4A4E  int3     
+000D4A4F  int3     
+000D4A50  mov      eax, dword ptr [ecx + 0xc]
+000D4A53  movzx    eax, byte ptr [eax + 0x76]
+000D4A57  ret      
+000D4A58  int3     
+000D4A59  int3     
+000D4A5A  int3     
+000D4A5B  int3     
+000D4A5C  int3     
+000D4A5D  int3     
+000D4A5E  int3     
+000D4A5F  int3     
+000D4A60  mov      eax, dword ptr [ecx + 0xc]
+000D4A63  movzx    eax, byte ptr [eax + 0xfc]
+000D4A6A  ret      
+000D4A6B  int3     
+000D4A6C  int3     
+000D4A6D  int3     
+000D4A6E  int3     
+000D4A6F  int3     
+000D4A70  mov      eax, dword ptr [ecx + 0xc]
+000D4A73  movzx    eax, byte ptr [eax + 0xfd]
+000D4A7A  ret      
+000D4A7B  int3     
+000D4A7C  int3     
+000D4A7D  int3     
+000D4A7E  int3     
+000D4A7F  int3     
+
+======================================================================
+CONFEDERATION helper 0xd4a80
+======================================================================
+000D4A80  mov      eax, dword ptr [ecx + 0xc]
+000D4A83  mov      eax, dword ptr [eax + 0x64]
+000D4A86  ret      
+000D4A87  int3     
+000D4A88  int3     
+000D4A89  int3     
+000D4A8A  int3     
+000D4A8B  int3     
+000D4A8C  int3     
+000D4A8D  int3     
+000D4A8E  int3     
+000D4A8F  int3     
+000D4A90  mov      eax, dword ptr [ecx + 0xc]
+000D4A93  mov      eax, dword ptr [eax + 0x10c]
+000D4A99  ret      
+000D4A9A  int3     
+000D4A9B  int3     
+000D4A9C  int3     
+000D4A9D  int3     
+000D4A9E  int3     
+000D4A9F  int3     
+000D4AA0  push     ebp
+000D4AA1  mov      ebp, esp
+000D4AA3  mov      eax, dword ptr [ecx + 0xc]
+000D4AA6  mov      ecx, dword ptr [ebp + 8]
+000D4AA9  movzx    eax, word ptr [eax + ecx*2 + 0x68]
+000D4AAE  pop      ebp
+000D4AAF  ret      4
+000D4AB2  int3     
+000D4AB3  int3     
+000D4AB4  int3     
+000D4AB5  int3     
+000D4AB6  int3     
+000D4AB7  int3     
+000D4AB8  int3     
+000D4AB9  int3     
+000D4ABA  int3     
+000D4ABB  int3     
+000D4ABC  int3     
+000D4ABD  int3     
+000D4ABE  int3     
+000D4ABF  int3     
+000D4AC0  push     ebp
+000D4AC1  mov      ebp, esp
+000D4AC3  mov      eax, dword ptr [ecx + 0xc]
+000D4AC6  mov      ecx, dword ptr [ebp + 8]
+000D4AC9  movzx    eax, byte ptr [eax + ecx + 0xbc]
+000D4AD1  pop      ebp
+000D4AD2  ret      4
+000D4AD5  int3     
+000D4AD6  int3     
+000D4AD7  int3     
+000D4AD8  int3     
+000D4AD9  int3     
+000D4ADA  int3     
+000D4ADB  int3     
+000D4ADC  int3     
+000D4ADD  int3     
+000D4ADE  int3     
+000D4ADF  int3     
+
+======================================================================
+TEAM helper 0xd4a70
+======================================================================
+000D4A70  mov      eax, dword ptr [ecx + 0xc]
+000D4A73  movzx    eax, byte ptr [eax + 0xfd]
+000D4A7A  ret      
+000D4A7B  int3     
+000D4A7C  int3     
+000D4A7D  int3     
+000D4A7E  int3     
+000D4A7F  int3     
+000D4A80  mov      eax, dword ptr [ecx + 0xc]
+000D4A83  mov      eax, dword ptr [eax + 0x64]
+000D4A86  ret      
+000D4A87  int3     
+000D4A88  int3     
+000D4A89  int3     
+000D4A8A  int3     
+000D4A8B  int3     
+000D4A8C  int3     
+000D4A8D  int3     
+000D4A8E  int3     
+000D4A8F  int3     
+000D4A90  mov      eax, dword ptr [ecx + 0xc]
+000D4A93  mov      eax, dword ptr [eax + 0x10c]
+000D4A99  ret      
+000D4A9A  int3     
+000D4A9B  int3     
+000D4A9C  int3     
+000D4A9D  int3     
+000D4A9E  int3     
+000D4A9F  int3     
+000D4AA0  push     ebp
+000D4AA1  mov      ebp, esp
+000D4AA3  mov      eax, dword ptr [ecx + 0xc]
+000D4AA6  mov      ecx, dword ptr [ebp + 8]
+000D4AA9  movzx    eax, word ptr [eax + ecx*2 + 0x68]
+000D4AAE  pop      ebp
+000D4AAF  ret      4
+000D4AB2  int3     
+000D4AB3  int3     
+000D4AB4  int3     
+000D4AB5  int3     
+000D4AB6  int3     
+000D4AB7  int3     
+000D4AB8  int3     
+000D4AB9  int3     
+000D4ABA  int3     
+000D4ABB  int3     
+000D4ABC  int3     
+000D4ABD  int3     
+000D4ABE  int3     
+000D4ABF  int3     
+000D4AC0  push     ebp
+000D4AC1  mov      ebp, esp
+000D4AC3  mov      eax, dword ptr [ecx + 0xc]
+000D4AC6  mov      ecx, dword ptr [ebp + 8]

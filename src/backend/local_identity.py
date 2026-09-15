@@ -95,6 +95,15 @@ LOCAL_TEST_STARTING_COINS = int(PACK_WEIGHTS_DOCUMENT.get("localTestStartingCoin
 WC_NATIVE_PLAYER_IDS_DOCUMENT = _load_json(WC_NATIVE_PLAYER_IDS_PATH)
 WC_NATION_CATALOG = _load_json(WC_NATION_CATALOG_PATH)
 
+WC_TEAM_ID_BY_NATION_ID = {
+    int(nation["nationId"]): int(nation.get("teamId", team_id))
+    for team_id, nation in WC_NATION_CATALOG.items()
+    if (
+        isinstance(nation, dict)
+        and int(nation.get("nationId", 0) or 0) > 0
+    )
+}
+
 WC_NATIVE_PLAYER_IDS = frozenset(
     int(player_id)
     for player_id in WC_NATIVE_PLAYER_IDS_DOCUMENT.get("playerIds", [])
@@ -597,7 +606,7 @@ class LocalIdentityStore:
                 "personaName": identity["persona_name"],
                 "userId": int(identity["persona_id"]),
                 "created": int(fut_user["created_at"]),
-                "returningUser": 1 if club is not None else 0,
+                "returningUser": 1 if bool(fut_user["starter_pack_claimed"]) else 0,
                 "clubName": "" if club is None else club["club_name"],
                 "clubAbbr": "" if club is None else club["club_abbr"],
                 "badgeId": 0 if club is None else int(club["badge_id"]),
@@ -1531,7 +1540,6 @@ class LocalIdentityStore:
                             json.dumps(payload, separators=(",", ":")),
                         ),
                     )
-    
                 connection.execute(
                     """
                     UPDATE fut_users
@@ -2488,7 +2496,23 @@ class LocalIdentityStore:
             slot_position = self._slot_position(slot_index) if slot_index is not None else "CM"
             preferred_position = "CM" if slot_position in {"SUB", "RES"} else slot_position
         is_goalkeeper = preferred_position == "GK"
-        team_id = self._bounded_int(player.get("teamId", source.get("teamId", source.get("teamid", 0))), 0)
+        team_id = self._bounded_int(
+            player.get("teamId", source.get("teamId", source.get("teamid", 0))),
+            0,
+        )
+
+        card_type = str(
+            player.get("cardType", source.get("cardType", ""))
+        ).strip().lower()
+        
+        if card_type == "worldcup":
+            nation_id = self._bounded_int(
+                player.get("nation", source.get("nation", 0)),
+                0,
+            )
+            wc_team_id = WC_TEAM_ID_BY_NATION_ID.get(nation_id)
+            if wc_team_id:
+                team_id = int(wc_team_id)
         rare_flag = self._bounded_int(
             player.get("rareFlag", source.get("rareFlag", source.get("rareflag", 0))), 0, minimum=0, maximum=255
         )
@@ -6008,6 +6032,8 @@ class LocalIdentityStore:
         with self._lock, closing(self._connect()) as connection, connection:
             identity = self._identity(connection)
             persona_id = int(identity["persona_id"])
+            fut_user = self._ensure_fut_user_locked(connection)
+            starter_pack_claimed = bool(fut_user["starter_pack_claimed"])
 
             club_row = connection.execute(
                 "SELECT team_id FROM clubs WHERE persona_id = ?",
@@ -6069,7 +6095,7 @@ class LocalIdentityStore:
                     # default squad before it has parsed all 23 ItemData records.
                     "rating": rating,
                     "valid": True,
-                    "newsquad": 0,
+                    "newsquad": 0 if starter_pack_claimed else 1,
                     "kicktakers": [],
                     "tactics": [],
                     "dreamSquad": False,

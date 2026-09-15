@@ -1371,7 +1371,17 @@ function hookWSARecv() {
   });
 }
 
+const ENTRY_ONLY_CARDS_HOOKS = new Set([
+  'Authentication JSON builder',
+  'Authentication EASW-Session null check',
+  'Authentication EASW-Token null check',
+  'RetrievePhishingQuestion callback',
+  'ValidatePhishingAnswer callback',
+  'RetrieveTrustedConsoleList callback'
+]);
+
 function installCardsHook(module, spec, callbacks) {
+  if (!ENTRY_ONLY_CARDS_HOOKS.has(spec.name)) return false;
   const address = module.base.add(spec.rva);
   const check = verify(address.add(spec.sigOffset || 0), spec.signature);
   emit('cards-operation92-signature', {
@@ -2676,8 +2686,7 @@ rpc.exports = {
   },
 
   setteamid(teamId) {
-    if (cardsBase === null)
-      return {ok:false, reason:'CardsDLL not ready'};
+    return {ok:false, reason:'ENTRY_ONLY: TeamName disabled until FUT hub'};
 
     try {
       // CardsDLL singleton slot: RVA 0x1D7C7C
@@ -2838,16 +2847,16 @@ function attachCardsHooksOnce(reason) {
   cardsBase = module.base;
   emit('cards-operation92-module-found', {reason: reason, name: module.name, path: module.path, base: module.base.toString(), size: module.size, expected_size: CARDS_EXPECTED_IMAGE_SIZE, size_ok: module.size === CARDS_EXPECTED_IMAGE_SIZE});
 
-  installCrashExceptionTrace();
-  installNativeOfflineStadiumHooks(module, reason);
-  installViewCardsEmptyListGuard(module, reason);
-  installActivateCardTrace(module, reason);
-  if (!RUNTIME_PERFORMANCE_MODE) installMatchBridgeTrace(module, reason);
-  installMainHubRecordOverride(module, reason);
-  installBadgeUiOverride(module, reason);
-  installUserRecordTrace(module, reason);
-  installTournamentNameFallback(module, reason);
-  installTournamentSessionTrace(module, reason);
+  // ENTRY_ONLY disabled: installCrashExceptionTrace();
+  // ENTRY_ONLY disabled: installNativeOfflineStadiumHooks(module, reason);
+  // ENTRY_ONLY disabled: installViewCardsEmptyListGuard(module, reason);
+  // ENTRY_ONLY disabled: installActivateCardTrace(module, reason);
+  // ENTRY_ONLY disabled: if (!RUNTIME_PERFORMANCE_MODE) installMatchBridgeTrace(module, reason);
+  // ENTRY_ONLY disabled: installMainHubRecordOverride(module, reason);
+  // ENTRY_ONLY disabled: installBadgeUiOverride(module, reason);
+  // ENTRY_ONLY disabled: installUserRecordTrace(module, reason);
+  // ENTRY_ONLY disabled: installTournamentNameFallback(module, reason);
+  // ENTRY_ONLY disabled: installTournamentSessionTrace(module, reason);
 
   const descriptor = module.base.add(OP92_DESCRIPTOR_RVA);
   emit('cards-operation92-descriptor', {
@@ -3798,7 +3807,7 @@ function attachCardsHooksOnce(reason) {
     }
   });
 
-  installLocalStoreGateHooks(module);
+  // ENTRY_ONLY disabled: installLocalStoreGateHooks(module);
   if (!RUNTIME_PERFORMANCE_MODE) {
     installStoreNumberArgTrace(module);
     installUserCreditsParserTrace(module);
@@ -4345,8 +4354,6 @@ def main() -> int:
 
         except sqlite3.Error:
             return None
-
-    agent = build_agent(Path(args.ca_file).read_bytes())
 
     agent = build_agent(Path(args.ca_file).read_bytes())
     if args.print_agent:

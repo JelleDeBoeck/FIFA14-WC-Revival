@@ -31,7 +31,52 @@ def _js_bytes(value: bytes) -> str:
     return ", ".join(f"0x{item:02x}" for item in value)
 
 
-def build_agent(ca_bytes: bytes) -> str:
+def load_wc_maps(root: Path):
+    special = json.loads(
+        (root / "src" / "backend" / "fifa14-special-catalog.v240.json").read_text(encoding="utf-8")
+    )
+    nations_doc = json.loads(
+        (root / "src" / "backend" / "fifa14-wc-nations.v1.json").read_text(encoding="utf-8")
+    )
+
+    priority = {"name+nation": 0, "unique-nation-name-token": 1, "slug": 2, "name": 3}
+    best = {}
+    for player in special.get("players", []):
+        if str(player.get("cardType", "")).strip().lower() != "worldcup":
+            continue
+        try:
+            asset_id = int(player.get("assetId", 0) or 0)
+            nation_id = int(player.get("nation", 0) or 0)
+        except (TypeError, ValueError):
+            continue
+        if asset_id <= 0 or nation_id <= 0:
+            continue
+        old = best.get(asset_id)
+        if old is None or priority.get(str(player.get("matchMethod", "")).strip().lower(), 99) < \
+                priority.get(str(old.get("matchMethod", "")).strip().lower(), 99):
+            best[asset_id] = player
+
+    asset_to_nation = {int(a): int(p["nation"]) for a, p in best.items()}
+
+    nation_map = {}
+    items = nations_doc.items() if isinstance(nations_doc, dict) else []
+    for key, row in items:
+        if not isinstance(row, dict):
+            continue
+        try:
+            nation_id = int(row.get("nationId", 0) or 0)
+            team_id = int(row.get("teamId", key) or 0)
+            confed_id = int(row.get("confederation", 0) or 0)
+        except (TypeError, ValueError):
+            continue
+        if nation_id > 0 and team_id > 0:
+            nation_map[nation_id] = {"teamId": team_id, "confederationId": confed_id}
+
+    if not asset_to_nation or not nation_map:
+        raise RuntimeError("WC catalog maps could not be built")
+    return asset_to_nation, nation_map
+
+def build_agent(ca_bytes: bytes, wc_asset_nation, wc_nation_map) -> str:
     encoded_ca = base64.b64encode(ca_bytes).decode("ascii")
     agent = r"""
 'use strict';
@@ -42,6 +87,13 @@ const EXPECTED_FIFA_IMAGE_SIZE = 0x04b7a000;
 // Store + ResetMatch paths were firing dozens of times per second and stalling
 // the render thread while packs were being browsed.
 const RUNTIME_PERFORMANCE_MODE = true;
+const WC_ASSET_NATION = __WC_ASSET_NATION__;
+const WC_NATION_MAP = __WC_NATION_MAP__;
+let wcPostLoginSafe = false;
+let wcModeActive = false;
+let wcVisualHooksInstalled = false;
+const wcCurrentAssetByThread = Object.create(null);
+const wcCurrentNationByThread = Object.create(null);
 const CA_FUNCTION_RVA = 0x00d99790;
 const UPDATE_RVA = 0x00d9a0b0;
 const SCREEN_EVENT_DISPATCHER_RVA = 0x0010eca0;
@@ -407,6 +459,36 @@ function armCompetitionTrace(kind, reason, durationMs) {
     window_ms: windowMs, until_ms: competitionTraceUntilMs, thread_id: tid()
   });
 }
+function setWcMode(active, source) {
+  const next = !!active;
+  if (wcModeActive === next) return;
+  wcModeActive = next;
+
+  // The TeamName controller is shared with normal FUT. Clear only our WC value
+  // when a normal-FUT request proves that WC mode has ended.
+  if (!wcModeActive && cardsBase !== null) {
+    try {
+      const controller = cardsBase.add(0x001d7c7c).readPointer();
+      if (!controller.isNull()) controller.add(0x13150).writeU32(0);
+    } catch (_) {}
+  }
+
+  emit('cards-wc-mode-changed', {active:wcModeActive, source:String(source || 'http'), thread_id:tid()});
+}
+
+function noteFutModeRequest(text, source) {
+  if (text === null || text === undefined) return;
+  const value = String(text);
+  const lower = value.toLowerCase();
+
+  // probe.py uses the same authoritative wire discriminator:
+  // ?skuMode=WC means FUT World Cup. Normal FUT requests do not carry it.
+  if (lower.indexOf('/ut/game/fifa14/') < 0 && lower.indexOf('/ut/v2/game/fifa14/') < 0) return;
+
+  if (lower.indexOf('skumode=wc') >= 0) setWcMode(true, source);
+  else setWcMode(false, source);
+}
+
 function noteCompetitionHttpRequest(text, source) {
   if (text === null || text === undefined) return;
   const lowered = String(text).toLowerCase();
@@ -1287,6 +1369,7 @@ function hookSend() {
     // BETA 2.4 armed from the later scalar response callback, after the season
     // list parser had already performed ten reward-item lookups. Inspect only
     // for the four competition request lines outside the trusted-device window.
+    noteFutModeRequest(previewText, 'send');
     noteCompetitionHttpRequest(previewText, 'send');
     if (!trustedWindowActive) return;
     emit('trusted-console-send', {socket: args[0].toUInt32(), length: length, preview_text: previewText, preview_hex: hexBytes(raw(args[1], count)), thread_id: tid()});
@@ -1305,6 +1388,7 @@ function hookWSASend() {
         const buffer = item.add(4).readPointer();
         const preview = Math.min(length, 4096);
         const text = cstring(buffer, preview);
+        noteFutModeRequest(text, 'WSASend');
         noteCompetitionHttpRequest(text, 'WSASend');
         if (trustedWindowActive) buffers.push({length: length, text: text, hex: hexBytes(raw(buffer, preview))});
       } catch (_) {}
@@ -1371,7 +1455,69 @@ function hookWSARecv() {
   });
 }
 
+const ENTRY_ONLY_CARDS_HOOKS = new Set([
+  'Authentication JSON builder',
+  'Authentication EASW-Session null check',
+  'Authentication EASW-Token null check',
+  'RetrievePhishingQuestion callback',
+  'ValidatePhishingAnswer callback',
+  'RetrieveTrustedConsoleList callback'
+]);
+
+
+function installWcVisualHooks() {
+  if (wcVisualHooksInstalled || !wcPostLoginSafe || cardsBase === null) return false;
+
+  function hookActualValue(name, rva) {
+    Interceptor.attach(cardsBase.add(rva), {
+      onEnter(args) {
+        if (!wcModeActive) return;
+        const thread = Process.getCurrentThreadId();
+        let original = 0;
+        try { original = this.context.eax.toUInt32(); } catch (_) {}
+
+        if (name === 'ASSET_ID') {
+          wcCurrentAssetByThread[thread] = original;
+          return;
+        }
+
+        if (name === 'NATIONALITY_ASSET_ID') {
+          const assetId = wcCurrentAssetByThread[thread];
+          const mappedNation = WC_ASSET_NATION[String(assetId)];
+          if (mappedNation !== undefined) {
+            this.context.eax = ptr(Number(mappedNation));
+            wcCurrentNationByThread[thread] = Number(mappedNation);
+          } else {
+            wcCurrentNationByThread[thread] = original;
+          }
+          return;
+        }
+
+        const nation = wcCurrentNationByThread[thread];
+        const wc = WC_NATION_MAP[String(nation)];
+        if (!wc) return;
+
+        if (name === 'CONFEDERATION_ASSET_ID' && Number(wc.confederationId) > 0)
+          this.context.eax = ptr(Number(wc.confederationId));
+
+        if (name === 'TEAM_ASSET_ID' && Number(wc.teamId) > 0)
+          this.context.eax = ptr(Number(wc.teamId));
+      }
+    });
+  }
+
+  hookActualValue('ASSET_ID',               0x0002486B);
+  hookActualValue('NATIONALITY_ASSET_ID',   0x00024C4A);
+  hookActualValue('CONFEDERATION_ASSET_ID', 0x00024CED);
+  hookActualValue('TEAM_ASSET_ID',          0x00024D07);
+
+  wcVisualHooksInstalled = true;
+  emit('cards-wc-visual-hooks-ready', {base:cardsBase.toString()});
+  return true;
+}
+
 function installCardsHook(module, spec, callbacks) {
+  if (!ENTRY_ONLY_CARDS_HOOKS.has(spec.name)) return false;
   const address = module.base.add(spec.rva);
   const check = verify(address.add(spec.sigOffset || 0), spec.signature);
   emit('cards-operation92-signature', {
@@ -2676,6 +2822,10 @@ rpc.exports = {
   },
 
   setteamid(teamId) {
+    if (!wcModeActive)
+      return {ok:false, reason:'not in WC mode'};
+    if (!wcPostLoginSafe)
+      return {ok:false, reason:'waiting for fcc_login2 unload'};
     if (cardsBase === null)
       return {ok:false, reason:'CardsDLL not ready'};
 
@@ -2838,16 +2988,16 @@ function attachCardsHooksOnce(reason) {
   cardsBase = module.base;
   emit('cards-operation92-module-found', {reason: reason, name: module.name, path: module.path, base: module.base.toString(), size: module.size, expected_size: CARDS_EXPECTED_IMAGE_SIZE, size_ok: module.size === CARDS_EXPECTED_IMAGE_SIZE});
 
-  installCrashExceptionTrace();
-  installNativeOfflineStadiumHooks(module, reason);
-  installViewCardsEmptyListGuard(module, reason);
-  installActivateCardTrace(module, reason);
-  if (!RUNTIME_PERFORMANCE_MODE) installMatchBridgeTrace(module, reason);
-  installMainHubRecordOverride(module, reason);
-  installBadgeUiOverride(module, reason);
-  installUserRecordTrace(module, reason);
-  installTournamentNameFallback(module, reason);
-  installTournamentSessionTrace(module, reason);
+  // ENTRY_ONLY disabled: installCrashExceptionTrace();
+  // ENTRY_ONLY disabled: installNativeOfflineStadiumHooks(module, reason);
+  // ENTRY_ONLY disabled: installViewCardsEmptyListGuard(module, reason);
+  // ENTRY_ONLY disabled: installActivateCardTrace(module, reason);
+  // ENTRY_ONLY disabled: if (!RUNTIME_PERFORMANCE_MODE) installMatchBridgeTrace(module, reason);
+  // ENTRY_ONLY disabled: installMainHubRecordOverride(module, reason);
+  // ENTRY_ONLY disabled: installBadgeUiOverride(module, reason);
+  // ENTRY_ONLY disabled: installUserRecordTrace(module, reason);
+  // ENTRY_ONLY disabled: installTournamentNameFallback(module, reason);
+  // ENTRY_ONLY disabled: installTournamentSessionTrace(module, reason);
 
   const descriptor = module.base.add(OP92_DESCRIPTOR_RVA);
   emit('cards-operation92-descriptor', {
@@ -3798,7 +3948,7 @@ function attachCardsHooksOnce(reason) {
     }
   });
 
-  installLocalStoreGateHooks(module);
+  // ENTRY_ONLY disabled: installLocalStoreGateHooks(module);
   if (!RUNTIME_PERFORMANCE_MODE) {
     installStoreNumberArgTrace(module);
     installUserCreditsParserTrace(module);
@@ -3928,7 +4078,12 @@ function installFifaNavHooks(fifa) {
           } else if (item.name === 'NAV::unloadView') {
             const view = cstring(args[2],768);
             if (view && view.toLowerCase().endsWith('/fcc_login1')) fccLogin1Active = false;
-            if (view && view.toLowerCase().endsWith('/fcc_login2')) fccLogin2Active = false;
+            if (view && view.toLowerCase().endsWith('/fcc_login2')) {
+              fccLogin2Active = false;
+              wcPostLoginSafe = true;
+              installWcVisualHooks();
+              emit('cards-wc-postlogin-runtime-armed', {thread_id:tid()});
+            }
             if (view && view.toLowerCase().indexOf('/icebreaker/futpackselect') >= 0) futPackSelectActive = false;
             if (!RUNTIME_PERFORMANCE_MODE || (view && (view.toLowerCase().endsWith('/fcc_login1') || view.toLowerCase().endsWith('/fcc_login2') || view.toLowerCase().indexOf('/icebreaker/futpackselect') >= 0))) {
               emit('fifa-nav-unload-view', {...common, layer:RUNTIME_PERFORMANCE_MODE?null:cstring(args[1],256), view:view, arg3:RUNTIME_PERFORMANCE_MODE?null:cstring(args[3],512), fcc_login1_active:fccLogin1Active, fcc_login2_active:fccLogin2Active, fut_packselect_active:futPackSelectActive});
@@ -4253,6 +4408,8 @@ send({
         .replace("__CA_SIGNATURE__", _js_bytes(CA_FUNCTION_SIGNATURE))
         .replace("__UPDATE_SIGNATURE__", _js_bytes(UPDATE_SIGNATURE))
         .replace("__DISPATCH_SIGNATURE__", _js_bytes(SCREEN_EVENT_DISPATCHER_SIGNATURE))
+        .replace("__WC_ASSET_NATION__", json.dumps(wc_asset_nation, separators=(",", ":")))
+        .replace("__WC_NATION_MAP__", json.dumps(wc_nation_map, separators=(",", ":")))
     )
 
 
@@ -4265,6 +4422,9 @@ def main() -> int:
     parser.add_argument("--run-seconds", type=int, default=1800)
     parser.add_argument("--print-agent", action="store_true")
     args = parser.parse_args()
+
+    root = Path(__file__).resolve().parents[1]
+    wc_asset_nation, wc_nation_map = load_wc_maps(root)
 
     def read_local_record() -> tuple[int, int, int] | None:
         if not args.identity_db:
@@ -4346,9 +4506,7 @@ def main() -> int:
         except sqlite3.Error:
             return None
 
-    agent = build_agent(Path(args.ca_file).read_bytes())
-
-    agent = build_agent(Path(args.ca_file).read_bytes())
+    agent = build_agent(Path(args.ca_file).read_bytes(), wc_asset_nation, wc_nation_map)
     if args.print_agent:
         print(agent)
         return 0
@@ -4438,7 +4596,7 @@ def main() -> int:
                 try:
                     result = script.exports_sync.setteamid(current_wc_team_id)
 
-                    if current_wc_team_id != last_wc_team_id:
+                    if isinstance(result, dict) and result.get("ok") and current_wc_team_id != last_wc_team_id:
                         record({
                             "kind": "cards-wc-teamname-published",
                             "team_id": current_wc_team_id,
