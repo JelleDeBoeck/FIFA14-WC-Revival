@@ -4147,7 +4147,7 @@ class HttpProbe(BaseHTTPRequestHandler):
                 or path_without_query.startswith("/ut/game/fifa14/tournament/")
             )
         ):
-            if identity_store is not None and hasattr(identity_store, "offline_tournaments_list"):
+            if identity_store is not None:
                 tournament_mode = (
                     identity_store.tournament_wire_mode()
                     if hasattr(identity_store, "tournament_wire_mode")
@@ -4165,8 +4165,12 @@ class HttpProbe(BaseHTTPRequestHandler):
                         response = {"teamId": []}
                     response_name = "fut-offline-tournament-teams-beta28-native"
                 elif path_without_query == "/ut/game/fifa14/tournament/user/list":
-                    response = identity_store.offline_tournament_user_list()
-                    response_name = f"fut-offline-tournament-user-beta28-{tournament_mode}"
+                    if world_cup_active:
+                        response = {"tournamentId": []}
+                        response_name = "fut-wc-tournament-user-list"
+                    else:
+                        response = identity_store.offline_tournament_user_list()
+                        response_name = f"fut-offline-tournament-user-beta28-{tournament_mode}"
                 elif re.fullmatch(r"/ut/game/fifa14/tournament/user/\d+", path_without_query, re.IGNORECASE):
                     tournament_id = int(path_without_query.rsplit("/", 1)[-1])
                     request_document: dict[str, Any] = {}
@@ -4187,8 +4191,75 @@ class HttpProbe(BaseHTTPRequestHandler):
                         response = {"tournamentId": tournament_id}
                         response_name = "fut-offline-tournament-user-minimal-beta28"
                 else:
-                    response = identity_store.offline_tournaments_list()
-                    response_name = f"fut-offline-tournaments-beta28-{tournament_mode}"
+                    if world_cup_active:
+                        response = {
+                            "tournament": [
+                                {
+                                    "id": 100,
+                                    "type": "offline",
+                                    "treeType": "knockout",
+                                    "aigroup": 0,
+                                    "eligibilityOperation": "AND",
+                                    "elgReq": [],
+                                    "numTeams": 16,
+                                    "numRounds": 4,
+                                    "matchlength": 6,
+                                    "rounds": [
+                                        {
+                                            "id": 1,
+                                            "difficulty": 1,
+                                            "rewardMultiplier": 1,
+                                            "coins": 150,
+                                        },
+                                        {
+                                            "id": 2,
+                                            "difficulty": 1,
+                                            "rewardMultiplier": 1,
+                                            "coins": 200,
+                                        },
+                                        {
+                                            "id": 3,
+                                            "difficulty": 2,
+                                            "rewardMultiplier": 1,
+                                            "coins": 300,
+                                        },
+                                        {
+                                            "id": 4,
+                                            "difficulty": 2,
+                                            "rewardMultiplier": 1,
+                                            "coins": 500,
+                                        },
+                                    ],
+                                    "awardSet": {
+                                        "awards": [
+                                            {
+                                                "awardType": 1,
+                                                "value": 1000,
+                                                "halid": 0,
+                                            }
+                                        ]
+                                    },
+                                    "lock": "UNLOCKED",
+                                    "unlockreq": 0,
+                                    "triesMax": 0,
+                                    "triesPeriod": 0,
+                                    "triesRemaining": 0,
+                                    "nextReset": 0,
+                                    "starttime": 0,
+                                    "endtime": 2147483647,
+                                    "timeUntilStart": 0,
+                                    "timeUntilEnd": 315360000,
+                                    "visStart": 3650,
+                                    "visEnd": 3650,
+                                    "trophyResourceId": 0,
+                                    "trophyUserCount": 0,
+                                }
+                            ]
+                        }
+                        response_name = "fut-wc-tournaments-test-one"
+                    else:
+                        response = identity_store.offline_tournaments_list()
+                        response_name = f"fut-offline-tournaments-beta28-{tournament_mode}"
             else:
                 response = {"tournament": []}
                 response_name = "fut-tournaments-empty"
@@ -4310,9 +4381,64 @@ class HttpProbe(BaseHTTPRequestHandler):
                 and "squadId" not in request_document
                 and not any(marker in request_document for marker in result_markers)
             )
-            if identity_store is not None and hasattr(identity_store, "create_match") and is_create_match:
+            if (
+                world_cup_active
+                and identity_store is not None
+                and is_create_match
+                and hasattr(identity_store, "squad_detail")
+            ):
+                try:
+                    requested_squad_id = int(request_document.get("squadId") or 0)
+                except (TypeError, ValueError):
+                    requested_squad_id = 0
+
+                squad = identity_store.squad_detail(
+                    requested_squad_id if requested_squad_id > 0 else None
+                )
+
+                # WC diagnostic/test contract:
+                # hand the exact persisted squad back across the match boundary instead
+                # of dropping into the old {} acknowledgement.
+                response = {
+                    "squadId": requested_squad_id,
+                    "type": str(request_document.get("type") or "OFFLINE"),
+                    "tournamentId": int(request_document.get("tournamentId") or 0),
+                    "squad": squad,
+                }
+
+                response_name = "fut-wc-create-match-squad-handoff"
+
+                emit(
+                    "fut-wc-create-match-squad-handoff",
+                    squad_id=requested_squad_id,
+                    tournament_id=response["tournamentId"],
+                    chemistry=(
+                        squad.get("teamChemistry", squad.get("chemistry"))
+                        if isinstance(squad, dict)
+                        else None
+                    ),
+                    rating=(
+                        squad.get("teamRating", squad.get("rating"))
+                        if isinstance(squad, dict)
+                        else None
+                    ),
+                    player_ids=[
+                        int((row.get("itemData") or {}).get("id", 0) or 0)
+                        for row in squad.get("players", [])
+                        if isinstance(row, dict)
+                        and isinstance(row.get("itemData"), dict)
+                    ] if isinstance(squad, dict) else [],
+                    actives=[
+                        row.get("itemState")
+                        for row in squad.get("actives", [])
+                        if isinstance(row, dict)
+                    ] if isinstance(squad, dict) else [],
+                )
+
+            elif identity_store is not None and hasattr(identity_store, "create_match") and is_create_match:
                 response = identity_store.create_match(request_document)
                 response_name = "fut-create-match-beta222-native"
+
             elif identity_store is not None and hasattr(identity_store, "match_ready") and is_match_ready:
                 response = identity_store.match_ready(request_document)
                 response_name = "fut-match-ready-beta222-native"

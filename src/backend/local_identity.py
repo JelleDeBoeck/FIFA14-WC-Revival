@@ -886,7 +886,7 @@ class LocalIdentityStore:
             "assetId": asset_id,
             "resourceId": resource_id,
             "definitionId": resource_id,
-            "itemState": "activeHomeKit" if category == 2 else "activeAwayKit",
+            "itemState": "activeHomeKit" if home else "activeAwayKit",
             "rareflag": 0,
             "formation": "",
             "leagueId": 0,
@@ -4308,7 +4308,71 @@ class LocalIdentityStore:
                     if is_untradeable
                     else max(0, int(payload.get("lastSalePrice", 0)))
                 )
-                payload["itemState"] = "forSale" if to_transfer else "free"
+                requested_state = str(
+                    update.get("itemState", update.get("state", ""))
+                ).strip()
+
+                normalized_state = (
+                    requested_state
+                    .replace("_", "")
+                    .replace("-", "")
+                    .lower()
+                )
+
+                active_state_map = {
+                    "activehomekit": "activeHomeKit",
+                    "activeawaykit": "activeAwayKit",
+                }
+
+                active_state = active_state_map.get(normalized_state)
+
+                if (
+                    not to_transfer
+                    and item_type == "kit"
+                    and active_state is not None
+                ):
+                    # Only one kit may own each active slot.
+                    for other in connection.execute(
+                        """
+                        SELECT item_id, payload
+                        FROM items
+                        WHERE persona_id = ?
+                        AND item_type = 'kit'
+                        AND item_id != ?
+                        """,
+                        (persona_id, item_id),
+                    ).fetchall():
+                        try:
+                            other_payload = json.loads(other["payload"] or "{}")
+                        except (TypeError, json.JSONDecodeError):
+                            continue
+
+                        if not isinstance(other_payload, dict):
+                            continue
+
+                        if str(other_payload.get("itemState") or "") == active_state:
+                            other_payload["itemState"] = "free"
+
+                            connection.execute(
+                                """
+                                UPDATE items
+                                SET payload = ?
+                                WHERE persona_id = ? AND item_id = ?
+                                """,
+                                (
+                                    json.dumps(
+                                        other_payload,
+                                        separators=(",", ":"),
+                                        ensure_ascii=False,
+                                    ),
+                                    persona_id,
+                                    int(other["item_id"]),
+                                ),
+                            )
+
+                    payload["itemState"] = active_state
+                else:
+                    payload["itemState"] = "forSale" if to_transfer else "free"
 
                 connection.execute(
                     "INSERT OR REPLACE INTO items (item_id,persona_id,asset_id,item_type,pile,tradeable,payload) "
@@ -6087,12 +6151,10 @@ class LocalIdentityStore:
                     "changed": False,
                     "captain": captain,
                     "chemistry": int(row["chemistry"] or 0),
+                    "teamChemistry": int(row["chemistry"] or 0),
                     "starRating": rating,
-                    # Retail SquadDetails carries both rating and starRating plus
-                    # explicit validity/new-squad/taker/tactics members.  Supplying
-                    # them prevents an old frontend from manufacturing a partial
-                    # default squad before it has parsed all 23 ItemData records.
                     "rating": rating,
+                    "teamRating": rating,
                     "valid": True,
                     "newsquad": 0 if starter_pack_claimed else 1,
                     "kicktakers": [],
@@ -6123,6 +6185,45 @@ class LocalIdentityStore:
             "newsquad": int(squad.get("newsquad", 0) or 0),
         }
 
+    def active_world_cup_cosmetic_items(self) -> list[dict[str, Any]]:
+        """Return the active FUTWC home/away kits for SquadDetails/CreateMatch."""
+        with self._lock, closing(self._connect()) as connection:
+            identity = self._identity(connection)
+            persona_id = int(identity["persona_id"])
+
+            active: dict[str, dict[str, Any]] = {}
+
+            rows = connection.execute(
+                """
+                SELECT payload
+                FROM items
+                WHERE persona_id = ?
+                AND item_type = 'kit'
+                ORDER BY item_id
+                """,
+                (persona_id,),
+            ).fetchall()
+
+            for row in rows:
+                try:
+                    payload = json.loads(row["payload"] or "{}")
+                except (TypeError, json.JSONDecodeError):
+                    continue
+
+                if not isinstance(payload, dict):
+                    continue
+
+                state = str(payload.get("itemState") or "")
+
+                if state in {"activeHomeKit", "activeAwayKit"}:
+                    active[state] = dict(payload)
+
+            return [
+                active[state]
+                for state in ("activeHomeKit", "activeAwayKit")
+                if state in active
+            ]    
+
     def squad_list_compact(self) -> dict[str, Any]:
         """Return the retail SquadListResponse contract used by GET /squad/list."""
         full = self.squad_list()
@@ -6138,14 +6239,41 @@ class LocalIdentityStore:
         """Return one full SquadDetailsResponse, including all 23 slots."""
         listing = self.squad_list()
         squads = listing.get("squadList", listing.get("squad", [])) if isinstance(listing, dict) else []
+
+        selected = None
+
         if requested_id not in (None, 0):
             for squad in squads:
-                if isinstance(squad, dict) and int(squad.get("id", squad.get("squadId", 0)) or 0) == int(requested_id):
-                    return dict(squad)
-        for squad in squads:
-            if isinstance(squad, dict) and squad.get("active"):
-                return dict(squad)
-        return dict(squads[0]) if squads else {}
+                if (
+                    isinstance(squad, dict)
+                    and int(squad.get("id", squad.get("squadId", 0)) or 0)
+                    == int(requested_id)
+                ):
+                    selected = dict(squad)
+                    break
+
+        if selected is None:
+            for squad in squads:
+                if isinstance(squad, dict) and squad.get("active"):
+                    selected = dict(squad)
+                    break
+
+        if selected is None and squads:
+            selected = dict(squads[0])
+
+        if selected is None:
+            return {}
+
+        # Retail aliases used by the squad/tournament frontend.
+        selected["teamChemistry"] = int(selected.get("chemistry", 0) or 0)
+        selected["teamRating"] = int(
+            selected.get("starRating", selected.get("rating", 0)) or 0
+        )
+
+        # WC match handoff needs the selected club kits here.
+        selected["actives"] = self.active_world_cup_cosmetic_items()
+
+        return selected
 
     def active_squad_document(self) -> dict[str, Any]:
         """Return the active native squad record used by CreateMatch."""

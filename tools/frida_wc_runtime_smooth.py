@@ -4120,9 +4120,25 @@ function installFifaNavHooks(fifa) {
               emit('fifa-nav-unload-view', {...common, layer:RUNTIME_PERFORMANCE_MODE?null:cstring(args[1],256), view:view, arg3:RUNTIME_PERFORMANCE_MODE?null:cstring(args[3],512), fcc_login1_active:fccLogin1Active, fcc_login2_active:fccLogin2Active, fut_packselect_active:futPackSelectActive});
             }
           } else if (item.name === 'NAV::sendAction') {
-            if (!RUNTIME_PERFORMANCE_MODE) emit('fifa-nav-send-action', {...common, action:cstring(args[1],512), parameter:cstring(args[2],768)});
+              const action = cstring(args[1], 512);
+              const parameter = cstring(args[2], 768);
+
+              emit('fifa-nav-send-action-squad-debug', {
+                  ...common,
+                  action: action,
+                  parameter: parameter,
+                  wc_mode_active: wcModeActive
+              });
           } else {
-            if (!RUNTIME_PERFORMANCE_MODE) emit('fifa-nav-send-screen-event', {...common, event:cstring(args[1],512), payload:cstring(args[2],1024)});
+              const event = cstring(args[1], 512);
+              const payload = cstring(args[2], 1024);
+
+              emit('fifa-nav-send-screen-event-squad-debug', {
+                  ...common,
+                  event: event,
+                  payload: payload,
+                  wc_mode_active: wcModeActive
+              });
           }
         }
       });
